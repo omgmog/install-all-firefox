@@ -19,9 +19,13 @@ The script installs these to /Applications/Firefoxes/
 INSTALLATION:
 
 From a terminal prompt enter the following
-    curl -L https://github.com/omgmog/install-all-firefox/raw/master/firefox.sh | bash
 
-That's it, then just wait for the whole process to complete.
+    curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/firefox.sh
+    chmod +x firefox.sh
+    ./firefox.sh
+
+That's it, then just wait for the .dmg files to download, 
+and accept the Mozilla license, then wait for the rest of the script to finish.
 
 
 TODO:

@@ -20,3 +20,6 @@ TODO:
 - Automate setting up of profiles for each version of Firefox (if possible)
 - Add ability to specify locale as a parameter
 - Add ability to specify additional versions
+
+
+Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms

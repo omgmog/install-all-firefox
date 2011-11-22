@@ -1,0 +1,22 @@
+This is a bash script to install all major versions of Firefox on OS X
+
+Currently it installs:
+
+- Firefox 2.0.0.20
+- Firefox 3.0.19
+- Firefox 3.6.24
+- Firefox 4.0.1
+- Firefox 5.0.1
+- Firefox 6.0.1
+- Firefox 7.0.1
+- Firefox 8.0.1
+
+The script downloads the en-GB locale .dmg files from mozilla's FTP into /tmp/firefoxes.
+
+The script installs these to /Applications/Firefoxes/
+
+
+TODO:
+- Automate setting up of profiles for each version of Firefox (if possible)
+- Add ability to specify locale as a parameter
+- Add ability to specify additional versions

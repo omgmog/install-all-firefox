@@ -16,6 +16,14 @@ The script downloads the en-GB locale .dmg files from mozilla's FTP into /tmp/fi
 The script installs these to /Applications/Firefoxes/
 
 
+INSTALLATION:
+
+From a terminal prompt enter the following
+    curl -L https://github.com/omgmog/install-all-firefox/raw/master/firefox.sh | bash
+
+That's it, then just wait for the whole process to complete.
+
+
 TODO:
 - Automate setting up of profiles for each version of Firefox (if possible)
 - Add ability to specify locale as a parameter

@@ -34,12 +34,12 @@ It'll take a little while to grab the .dmg files, but it should only need to do 
 Update: 24/11/11
 - Implemented automatic profile creation and launcher modification
 - Added custom icon for each version
+- Added checks for existing install to skip reinstall
 
 
 TODO:
 - Add ability to specify locale as a parameter
 - Add ability to specify additional versions
-- Add checks for existing install to skip reinstall
 - Add check for local 'bits' folder (if whole branch mirrored locally)
 
 

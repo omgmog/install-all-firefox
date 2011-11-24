@@ -20,7 +20,7 @@ get_bits(){
 
     log " - icons for Firefox"
 
-    for i in 2 3 36 4 5 6 7 8
+    for i in 2 3 36 4 5 6 7 8 firefox-folder
     do
         if [[ ! -f "fx$i.png" ]]
             then
@@ -31,6 +31,7 @@ get_bits(){
             sips -s format icns "fx$i.png" --out "fx$i.icns"
         fi
     done
+    /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
     log "Download finished!"
 }
 get_ffx(){
@@ -133,30 +134,35 @@ get_ffx(){
         
     fi
 
-    # mount dmg
-    hdiutil attach -plist -nobrowse -readonly -quiet "${file}" > /dev/null
-    cd "/Volumes/Firefox"
-    mkdir -p "/Applications/Firefoxes"
-    if cp -r Firefox.app/ /Applications/Firefoxes/"${app}".app/
+    if [[ ! -d "/Applications/Firefoxes/${app}.app/" ]]
         then
-        log "Installed ${app} to /Applications/Firefoxes/${app}.app"
-        hdiutil detach "/Volumes/Firefox" -force > /dev/null
+        # mount dmg
+        hdiutil attach -plist -nobrowse -readonly -quiet "${file}" > /dev/null
+        cd "/Volumes/Firefox"
+        mkdir -p "/Applications/Firefoxes"
+        if cp -r Firefox.app/ /Applications/Firefoxes/"${app}".app/
+            then
+            log "Installed ${app} to /Applications/Firefoxes/${app}.app"
+            hdiutil detach "/Volumes/Firefox" -force > /dev/null
 
-        exec "/Applications/Firefoxes/${app}.app/Contents/MacOS/firefox-bin" -CreateProfile "${profile}" &> /dev/null &
-        log "Created profile '${profile}' for ${app}"
+            exec "/Applications/Firefoxes/${app}.app/Contents/MacOS/firefox-bin" -CreateProfile "${profile}" &> /dev/null &
+            log "Created profile '${profile}' for ${app}"
 
-        # edit Info.plist for launching
-        plist_o="/Applications/Firefoxes/${app}.app/Contents/Info.plist"
-        plist_t="/tmp/firefoxes/plist.tmp"
-        sed -e "s/${bin}/${bin}-af/g" "$plist_o" > "$plist_t"
-        mv "$plist_t" "$plist_o"
-        echo -e "#!/bin/sh\n\"/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}\" -no-remote -P \"${profile}\" &" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
-        chmod +x "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
+            # edit Info.plist for launching
+            plist_o="/Applications/Firefoxes/${app}.app/Contents/Info.plist"
+            plist_t="/tmp/firefoxes/plist.tmp"
+            sed -e "s/${bin}/${bin}-af/g" "$plist_o" > "$plist_t"
+            mv "$plist_t" "$plist_o"
+            echo -e "#!/bin/sh\n\"/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}\" -no-remote -P \"${profile}\" &" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
+            chmod +x "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
 
-        # edit icon
-        cp "/tmp/firefoxes/bits/${profile}.icns" "/Applications/Firefoxes/${app}.app/${profile}.icns"
-        /tmp/firefoxes/bits/setfileicon "/Applications/Firefoxes/${app}.app/${profile}.icns" "/Applications/Firefoxes/${app}.app/"
-        log "Modified ${app} launcher"
+            # edit icon
+            cp "/tmp/firefoxes/bits/${profile}.icns" "/Applications/Firefoxes/${app}.app/${profile}.icns"
+            /tmp/firefoxes/bits/setfileicon "/Applications/Firefoxes/${app}.app/${profile}.icns" "/Applications/Firefoxes/${app}.app/"
+            log "Modified ${app} launcher"
+        fi
+    else
+        log "${app} already installed! Skipping."
     fi
 }
 
@@ -170,6 +176,5 @@ do
     get_ffx $ver
 done
 
-wait ${!}
 log "==========================="
 log "Done!"

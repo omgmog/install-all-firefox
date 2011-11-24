@@ -39,6 +39,8 @@ Update: 24/11/11
 TODO:
 - Add ability to specify locale as a parameter
 - Add ability to specify additional versions
+- Add checks for existing install to skip reinstall
+- Add check for local 'bits' folder (if whole branch mirrored locally)
 
 
 - Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms

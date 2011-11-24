@@ -1,6 +1,4 @@
-# INSTALL ALL THE FIREFOXES
-
-![](http://cl.ly/C5Ak/11631081.jpg)
+![](https://github.com/omgmog/install-all-firefox/raw/master/bits/fxfirefox-folder.png)
 
 ## ABOUT
 
@@ -26,9 +24,11 @@ The script installs these to /Applications/Firefoxes/
 
 1. From a terminal prompt enter the following
 
-    `curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
-    chmod +x install-all-firefox.sh
-    ./install-all-firefox.sh`
+    > curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
+    
+    > chmod +x install-all-firefox.sh
+    
+    > ./install-all-firefox.sh
 
 2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 
@@ -41,7 +41,7 @@ The script installs these to /Applications/Firefoxes/
 - Implemented automatic profile creation and launcher modification
 - Added custom icon for each version
 - Added checks for existing install to skip reinstall
-
+- Disabled the 'default browser' check using *.app/Contents/MacOS/defaults/pref/macprefs.js
 
 ## TODO
 - Add ability to specify locale as a parameter

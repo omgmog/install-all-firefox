@@ -24,8 +24,11 @@ From a terminal prompt enter the following
     chmod +x install-all-firefox.sh
     ./install-all-firefox.sh
 
-That's it, then just wait for the .dmg files to download, 
-and accept the Mozilla license, then wait for the rest of the script to finish.
+The script will download the 'bits' (icons, utils) for the rest of the installer.
+
+When the Mozilla license pops up, press Q and then Y to continue.
+
+It'll take a little while to grab the .dmg files, but it should only need to do this once.
 
 
 Update: 24/11/11

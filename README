@@ -28,10 +28,15 @@ That's it, then just wait for the .dmg files to download,
 and accept the Mozilla license, then wait for the rest of the script to finish.
 
 
+Update: 24/11/11
+- Implemented automatic profile creation and launcher modification
+- Added custom icon for each version
+
+
 TODO:
-- Automate setting up of profiles for each version of Firefox (if possible)
 - Add ability to specify locale as a parameter
 - Add ability to specify additional versions
 
 
-Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms
+- Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms
+- setfileicon is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz

@@ -20,9 +20,9 @@ INSTALLATION:
 
 From a terminal prompt enter the following
 
-    curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/firefox.sh
-    chmod +x firefox.sh
-    ./firefox.sh
+    curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
+    chmod +x install-all-firefox.sh
+    ./install-all-firefox.sh
 
 That's it, then just wait for the .dmg files to download, 
 and accept the Mozilla license, then wait for the rest of the script to finish.

@@ -1,7 +1,3 @@
-# INSTALL ALL THE FIREFOXES
-
-![INSTALL ALL THE FIREFOXES](http://cl.ly/C5Ak/11631081.jpg)
-
 ## ABOUT
 
 This is a bash script to install all major versions of Firefox on OS X
@@ -26,9 +22,11 @@ The script installs these to /Applications/Firefoxes/
 
 1. From a terminal prompt enter the following
 
-    `curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
-    chmod +x install-all-firefox.sh
-    ./install-all-firefox.sh`
+    > curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
+    
+    > chmod +x install-all-firefox.sh
+    
+    > ./install-all-firefox.sh
 
 2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 

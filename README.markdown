@@ -1,3 +1,7 @@
+# INSTALL ALL THE FIREFOXES
+![INSTALL ALL THE FIREFOXES](http://cl.ly/C5Ak/11631081.jpg)
+## ABOUT
+
 This is a bash script to install all major versions of Firefox on OS X
 
 Currently it installs:
@@ -16,32 +20,33 @@ The script downloads the en-GB locale .dmg files from mozilla's FTP into /tmp/fi
 The script installs these to /Applications/Firefoxes/
 
 
-INSTALLATION:
+## INSTALLATION
 
-From a terminal prompt enter the following
+1. From a terminal prompt enter the following
 
-    curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
+    `curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
     chmod +x install-all-firefox.sh
-    ./install-all-firefox.sh
+    ./install-all-firefox.sh`
 
-The script will download the 'bits' (icons, utils) for the rest of the installer.
+2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 
-When the Mozilla license pops up, press Q and then Y to continue.
+3. When the Mozilla license pops up, press Q and then Y to continue.
 
-It'll take a little while to grab the .dmg files, but it should only need to do this once.
+4. It'll take a little while to grab the .dmg files, but it should only need to do this once.
 
 
-Update: 24/11/11
+### Update: 24/11/11
 - Implemented automatic profile creation and launcher modification
 - Added custom icon for each version
 - Added checks for existing install to skip reinstall
 
 
-TODO:
+## TODO
 - Add ability to specify locale as a parameter
 - Add ability to specify additional versions
 - Add check for local 'bits' folder (if whole branch mirrored locally)
 
 
+## CREDITS
 - Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms
 - setfileicon is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz

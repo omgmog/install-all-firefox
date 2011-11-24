@@ -1,3 +1,5 @@
+![](https://github.com/omgmog/install-all-firefox/raw/master/bits/fxfirefox-folder.png)
+
 ## ABOUT
 
 This is a bash script to install all major versions of Firefox on OS X

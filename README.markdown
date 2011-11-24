@@ -1,5 +1,7 @@
 # INSTALL ALL THE FIREFOXES
+
 ![INSTALL ALL THE FIREFOXES](http://cl.ly/C5Ak/11631081.jpg)
+
 ## ABOUT
 
 This is a bash script to install all major versions of Firefox on OS X

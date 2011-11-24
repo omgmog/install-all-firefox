@@ -37,7 +37,7 @@ get_ffx(){
     case $1 in 
         2.0.0.20)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/mac/en-GB/Firefox%202.0.0.20.dmg"
-            md5=""
+            md5="d66f6ec6e77dc1cd4e0f1931f9523653"
             file="Firefox 2.0.0.20.dmg"
             app="Firefox 2.0"
             profile="fx2"
@@ -45,7 +45,7 @@ get_ffx(){
         ;;
         3.0.19)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/mac/en-GB/Firefox%203.0.19.dmg"
-            md5=""
+            md5="aa58a93cf63f55636adb30c1bda2377a"
             file="Firefox 3.0.19.dmg"
             app="Firefox 3.0"
             profile="fx3"
@@ -53,7 +53,7 @@ get_ffx(){
         ;;
         3.6.24)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.24/mac/en-GB/Firefox%203.6.24.dmg"
-            md5=""
+            md5="abd70e423c4ae7c7b6234b4e95de6fc9"
             file="Firefox 3.6.24.dmg"
             app="Firefox 3.6"
             profile="fx36"
@@ -61,7 +61,7 @@ get_ffx(){
         ;;
         4.0.1)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/mac/en-GB/Firefox%204.0.1.dmg"
-            md5=""
+            md5="2b47cc50acc2b60ee240ad6f91ad675f"
             file="Firefox 4.0.1.dmg"
             app="Firefox 4.0"
             profile="fx4"
@@ -69,7 +69,7 @@ get_ffx(){
         ;;
         5.0.1)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/mac/en-GB/Firefox%205.0.1.dmg"
-            md5=""
+            md5="0c61c9825ca6596339f5a45f849911de"
             file="Firefox 5.0.1.dmg"
             app="Firefox 5.0"
             profile="fx5"
@@ -77,7 +77,7 @@ get_ffx(){
         ;;
         6.0.1)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.1/mac/en-GB/Firefox%206.0.1.dmg"
-            md5=""
+            md5="362a98bc542df0601afd075c500d8bd0"
             file="Firefox 6.0.1.dmg"
             app="Firefox 6.0"
             profile="fx6"
@@ -85,7 +85,7 @@ get_ffx(){
         ;;
         7.0.1)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/mac/en-GB/Firefox%207.0.1.dmg"
-            md5=""
+            md5="2006b28e481199924528777042c0edb8"
             file="Firefox 7.0.1.dmg"
             app="Firefox 7.0"
             profile="fx7"
@@ -93,7 +93,7 @@ get_ffx(){
         ;;
         8.0.1)
             url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/mac/en-GB/Firefox%208.0.1.dmg"
-            md5=""
+            md5="48d4d8524abab012e33ff3dc895dd1c4"
             file="Firefox 8.0.1.dmg"
             app="Firefox 8.0"
             profile="fx8"
@@ -118,6 +118,19 @@ get_ffx(){
             then
             fail "Failed to download ${url} to ${file}!\n"
         fi
+    else
+        themd5=`md5 -q "/tmp/firefoxes/${file}"`
+        if [[ $themd5 = "${md5}" ]]
+            then
+            log "md5 of ${file} matches!"
+        else
+            log "Error: md5 mismatch, redownloading"
+            if ! curl -C -L "${url}" -o "${file}"
+                then
+                fail "Failed to download ${url} to ${file}!\n"
+            fi
+        fi
+        
     fi
 
     # mount dmg

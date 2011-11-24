@@ -1,6 +1,6 @@
 # INSTALL ALL THE FIREFOXES
 
-![INSTALL ALL THE FIREFOXES](http://cl.ly/C5Ak/11631081.jpg)
+![](http://cl.ly/C5Ak/11631081.jpg)
 
 ## ABOUT
 

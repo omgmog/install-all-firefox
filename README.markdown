@@ -30,7 +30,10 @@ The script installs these to /Applications/Firefoxes/
     > ./install-all-firefox.sh [locale]
 
 By default the installer uses the en-GB locale, but you can specify any of the following:
-   > af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL, ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR, pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
+
+    af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL, 
+    ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR, 
+    pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 
 2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 

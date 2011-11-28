@@ -15,10 +15,9 @@ Currently it installs:
 - Firefox 7.0.1
 - Firefox 8.0.1
 
-The script downloads the en-GB locale .dmg files from mozilla's FTP into /tmp/firefoxes.
+The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
 
 The script installs these to /Applications/Firefoxes/
-
 
 ## INSTALLATION
 
@@ -28,7 +27,10 @@ The script installs these to /Applications/Firefoxes/
     
     > chmod +x install-all-firefox.sh
     
-    > ./install-all-firefox.sh
+    > ./install-all-firefox.sh <locale>
+
+By default the installer uses the en-GB locale, but you can specify any of the following:
+   > af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL, ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR, pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 
 2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 
@@ -37,14 +39,13 @@ The script installs these to /Applications/Firefoxes/
 4. It'll take a little while to grab the .dmg files, but it should only need to do this once.
 
 
-### Update: 24/11/11
-- Implemented automatic profile creation and launcher modification
-- Added custom icon for each version
-- Added checks for existing install to skip reinstall
-- Disabled the 'default browser' check using *.app/Contents/MacOS/defaults/pref/macprefs.js
+
+
+### Update: 28/11/11
+- Added ability to specify locale as parameter (defaults to en-GB if none specified)
+- Changed md5 check to rely on downloaded MD5SUMS from Mozilla ftp, instead of hard coded values
 
 ## TODO
-- Add ability to specify locale as a parameter
 - Add ability to specify additional versions
 - Add check for local 'bits' folder (if whole branch mirrored locally)
 

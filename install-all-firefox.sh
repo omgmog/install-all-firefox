@@ -6,6 +6,9 @@ set -o errtrace
 set -o errexit
 set -o pipefail
 
+# if no locale specified, default to en-GB
+LOCALE=${1-en-GB}
+
 log()  { printf "$*\n" ; return $? ;  }
 
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
@@ -15,8 +18,11 @@ get_bits(){
     cd "/tmp/firefoxes/bits"
 
     log " - setfileicon"
-    curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
-    chmod +x setfileicon
+    if [[ ! -f "setfileicon" ]]
+        then
+        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+        chmod +x setfileicon
+    fi
 
     log " - icons for Firefox"
 
@@ -31,70 +37,68 @@ get_bits(){
             sips -s format icns "fx$i.png" --out "fx$i.icns"
         fi
     done
-    /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
-    log "Download finished!"
+    if [[ ! -d "/Applications/Firefoxes" ]]
+        then
+            mkdir "/Applications/Firefoxes"
+    fi
+        log "Setting custom icon for /Applications/Firefoxes/"
+        /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
+        
+        log "Download finished!"
 }
 get_ffx(){
     case $1 in 
         2.0.0.20)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/mac/en-GB/Firefox%202.0.0.20.dmg"
-            md5="d66f6ec6e77dc1cd4e0f1931f9523653"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
             file="Firefox 2.0.0.20.dmg"
             app="Firefox 2.0"
             profile="fx2"
             bin="firefox-bin"
         ;;
         3.0.19)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/mac/en-GB/Firefox%203.0.19.dmg"
-            md5="aa58a93cf63f55636adb30c1bda2377a"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
             file="Firefox 3.0.19.dmg"
             app="Firefox 3.0"
             profile="fx3"
             bin="firefox-bin"
         ;;
         3.6.24)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.24/mac/en-GB/Firefox%203.6.24.dmg"
-            md5="abd70e423c4ae7c7b6234b4e95de6fc9"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.24/"
             file="Firefox 3.6.24.dmg"
             app="Firefox 3.6"
             profile="fx36"
             bin="firefox-bin"
         ;;
         4.0.1)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/mac/en-GB/Firefox%204.0.1.dmg"
-            md5="2b47cc50acc2b60ee240ad6f91ad675f"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
             file="Firefox 4.0.1.dmg"
             app="Firefox 4.0"
             profile="fx4"
             bin="firefox-bin"
         ;;
         5.0.1)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/mac/en-GB/Firefox%205.0.1.dmg"
-            md5="0c61c9825ca6596339f5a45f849911de"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
             file="Firefox 5.0.1.dmg"
             app="Firefox 5.0"
             profile="fx5"
             bin="firefox-bin"
         ;;
         6.0.1)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.1/mac/en-GB/Firefox%206.0.1.dmg"
-            md5="362a98bc542df0601afd075c500d8bd0"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.1/"
             file="Firefox 6.0.1.dmg"
             app="Firefox 6.0"
             profile="fx6"
             bin="firefox-bin"
         ;;
         7.0.1)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/mac/en-GB/Firefox%207.0.1.dmg"
-            md5="2006b28e481199924528777042c0edb8"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
             file="Firefox 7.0.1.dmg"
             app="Firefox 7.0"
             profile="fx7"
             bin="firefox"
         ;;
         8.0.1)
-            url="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/mac/en-GB/Firefox%208.0.1.dmg"
-            md5="48d4d8524abab012e33ff3dc895dd1c4"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
             file="Firefox 8.0.1.dmg"
             app="Firefox 8.0"
             profile="fx8"
@@ -104,7 +108,15 @@ get_ffx(){
             fail "Invalid Firefox version: ${1}"
         ;;
     esac
+    # download md5sums for this release
+    cd /tmp
+    mkdir -p "firefoxes"
+    cd "firefoxes"
+    # download the md5sums for this version
+    log "lets see if we can download the md5sums..."
+    curl -L -o "MD5SUMS-${profile}" "${rooturl}MD5SUMS" 
 
+    md5hash=`cat "MD5SUMS-${profile}" | grep "$LOCALE/${file}" | cut -c 1-32`
 
     #go to tmp dir
     cd /tmp
@@ -115,20 +127,22 @@ get_ffx(){
     if [[ ! -f "${file}" ]]
         then
         log "Downloading ${file}"
-        if ! curl -C -L "${url}" -o "${file}"
+        if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
             then
-            fail "Failed to download ${url} to ${file}!\n"
+            fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
         fi
     else
         themd5=`md5 -q "/tmp/firefoxes/${file}"`
-        if [[ $themd5 = "${md5}" ]]
+        if [[ $themd5 = "$md5hash" ]]
             then
+            log "md5 from MD5SUMS   = $md5hash"
+            log "md5 of file        = $themd5"
             log "md5 of ${file} matches!"
         else
             log "Error: md5 mismatch, redownloading"
-            if ! curl -C -L "${url}" -o "${file}"
+            if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
                 then
-                fail "Failed to download ${url} to ${file}!\n"
+                fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
             fi
         fi
         

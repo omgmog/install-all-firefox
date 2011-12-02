@@ -14,6 +14,9 @@ Currently it installs:
 - Firefox 6.0.1
 - Firefox 7.0.1
 - Firefox 8.0.1
+- Firefox Aurora (nightly)
+
+Currently there is no md5 check on the Aurora dmg as Mozilla don't keep a md5sums file on their FTP server for the nightlies.
 
 The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
 
@@ -35,6 +38,8 @@ By default the installer uses the en-GB locale, but you can specify any of the f
     ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR, 
     pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 
+The installation process for the Aurora nightly doesn't take any locale, but it installs en-US.
+
 2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 
 3. When the Mozilla license pops up, press Q and then Y to continue.
@@ -44,9 +49,8 @@ By default the installer uses the en-GB locale, but you can specify any of the f
 
 
 
-### Update: 28/11/11
-- Added ability to specify locale as parameter (defaults to en-GB if none specified)
-- Changed md5 check to rely on downloaded MD5SUMS from Mozilla ftp, instead of hard coded values
+### Update: 02/12/11
+- Added steps to download latest Firefox Aurora nightly to installer, Aurora is selected as part of the default installs
 
 ## TODO
 - Add ability to specify additional versions

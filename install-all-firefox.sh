@@ -40,11 +40,48 @@ get_bits(){
     if [[ ! -d "/Applications/Firefoxes" ]]
         then
             mkdir "/Applications/Firefoxes"
+            log "Setting custom icon for /Applications/Firefoxes/"
+            /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
     fi
-        log "Setting custom icon for /Applications/Firefoxes/"
-        /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
         
         log "Download finished!"
+}
+get_aurora(){
+
+    # version stuff 
+    rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
+    file=`curl -silent -L ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/ | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+    app="Firefox Aurora"
+    profile="fxa"
+    bin="firefox"
+
+    # get the icon
+    mkdir -p "/tmp/firefoxes/bits"
+    cd "/tmp/firefoxes/bits"
+    if [[ ! -f "${profile}.png" ]]
+        then
+        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${profile}.png" -o "${profile}.png"
+    fi
+    if [[ ! -f "${profile}.icns" ]]
+        then
+        sips -s format icns "${profile}.png" --out "${profile}.icns"
+    fi
+
+    # get the dmg
+    cd /tmp
+    mkdir -p "firefoxes"
+    cd "firefoxes"
+    if [[ ! -f "${file}" ]]
+        then
+        log "Downloading ${file}"
+        if ! curl -C -L "${rooturl}/${file}" -o "${file}"
+            then
+            rm -f "${file}"
+            fail "Failed to download ${rooturl}/${file} to ${file}!\n"
+        else
+            log "Downloaded ${file}"
+        fi
+    fi
 }
 get_ffx(){
     case $1 in 
@@ -105,59 +142,74 @@ get_ffx(){
             bin="firefox"
         ;;
         *)
-            fail "Invalid Firefox version: ${1}"
+            if [[ "$1" != "aurora" ]]
+                then
+                fail "Invalid Firefox version: ${1}"
+            fi
         ;;
     esac
-    # download md5sums for this release
-    cd /tmp
-    mkdir -p "firefoxes"
-    cd "firefoxes"
-    # download the md5sums for this version
-    log "lets see if we can download the md5sums..."
-    curl -L -o "MD5SUMS-${profile}" "${rooturl}MD5SUMS" 
-
-    md5hash=`cat "MD5SUMS-${profile}" | grep "$LOCALE/${file}" | cut -c 1-32`
-
-    #go to tmp dir
-    cd /tmp
-    mkdir -p "firefoxes"
-    cd "firefoxes"
-
-    # check for existing file
-    if [[ ! -f "${file}" ]]
+    if [[ "$1" = "aurora" ]]
         then
-        log "Downloading ${file}"
-        if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
-            then
-            fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
-        fi
+        # stuff for downloading nightly
+        get_aurora
     else
-        themd5=`md5 -q "/tmp/firefoxes/${file}"`
-        if [[ $themd5 = "$md5hash" ]]
+        # download md5sums for this release
+        cd /tmp
+        mkdir -p "firefoxes"
+        cd "firefoxes"
+        # download the md5sums for this version
+        log "lets see if we can download the md5sums..."
+        curl -L -o "MD5SUMS-${profile}" "${rooturl}MD5SUMS" 
+
+        md5hash=`cat "MD5SUMS-${profile}" | grep "$LOCALE/${file}" | cut -c 1-32`
+
+        #go to tmp dir
+        cd /tmp
+        mkdir -p "firefoxes"
+        cd "firefoxes"
+
+        # check for existing file
+        if [[ ! -f "${file}" ]]
             then
-            log "md5 from MD5SUMS   = $md5hash"
-            log "md5 of file        = $themd5"
-            log "md5 of ${file} matches!"
-        else
-            log "Error: md5 mismatch, redownloading"
+            log "Downloading ${file}"
             if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
                 then
                 fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
             fi
+        else
+            themd5=`md5 -q "/tmp/firefoxes/${file}"`
+            if [[ $themd5 = "$md5hash" ]]
+                then
+                log "md5 from MD5SUMS   = $md5hash"
+                log "md5 of file        = $themd5"
+                log "md5 of ${file} matches!"
+            else
+                log "Error: md5 mismatch, redownloading"
+                if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
+                    then
+                    fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
+                fi
+            fi
+            
         fi
-        
+    # end test for 'nightly'
     fi
-
     if [[ ! -d "/Applications/Firefoxes/${app}.app/" ]]
         then
         # mount dmg
         hdiutil attach -plist -nobrowse -readonly -quiet "${file}" > /dev/null
-        cd "/Volumes/Firefox"
+        if [[ "$1" = "aurora" ]]
+            then
+            release="Aurora"
+        else
+            release="Firefox"
+        fi
+            cd "/Volumes/${release}"
         mkdir -p "/Applications/Firefoxes"
-        if cp -r Firefox.app/ /Applications/Firefoxes/"${app}".app/
+        if cp -r "${release}.app/" /Applications/Firefoxes/"${app}".app/
             then
             log "Installed ${app} to /Applications/Firefoxes/${app}.app"
-            hdiutil detach "/Volumes/Firefox" -force > /dev/null
+            hdiutil detach "/Volumes/${release}" -force > /dev/null
 
             exec "/Applications/Firefoxes/${app}.app/Contents/MacOS/firefox-bin" -CreateProfile "${profile}" &> /dev/null &
             log "Created profile '${profile}' for ${app}"
@@ -184,7 +236,7 @@ get_ffx(){
     fi
 }
 
-ffx_versions="2.0.0.20 3.0.19 3.6.24 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1"
+ffx_versions="2.0.0.20 3.0.19 3.6.24 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 aurora"
 
     log "==========================="
     get_bits

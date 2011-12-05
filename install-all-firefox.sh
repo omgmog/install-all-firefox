@@ -1,31 +1,23 @@
 #!/usr/bin/env bash
-
-# Caution is a virtue
 set -o nounset
 set -o errtrace
 set -o errexit
 set -o pipefail
-
 # if no locale specified, default to en-GB
 LOCALE=${1-en-GB}
-
 log()  { printf "$*\n" ; return $? ;  }
-
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
 get_bits(){
     log "Downloading bits"
     mkdir -p "/tmp/firefoxes/bits"
     cd "/tmp/firefoxes/bits"
-
     log " - setfileicon"
     if [[ ! -f "setfileicon" ]]
         then
         curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
         chmod +x setfileicon
     fi
-
     log " - icons for Firefox"
-
     for i in 2 3 36 4 5 6 7 8 firefox-folder
     do
         if [[ ! -f "fx$i.png" ]]
@@ -43,19 +35,14 @@ get_bits(){
             log "Setting custom icon for /Applications/Firefoxes/"
             /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
     fi
-        
-        log "Download finished!"
+    log "Download finished!"
 }
 get_aurora(){
-
-    # version stuff 
     rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
-    file=`curl -silent -L ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/ | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+    file=`curl -silent -L ${rooturl} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
     app="Firefox Aurora"
     profile="fxa"
     bin="firefox"
-
-    # get the icon
     mkdir -p "/tmp/firefoxes/bits"
     cd "/tmp/firefoxes/bits"
     if [[ ! -f "${profile}.png" ]]
@@ -66,8 +53,6 @@ get_aurora(){
         then
         sips -s format icns "${profile}.png" --out "${profile}.icns"
     fi
-
-    # get the dmg
     cd /tmp
     mkdir -p "firefoxes"
     cd "firefoxes"
@@ -79,7 +64,26 @@ get_aurora(){
             rm -f "${file}"
             fail "Failed to download ${rooturl}/${file} to ${file}!\n"
         else
-            log "Downloaded ${file}"
+            log "Downloaded ${file} successfully :D"
+        fi
+    else
+        checksums=`echo ${file} | sed "s/\.dmg/\.checksums/"`
+        if [[ ! -f "${checksums}" ]]
+            then
+            log "sha512 for ${app} not found, downloading..."
+            curl -L -O "${rooturl}${checksums}"
+        fi
+        file_sha512=`openssl dgst -sha512 /tmp/firefoxes/${file} | sed "s/^.*\(.\{128\}\)$/\1/"`
+        exp_sha512=`cat "${checksums}" | grep "${file}" | cut -c 1-128`
+
+        if [[ "$file_sha512" = "$exp_sha512" ]]
+            then
+            log "sha512 from ${checksums}       = $exp_sha512"
+            log "sha512 of ${file}               = $file_sha512"
+            log "sha512 for ${file} matches!"
+        else
+            log "sha512 doesn't match.. redownloading!"
+            curl -C -L "${rooturl}/${file}" -o "${file}"
         fi
     fi
 }
@@ -150,25 +154,20 @@ get_ffx(){
     esac
     if [[ "$1" = "aurora" ]]
         then
-        # stuff for downloading nightly
         get_aurora
     else
-        # download md5sums for this release
         cd /tmp
         mkdir -p "firefoxes"
         cd "firefoxes"
-        # download the md5sums for this version
-        log "lets see if we can download the md5sums..."
-        curl -L -o "MD5SUMS-${profile}" "${rooturl}MD5SUMS" 
-
+        if [[ ! -f "MD5SUMS-${profile}" ]]
+            then
+            log "md5sums for ${app} not found, downloading..."
+            curl -L -o "MD5SUMS-${profile}" "${rooturl}MD5SUMS" 
+        fi
         md5hash=`cat "MD5SUMS-${profile}" | grep "$LOCALE/${file}" | cut -c 1-32`
-
-        #go to tmp dir
         cd /tmp
         mkdir -p "firefoxes"
         cd "firefoxes"
-
-        # check for existing file
         if [[ ! -f "${file}" ]]
             then
             log "Downloading ${file}"
@@ -190,13 +189,10 @@ get_ffx(){
                     fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
                 fi
             fi
-            
         fi
-    # end test for 'nightly'
     fi
     if [[ ! -d "/Applications/Firefoxes/${app}.app/" ]]
         then
-        # mount dmg
         hdiutil attach -plist -nobrowse -readonly -quiet "${file}" > /dev/null
         if [[ "$1" = "aurora" ]]
             then
@@ -204,29 +200,21 @@ get_ffx(){
         else
             release="Firefox"
         fi
-            cd "/Volumes/${release}"
+        cd "/Volumes/${release}"
         mkdir -p "/Applications/Firefoxes"
         if cp -r "${release}.app/" /Applications/Firefoxes/"${app}".app/
             then
             log "Installed ${app} to /Applications/Firefoxes/${app}.app"
             hdiutil detach "/Volumes/${release}" -force > /dev/null
-
             exec "/Applications/Firefoxes/${app}.app/Contents/MacOS/firefox-bin" -CreateProfile "${profile}" &> /dev/null &
             log "Created profile '${profile}' for ${app}"
-
-            # edit Info.plist for launching
             plist_o="/Applications/Firefoxes/${app}.app/Contents/Info.plist"
             plist_t="/tmp/firefoxes/plist.tmp"
             sed -e "s/${bin}/${bin}-af/g" "$plist_o" > "$plist_t"
             mv "$plist_t" "$plist_o"
-
-            # disable default browser check
             echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/defaults/pref/macprefs.js"
-
             echo -e "#!/bin/sh\n\"/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}\" -no-remote -P \"${profile}\" &" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
-            chmod +x "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
-
-            # edit icon
+            chmod +x "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af"
             cp "/tmp/firefoxes/bits/${profile}.icns" "/Applications/Firefoxes/${app}.app/${profile}.icns"
             /tmp/firefoxes/bits/setfileicon "/Applications/Firefoxes/${app}.app/${profile}.icns" "/Applications/Firefoxes/${app}.app/"
             log "Modified ${app} launcher"
@@ -235,9 +223,7 @@ get_ffx(){
         log "${app} already installed! Skipping."
     fi
 }
-
 ffx_versions="2.0.0.20 3.0.19 3.6.24 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 aurora"
-
     log "==========================="
     get_bits
 for ver in ${ffx_versions}
@@ -245,6 +231,5 @@ do
     log "==========================="
     get_ffx $ver
 done
-
 log "==========================="
 log "Done!"

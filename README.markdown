@@ -16,8 +16,6 @@ Currently it installs:
 - Firefox 8.0.1
 - Firefox Aurora (nightly)
 
-Currently there is no md5 check on the Aurora dmg as Mozilla don't keep a md5sums file on their FTP server for the nightlies.
-
 The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
 
 The script installs these to /Applications/Firefoxes/
@@ -49,8 +47,8 @@ The installation process for the Aurora nightly doesn't take any locale, but it 
 
 
 
-### Update: 02/12/11
-- Added steps to download latest Firefox Aurora nightly to installer, Aurora is selected as part of the default installs
+### Update: 05/12/11
+- Added sha512 check to Aurora, using checksums available on Mozilla FTP
 
 ## TODO
 - Add ability to specify additional versions

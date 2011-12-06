@@ -74,7 +74,7 @@ get_aurora(){
             curl -L -O "${rooturl}${checksums}"
         fi
         file_sha512=`openssl dgst -sha512 /tmp/firefoxes/${file} | sed "s/^.*\(.\{128\}\)$/\1/"`
-        exp_sha512=`cat "${checksums}" | grep "${file}" | cut -c 1-128`
+        exp_sha512=`grep "${file}" "${checksums}" | cut -c 1-128`
 
         if [[ "$file_sha512" = "$exp_sha512" ]]
             then

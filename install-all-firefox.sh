@@ -18,7 +18,7 @@ get_bits(){
         chmod +x setfileicon
     fi
     log " - icons for Firefox"
-    for i in 2 3 36 4 5 6 7 8 firefox-folder
+    for i in 2 3 36 4 5 6 7 8 9 firefox-folder
     do
         if [[ ! -f "fx$i.png" ]]
             then

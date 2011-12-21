@@ -14,6 +14,7 @@ Currently it installs:
 - Firefox 6.0.1
 - Firefox 7.0.1
 - Firefox 8.0.1
+- Firefox 9.0
 - Firefox Aurora (nightly)
 
 The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
@@ -47,8 +48,9 @@ The installation process for the Aurora nightly doesn't take any locale, but it 
 
 
 
-### Update: 05/12/11
-- Added sha512 check to Aurora, using checksums available on Mozilla FTP
+### Update: 21/12/2011
+- Added new icons
+- Added Firefox 9.0
 
 ## TODO
 - Add ability to specify additional versions

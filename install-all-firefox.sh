@@ -145,6 +145,13 @@ get_ffx(){
             profile="fx8"
             bin="firefox"
         ;;
+        9.0)
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0/"
+            file="Firefox 9.0.dmg"
+            app="Firefox 9.0"
+            profile="fx9"
+            bin="firefox"
+        ;;
         *)
             if [[ "$1" != "aurora" ]]
                 then
@@ -223,7 +230,7 @@ get_ffx(){
         log "${app} already installed! Skipping."
     fi
 }
-ffx_versions="2.0.0.20 3.0.19 3.6.24 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 aurora"
+ffx_versions="9.0" #2.0.0.20 3.0.19 3.6.24 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 aurora"
     log "==========================="
     get_bits
 for ver in ${ffx_versions}

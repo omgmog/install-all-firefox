@@ -203,16 +203,18 @@ get_ffx(){
         hdiutil attach -plist -nobrowse -readonly -quiet "${file}" > /dev/null
         if [[ "$1" = "aurora" ]]
             then
-            release="Aurora"
+            dmg="Aurora"
+            release="FirefoxAurora"
         else
+            dmg="Firefox"
             release="Firefox"
         fi
-        cd "/Volumes/${release}"
+        cd "/Volumes/${dmg}"
         mkdir -p "/Applications/Firefoxes"
         if cp -r "${release}.app/" /Applications/Firefoxes/"${app}".app/
             then
             log "Installed ${app} to /Applications/Firefoxes/${app}.app"
-            hdiutil detach "/Volumes/${release}" -force > /dev/null
+            hdiutil detach "/Volumes/${dmg}" -force > /dev/null
             exec "/Applications/Firefoxes/${app}.app/Contents/MacOS/firefox-bin" -CreateProfile "${profile}" &> /dev/null &
             log "Created profile '${profile}' for ${app}"
             plist_o="/Applications/Firefoxes/${app}.app/Contents/Info.plist"

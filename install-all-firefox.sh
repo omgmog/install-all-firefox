@@ -104,8 +104,8 @@ get_ffx(){
             bin="firefox-bin"
         ;;
         3.6.24)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.24/"
-            file="Firefox 3.6.24.dmg"
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.25/"
+            file="Firefox 3.6.25.dmg"
             app="Firefox 3.6"
             profile="fx36"
             bin="firefox-bin"
@@ -232,7 +232,7 @@ get_ffx(){
         log "${app} already installed! Skipping."
     fi
 }
-ffx_versions="2.0.0.20 3.0.19 3.6.24 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 9.0.1 aurora"
+ffx_versions="2.0.0.20 3.0.19 3.6.25 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 9.0.1 aurora"
     log "==========================="
     get_bits
 for ver in ${ffx_versions}

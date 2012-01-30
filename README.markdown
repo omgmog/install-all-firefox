@@ -48,8 +48,8 @@ The installation process for the Aurora nightly doesn't take any locale, but it 
 
 
 
-### Update: 04/01/2012
-- Added Firefox 9.0.1 (didn't realise 9.0.1 came out!)
+### Update: 30/01/2012
+- Updated Firefox 3.6.24 to 3.6.25
 
 ## TODO
 - Add ability to specify additional versions

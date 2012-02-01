@@ -18,7 +18,7 @@ get_bits(){
         chmod +x setfileicon
     fi
     log " - icons for Firefox"
-    for i in 2 3 36 4 5 6 7 8 9 firefox-folder
+    for i in 2 3 36 4 5 6 7 8 9 10 firefox-folder
     do
         if [[ ! -f "fx$i.png" ]]
             then
@@ -103,7 +103,7 @@ get_ffx(){
             profile="fx3"
             bin="firefox-bin"
         ;;
-        3.6.24)
+        3.6.25)
             rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.25/"
             file="Firefox 3.6.25.dmg"
             app="Firefox 3.6"
@@ -150,6 +150,13 @@ get_ffx(){
             file="Firefox 9.0.1.dmg"
             app="Firefox 9.0"
             profile="fx9"
+            bin="firefox"
+        ;;
+        10.0)
+            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0/"
+            file="Firefox 10.0.dmg"
+            app="Firefox 10.0"
+            profile="fx10"
             bin="firefox"
         ;;
         *)
@@ -232,7 +239,7 @@ get_ffx(){
         log "${app} already installed! Skipping."
     fi
 }
-ffx_versions="2.0.0.20 3.0.19 3.6.25 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 9.0.1 aurora"
+ffx_versions="2.0.0.20 3.0.19 3.6.25 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 9.0.1 10.0 aurora"
     log "==========================="
     get_bits
 for ver in ${ffx_versions}

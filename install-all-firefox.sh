@@ -228,7 +228,7 @@ get_ffx(){
             plist_t="/tmp/firefoxes/plist.tmp"
             sed -e "s/${bin}/${bin}-af/g" "$plist_o" > "$plist_t"
             mv "$plist_t" "$plist_o"
-            echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/defaults/pref/macprefs.js"
+            echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/defaults/pref/macprefs.js"
             echo -e "#!/bin/sh\n\"/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}\" -no-remote -P \"${profile}\" &" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
             chmod +x "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af"
             cp "/tmp/firefoxes/bits/${profile}.icns" "/Applications/Firefoxes/${app}.app/${profile}.icns"

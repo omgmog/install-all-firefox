@@ -8,7 +8,7 @@ Currently it installs:
 
 - Firefox 2.0.0.20
 - Firefox 3.0.19
-- Firefox 3.6.25
+- Firefox 3.6.26
 - Firefox 4.0.1
 - Firefox 5.0.1
 - Firefox 6.0.1
@@ -48,14 +48,14 @@ The installation process for the Aurora nightly doesn't take any locale, but it 
 
 
 
-## Update: 01/02/2012
-- Added Firefox 10.0
+## Update: 09/02/2012
+- Updated Firefox 3.6.26
 
 
 ## TODO
 - Add ability to specify additional versions
 - Add check for local 'bits' folder (if whole branch mirrored locally)
-
+- Create launcher to preview a site in all install firefoxes
 
 ## CREDITS
 - Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms

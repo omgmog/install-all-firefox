@@ -239,7 +239,7 @@ get_ffx(){
         log "${app} already installed! Skipping."
     fi
 }
-ffx_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.1 7.0.1 8.0.1 9.0.1 10.0 aurora"
+ffx_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora"
     log "==========================="
     get_bits
 for ver in ${ffx_versions}

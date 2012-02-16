@@ -1,251 +1,326 @@
-#!/usr/bin/env bash
-set -o nounset
-set -o errtrace
-set -o errexit
-set -o pipefail
-# if no locale specified, default to en-GB
-LOCALE=${1-en-GB}
-log()  { printf "$*\n" ; return $? ;  }
-fail() { log "\nERROR: $*\n" ; exit 1 ; }
+#!/bin/bash
+default_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora"
+tmp_directory="/tmp/firefoxes/"
+bits_directory="${tmp_directory}bits/"
+install_directory="/Applications/Firefoxes/"
+
+# Don't edit below this line (unless you're adding new version cases in get_associated_information)
+
+locale=${2:-"en-GB"}
+versions="${1:-$default_versions}"
+ftp_root=""
+dmg_file=""
+sum_file=""
+sum_file_type=""
+sum_of_dmg=""
+sum_expected=""
+binary=""
+short_name=""
+nice_name=""
+vol_name="Firefox"
+release_name="Firefox"
+release_type=""
+binary_folder="/Contents/MacOS/"
+get_associated_information(){
+    case $1 in 
+        2.0.0.20)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
+            dmg_file="Firefox 2.0.0.20.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx2"
+            nice_name="Firefox 2.0"
+        ;;
+        3.0.19)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
+            dmg_file="Firefox 3.0.19.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx3"
+            nice_name="Firefox 3.0"
+        ;;
+        3.6.26)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.26/"
+            dmg_file="Firefox 3.6.26.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx36"
+            nice_name="Firefox 3.6"
+        ;;
+        4.0.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
+            dmg_file="Firefox 4.0.1.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx4"
+            nice_name="Firefox 4.0"
+        ;;
+        5.0.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
+            dmg_file="Firefox 5.0.1.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx5"
+            nice_name="Firefox 5.0"
+        ;;
+        6.0.2)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
+            dmg_file="Firefox 6.0.2.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx6"
+            nice_name="Firefox 6.0"
+        ;;
+        7.0.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
+            dmg_file="Firefox 7.0.1.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx7"
+            nice_name="Firefox 7.0"
+        ;;
+        8.0.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
+            dmg_file="Firefox 8.0.1.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx8"
+            nice_name="Firefox 8.0"
+        ;;
+        9.0.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
+            dmg_file="Firefox 9.0.1.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx9"
+            nice_name="Firefox 9.0"
+        ;;
+        10.0)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0/"
+            dmg_file="Firefox 10.0.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx10"
+            nice_name="Firefox 10.0"
+        ;;
+        aurora)
+            release_type="aurora"
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
+            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+            sum_file_type="sha512"
+            binary="firefox"
+            short_name="fxa"
+            nice_name="Firefox Aurora"
+        ;;
+        *)
+            error "  Invalid version specified!\n\n  Please choose one of:\n  $default_versions\n\n"
+            exit 1
+        ;;
+    esac
+    log "====================\nInstalling ${nice_name}"
+}
+setup_dirs(){
+    if [[ ! -d "$tmp_directory" ]]
+        then
+        mkdir -p "$tmp_directory"
+    fi
+    if [[ ! -d "$bits_directory" ]]
+        then
+        mkdir -p "$bits_directory"
+    fi
+    if [[ ! -d "$install_directory" ]]
+        then
+        mkdir -p "$install_directory"
+    fi
+}
 get_bits(){
     log "Downloading bits"
-    mkdir -p "/tmp/firefoxes/bits"
-    cd "/tmp/firefoxes/bits"
-    log " - setfileicon"
+    cd "$bits_directory"
     if [[ ! -f "setfileicon" ]]
         then
         curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
         chmod +x setfileicon
     fi
-    log " - icons for Firefox"
-    for i in 2 3 36 4 5 6 7 8 9 10 firefox-folder
-    do
-        if [[ ! -f "fx$i.png" ]]
-            then
-            curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/fx$i.png" -o "fx$i.png"
-        fi
-        if [[ ! -f "fx$i.icns" ]]
-            then
-            sips -s format icns "fx$i.png" --out "fx$i.icns"
-        fi
-    done
-    if [[ ! -d "/Applications/Firefoxes" ]]
+    if [[ ! -f "${short_name}.png" ]]
         then
-            mkdir "/Applications/Firefoxes"
-            log "Setting custom icon for /Applications/Firefoxes/"
-            /tmp/firefoxes/bits/setfileicon "/tmp/firefoxes/bits/fxfirefox-folder.icns" "/Applications/Firefoxes/"
+        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
     fi
-    log "Download finished!"
+    if [[ ! -f "${short_name}.icns" ]]
+        then
+        sips -s format icns "${short_name}.png" --out "${short_name}.icns"
+    fi
+    if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]
+        then
+        if [[ ! -f "fxfirefox-folder.png" ]]
+            then
+            curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+        fi
+        if [[ ! -f "fxfirefox-folder.icns" ]]
+            then
+            sips -s format icns "fxfirefox-folder.png" --out "fxfirefox-folder.icns"
+        fi
+        ./setfileicon "fxfirefox-folder.icns" "${install_directory}"
+    fi
 }
-get_aurora(){
-    rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
-    file=`curl -silent -L ${rooturl} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
-    app="Firefox Aurora"
-    profile="fxa"
-    bin="firefox"
-    mkdir -p "/tmp/firefoxes/bits"
-    cd "/tmp/firefoxes/bits"
-    if [[ ! -f "${profile}.png" ]]
+check_dmg(){
+    if [[ ! -f "${tmp_directory}/${dmg_file}" ]]
         then
-        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${profile}.png" -o "${profile}.png"
-    fi
-    if [[ ! -f "${profile}.icns" ]]
-        then
-        sips -s format icns "${profile}.png" --out "${profile}.icns"
-    fi
-    cd /tmp
-    mkdir -p "firefoxes"
-    cd "firefoxes"
-    if [[ ! -f "${file}" ]]
-        then
-        log "Downloading ${file}"
-        if ! curl -C -L "${rooturl}/${file}" -o "${file}"
-            then
-            rm -f "${file}"
-            fail "Failed to download ${rooturl}/${file} to ${file}!\n"
-        else
-            log "Downloaded ${file} successfully :D"
-        fi
+        log "Downloading ${dmg_file}"
+        download_dmg
     else
-        checksums=`echo ${file} | sed "s/\.dmg/\.checksums/"`
-        if [[ ! -f "${checksums}" ]]
+        get_sum_file
+        case $sum_file_type in
+            md5)
+                sum_of_dmg=`md5 -q "${tmp_directory}${dmg_file}"`
+                sum_expected=`cat "${sum_file}-${short_name}" | grep "${locale}/${dmg_file}" | cut -c 1-32`
+            ;;
+            sha512)
+                sum_of_dmg=`openssl dgst -sha512 "${tmp_directory}${dmg_file}" | sed "s/^.*\(.\{128\}\)$/\1/"`
+                sum_expected=`cat "${sum_file}-${short_name}" | grep "${sum_of_dmg}" | cut -c 1-128`
+            ;;
+            *)
+                error "✖ Invalid sum type specified!"
+            ;;
+        esac
+        if [[ "${sum_of_dmg}" == "${sum_expected}" ]]
             then
-            log "sha512 for ${app} not found, downloading..."
-            curl -L -O "${rooturl}${checksums}"
+            log "✔ ${sum_file_type} of ${dmg_file} matches"
+        else
+            error "✖ ${sum_file_type} of ${dmg_file} doesn't match!"
+            log "Redownloading.\n"
+            download_dmg
         fi
-        file_sha512=`openssl dgst -sha512 /tmp/firefoxes/${file} | sed "s/^.*\(.\{128\}\)$/\1/"`
-        exp_sha512=`grep "${file}" "${checksums}" | cut -c 1-128`
+    fi
+}
+get_sum_file(){
+    cd "${tmp_directory}"
+    curl -C -L "${ftp_root}${sum_file}" -o "${sum_file}-${short_name}"
+}
+download_dmg(){
+    cd "${tmp_directory}"
+    if [[ "${release_type}" == "aurora" ]]
+        then
+        dmg_url="${ftp_root}${dmg_file}"
+    else
+        dmg_url="${ftp_root}mac/$locale/${dmg_file}"
+    fi
+    if ! curl -C -L "${dmg_url}" -o "${dmg_file}"
+        then
+        error "✖ Failed to download ${dmg_file}!"
+    fi
+}
+mount_dmg(){
+    hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
+    if [[ "${release_type}" == "aurora" ]]
+        then
+        vol_name="Aurora"
+        release_name="FirefoxAurora"
+    fi
+}
+install_app(){
+    if [[ -d "${install_directory}${nice_name}.app" ]]
+        then
+        log "Delete your existing ${nice_name}.app and install again? [y/n]"
+        read user_choice
+        choice_made="false"
+        while [[ "$choice_made" == "false" ]]
+        do
+            case "$user_choice" in
+                "y")
+                    choice_made="true"
+                    log "Reinstalling ${nice_name}.app"
+                    remove_app
+                    process_install
+                ;;
+                "n")
+                    choice_made="true"
+                    log "Skipping installation of ${nice_name}.app"
+                ;;
+                *)
+                    error "Please enter 'y' or 'n'"
+                    read user_choice
+                ;;
+            esac
+        done
+        return 0
+    else
+        process_install
+    fi
+}
+remove_app(){
+    if rm -rf "${install_directory}${nice_name}.app"
+        then
+        log "✔ Removed ${install_directory}${nice_name}.app"
+    else
+        error "✖ Could not remove ${install_directory}${nice_name}.app!"
+        return 0
+    fi
+}
+process_install(){
+    cd "/Volumes/${vol_name}"
+    if cp -r "${release_name}.app/" "${install_directory}${nice_name}.app/"
+        then
+        log "✔ Installed ${nice_name}.app"
+    else
+        error "✖ Could not install ${nice_name}.app!"
+        return 0
+    fi
+    hdiutil detach "/Volumes/${vol_name}" -force > /dev/null
+    create_profile
+    modify_launcher
+    install_complete
+}
+create_profile(){
+    if exec "${install_directory}${nice_name}.app${binary_folder}${binary}" -CreateProfile "${short_name}" &> /dev/null &
+        then
+        log "✔ Created profile '${short_name}' for ${nice_name}"
+    else
+        error "✖ Could not create profile '${short_name}' for ${nice_name}"
+        return 0
+    fi
+}
+modify_launcher(){
+    plist_old="${install_directory}${nice_name}.app/Contents/Info.plist"
+    plist_new="${tmp_directory}Info.plist"
+    sed -e "s/${binary}/${binary}-af/g" "${plist_old}" > "${plist_new}"
+    mv "${plist_new}" "${plist_old}"
+   
+    echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
+    chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
-        if [[ "$file_sha512" = "$exp_sha512" ]]
-            then
-            log "sha512 from ${checksums}       = $exp_sha512"
-            log "sha512 of ${file}               = $file_sha512"
-            log "sha512 for ${file} matches!"
-        else
-            log "sha512 doesn't match.. redownloading!"
-            curl -C -L "${rooturl}/${file}" -o "${file}"
-        fi
-    fi
+    echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
+
+    cd "${bits_directory}"
+    ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"
 }
-get_ffx(){
-    case $1 in 
-        2.0.0.20)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
-            file="Firefox 2.0.0.20.dmg"
-            app="Firefox 2.0"
-            profile="fx2"
-            bin="firefox-bin"
-        ;;
-        3.0.19)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
-            file="Firefox 3.0.19.dmg"
-            app="Firefox 3.0"
-            profile="fx3"
-            bin="firefox-bin"
-        ;;
-        3.6.26)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.26/"
-            file="Firefox 3.6.26.dmg"
-            app="Firefox 3.6"
-            profile="fx36"
-            bin="firefox-bin"
-        ;;
-        4.0.1)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
-            file="Firefox 4.0.1.dmg"
-            app="Firefox 4.0"
-            profile="fx4"
-            bin="firefox-bin"
-        ;;
-        5.0.1)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
-            file="Firefox 5.0.1.dmg"
-            app="Firefox 5.0"
-            profile="fx5"
-            bin="firefox-bin"
-        ;;
-        6.0.2)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
-            file="Firefox 6.0.2.dmg"
-            app="Firefox 6.0"
-            profile="fx6"
-            bin="firefox-bin"
-        ;;
-        7.0.1)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
-            file="Firefox 7.0.1.dmg"
-            app="Firefox 7.0"
-            profile="fx7"
-            bin="firefox"
-        ;;
-        8.0.1)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
-            file="Firefox 8.0.1.dmg"
-            app="Firefox 8.0"
-            profile="fx8"
-            bin="firefox"
-        ;;
-        9.0.1)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
-            file="Firefox 9.0.1.dmg"
-            app="Firefox 9.0"
-            profile="fx9"
-            bin="firefox"
-        ;;
-        10.0)
-            rooturl="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0/"
-            file="Firefox 10.0.dmg"
-            app="Firefox 10.0"
-            profile="fx10"
-            bin="firefox"
-        ;;
-        *)
-            if [[ "$1" != "aurora" ]]
-                then
-                fail "Invalid Firefox version: ${1}"
-            fi
-        ;;
-    esac
-    if [[ "$1" = "aurora" ]]
-        then
-        get_aurora
-    else
-        cd /tmp
-        mkdir -p "firefoxes"
-        cd "firefoxes"
-        if [[ ! -f "MD5SUMS-${profile}" ]]
-            then
-            log "md5sums for ${app} not found, downloading..."
-            curl -L -o "MD5SUMS-${profile}" "${rooturl}MD5SUMS" 
-        fi
-        md5hash=`cat "MD5SUMS-${profile}" | grep "$LOCALE/${file}" | cut -c 1-32`
-        cd /tmp
-        mkdir -p "firefoxes"
-        cd "firefoxes"
-        if [[ ! -f "${file}" ]]
-            then
-            log "Downloading ${file}"
-            if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
-                then
-                fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
-            fi
-        else
-            themd5=`md5 -q "/tmp/firefoxes/${file}"`
-            if [[ $themd5 = "$md5hash" ]]
-                then
-                log "md5 from MD5SUMS   = $md5hash"
-                log "md5 of file        = $themd5"
-                log "md5 of ${file} matches!"
-            else
-                log "Error: md5 mismatch, redownloading"
-                if ! curl -C -L "${rooturl}mac/$LOCALE/${file}" -o "${file}"
-                    then
-                    fail "Failed to download ${rooturl}mac/$LOCALE/${file} to ${file}!\n"
-                fi
-            fi
-        fi
-    fi
-    if [[ ! -d "/Applications/Firefoxes/${app}.app/" ]]
-        then
-        hdiutil attach -plist -nobrowse -readonly -quiet "${file}" > /dev/null
-        if [[ "$1" = "aurora" ]]
-            then
-            dmg="Aurora"
-            release="FirefoxAurora"
-        else
-            dmg="Firefox"
-            release="Firefox"
-        fi
-        cd "/Volumes/${dmg}"
-        mkdir -p "/Applications/Firefoxes"
-        if cp -r "${release}.app/" /Applications/Firefoxes/"${app}".app/
-            then
-            log "Installed ${app} to /Applications/Firefoxes/${app}.app"
-            hdiutil detach "/Volumes/${dmg}" -force > /dev/null
-            exec "/Applications/Firefoxes/${app}.app/Contents/MacOS/firefox-bin" -CreateProfile "${profile}" &> /dev/null &
-            log "Created profile '${profile}' for ${app}"
-            plist_o="/Applications/Firefoxes/${app}.app/Contents/Info.plist"
-            plist_t="/tmp/firefoxes/plist.tmp"
-            sed -e "s/${bin}/${bin}-af/g" "$plist_o" > "$plist_t"
-            mv "$plist_t" "$plist_o"
-            echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/defaults/pref/macprefs.js"
-            echo -e "#!/bin/sh\n\"/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}\" -no-remote -P \"${profile}\" &" > "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af" 
-            chmod +x "/Applications/Firefoxes/${app}.app/Contents/MacOS/${bin}-af"
-            cp "/tmp/firefoxes/bits/${profile}.icns" "/Applications/Firefoxes/${app}.app/${profile}.icns"
-            /tmp/firefoxes/bits/setfileicon "/Applications/Firefoxes/${app}.app/${profile}.icns" "/Applications/Firefoxes/${app}.app/"
-            log "Modified ${app} launcher"
-        fi
-    else
-        log "${app} already installed! Skipping."
-    fi
+install_complete(){
+    log "✔ Install complete!\n"
 }
-ffx_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora"
-    log "==========================="
-    get_bits
-for ver in ${ffx_versions}
+error(){
+    printf "\n\033[31m$*\033[00m"
+    return 0
+}
+log(){
+    printf "\n\033[32m$*\033[00m\n"
+    return $?
+}
+for VERSION in $versions
 do
-    log "==========================="
-    get_ffx $ver
+    get_associated_information $VERSION
+    setup_dirs
+    get_bits
+    check_dmg
+    mount_dmg
+    install_app
 done
-log "==========================="
-log "Done!"

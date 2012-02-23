@@ -1,5 +1,5 @@
 #!/bin/bash
-default_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora"
+default_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora nightly ux"
 tmp_directory="/tmp/firefoxes/"
 bits_directory="${tmp_directory}bits/"
 install_directory="/Applications/Firefoxes/"
@@ -22,7 +22,7 @@ release_name="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
 get_associated_information(){
-    case $1 in 
+    case $1 in
         2.0.0.20)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
             dmg_file="Firefox 2.0.0.20.dmg"
@@ -115,6 +115,7 @@ get_associated_information(){
         ;;
         aurora)
             release_type="aurora"
+            future="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
             dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
             sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
@@ -122,6 +123,34 @@ get_associated_information(){
             binary="firefox"
             short_name="fxa"
             nice_name="Firefox Aurora"
+            vol_name="Aurora"
+            release_name="FirefoxAurora"
+        ;;
+        nightly)
+            release_type="nightly"
+            future="true"
+            ftp_root="ftp://ftp.mozilla.org//pub/mozilla.org/firefox/nightly/latest-trunk/"
+            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+            sum_file_type="sha512"
+            binary="firefox"
+            short_name="fxn"
+            nice_name="Firefox Nightly"
+            vol_name="Nightly"
+            release_name="FirefoxNightly"
+        ;;
+        ux)
+            release_type="ux"
+            future="true"
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
+            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+            sum_file_type="sha512"
+            binary="firefox"
+            short_name="fxux"
+            nice_name="Firefox UX Nightly"
+            vol_name="UX"
+            release_name="FirefoxUX"
         ;;
         *)
             error "  Invalid version specified!\n\n  Please choose one of:\n  $default_versions\n\n"
@@ -209,7 +238,7 @@ get_sum_file(){
 }
 download_dmg(){
     cd "${tmp_directory}"
-    if [[ "${release_type}" == "aurora" ]]
+    if [[ "${future}" == "true" ]]
         then
         dmg_url="${ftp_root}${dmg_file}"
     else
@@ -222,10 +251,10 @@ download_dmg(){
 }
 mount_dmg(){
     hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
-    if [[ "${release_type}" == "aurora" ]]
+    if [[ "${future}" == "true" ]]
         then
-        vol_name="Aurora"
-        release_name="FirefoxAurora"
+        vol_name="${vol_name}"
+        release_name="${release_name}"
     fi
 }
 install_app(){
@@ -295,7 +324,7 @@ modify_launcher(){
     plist_new="${tmp_directory}Info.plist"
     sed -e "s/${binary}/${binary}-af/g" "${plist_old}" > "${plist_new}"
     mv "${plist_new}" "${plist_old}"
-   
+
     echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
     chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 

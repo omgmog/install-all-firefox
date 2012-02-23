@@ -16,7 +16,9 @@ Currently it installs:
 - Firefox 8.0.1
 - Firefox 9.0.1
 - Firefox 10.0
-- Firefox Aurora (nightly)
+- Firefox Aurora
+- Firefox Nightly
+- Firefox UX Nightly
 
 The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
 
@@ -27,17 +29,17 @@ The script installs these to /Applications/Firefoxes/
 1. From a terminal prompt enter the following
 
     > curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
-    
+
     > chmod +x install-all-firefox.sh
-    
+
     > ./install-all-firefox.sh [version] [locale]
 
 [version] and [locale] are optional.
 
 By default the installer uses the en-GB locale, but you can specify any of the following:
 
-    af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL, 
-    ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR, 
+    af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
+    ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,
     pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 
 The installation process for the Aurora nightly doesn't take any locale, but it installs en-US.

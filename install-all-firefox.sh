@@ -153,7 +153,7 @@ get_associated_information(){
             release_name="FirefoxUX"
         ;;
         *)
-            error "  Invalid version specified!\n\n  Please choose one of:\n  $default_versions\n\n"
+            error "  Invalid version specified!\n\n  Please choose one of:\n  all $default_versions\n\n"
             exit 1
         ;;
     esac
@@ -344,6 +344,12 @@ log(){
     printf "\n\033[32m$*\033[00m\n"
     return $?
 }
+
+if [[ ${versions} == "all" ]]
+    then
+    versions=$default_versions
+fi
+
 for VERSION in $versions
 do
     get_associated_information $VERSION

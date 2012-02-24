@@ -67,10 +67,14 @@ for multiple:
 ## Update: 15/02/2012
 - Complete rewrite from scratch! (see NEW FEATURES above)
 
+## Update: 24/02/2012
+- Added support for Nightly / Aurora / Nightly UX
+- Added groups ("all", "all\_past", "all\_future")
+- Added "current" alias for the current version
+- Add check for local 'bits' folder (if whole branch mirrored locally)
 
 ## TODO
 - Add ability to specify additional versions
-- Add check for local 'bits' folder (if whole branch mirrored locally)
 - Create launcher to preview a site in all install firefoxes (WIP!)
 
 ## CREDITS

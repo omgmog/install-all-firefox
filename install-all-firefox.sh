@@ -179,6 +179,7 @@ setup_dirs(){
 }
 get_bits(){
     log "Downloading bits"
+    current_dir=`pwd`
     cd "$bits_directory"
     if [[ ! -f "setfileicon" ]]
         then
@@ -187,7 +188,15 @@ get_bits(){
     fi
     if [[ ! -f "${short_name}.png" ]]
         then
-        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+        icon_file="${current_dir}/bits/${short_name}.png"
+
+        # If file exists locally, use it
+        if [[ -f $icon_file ]]
+            then
+            cp -r $icon_file "${short_name}.png"
+        else
+            curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+        fi
     fi
     if [[ ! -f "${short_name}.icns" ]]
         then

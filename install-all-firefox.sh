@@ -1,5 +1,9 @@
 #!/bin/bash
-default_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora nightly ux"
+default_versions_future="aurora nightly ux"
+default_versions_current="10.0"
+default_versions_past="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
+
+default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
 bits_directory="${tmp_directory}bits/"
 install_directory="/Applications/Firefoxes/"
@@ -153,7 +157,7 @@ get_associated_information(){
             release_name="FirefoxUX"
         ;;
         *)
-            error "  Invalid version specified!\n\n  Please choose one of:\n  all $default_versions\n\n"
+            error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"
             exit 1
         ;;
     esac
@@ -345,10 +349,11 @@ log(){
     return $?
 }
 
-if [[ ${versions} == "all" ]]
-    then
-    versions=$default_versions
-fi
+# Replace special keywords with actual versions (duplicates are okay; it'll work fine)
+versions=${versions/all_future/${default_versions_future}}
+versions=${versions/all_past/${default_versions_past}}
+versions=${versions/all/${default_versions}}
+versions=${versions/current/${default_versions_current}}
 
 for VERSION in $versions
 do

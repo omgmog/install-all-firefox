@@ -255,11 +255,6 @@ download_dmg(){
 }
 mount_dmg(){
     hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
-    if [[ "${future}" == "true" ]]
-        then
-        vol_name="${vol_name}"
-        release_name="${release_name}"
-    fi
 }
 install_app(){
     if [[ -d "${install_directory}${nice_name}.app" ]]

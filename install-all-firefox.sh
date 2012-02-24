@@ -188,6 +188,7 @@ get_bits(){
     fi
     if [[ ! -f "${short_name}.png" ]]
         then
+        new_icon="true"
         icon_file="${current_dir}/bits/${short_name}.png"
 
         # If file exists locally, use it
@@ -198,9 +199,9 @@ get_bits(){
             curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
         fi
     fi
-    if [[ ! -f "${short_name}.icns" ]]
+    if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]
         then
-        sips -s format icns "${short_name}.png" --out "${short_name}.icns"
+        sips -s format icns "${short_name}.png" --out "${short_name}.icns" > /dev/null
     fi
     if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]
         then

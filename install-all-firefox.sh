@@ -122,6 +122,7 @@ get_associated_information(){
 
             release_type="beta"
             # future="true" # Even though it's technically future, the file structure is the same as non-future
+            autoupdate="true"
             ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
             candidates_folder=`curl -silent -L ${ftp_candidates} | sort -n | tail -n1`
             build_folder=`curl -silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
@@ -139,6 +140,7 @@ get_associated_information(){
         aurora)
             release_type="aurora"
             future="true"
+            autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
             dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
             sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
@@ -152,6 +154,7 @@ get_associated_information(){
         nightly)
             release_type="nightly"
             future="true"
+            autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org//pub/mozilla.org/firefox/nightly/latest-trunk/"
             dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
             sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
@@ -165,6 +168,7 @@ get_associated_information(){
         ux)
             release_type="ux"
             future="true"
+            autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
             dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
             sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
@@ -356,7 +360,12 @@ modify_launcher(){
     echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
     chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
-    echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
+    if [[ $autoupdate != "true" ]]
+        then
+        prefs_previous="\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);"
+    fi
+
+    echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);${prefs_previous}\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
 
     cd "${bits_directory}"
     ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"

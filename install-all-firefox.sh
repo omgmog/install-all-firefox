@@ -10,7 +10,6 @@ install_directory="/Applications/Firefoxes/"
 
 # Don't edit below this line (unless you're adding new version cases in get_associated_information)
 
-locale=${2:-"en-GB"}
 versions="${1:-$default_versions}"
 ftp_root=""
 dmg_file=""
@@ -25,6 +24,22 @@ vol_name="Firefox"
 release_name="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
+
+get_locale() {
+    all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
+    lang=`echo ${LANG/_/-} | sed 's/\..*//'`
+
+    locale_default="en-GB"
+    if [[ $all_locales == *" $lang "* ]]
+        then
+        locale_default=$lang
+    fi
+
+    locale=${2:-$locale_default}
+}
+
+get_locale
+
 get_associated_information(){
     case $1 in
         2.0.0.20)

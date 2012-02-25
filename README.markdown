@@ -25,6 +25,10 @@ The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
 
 The script installs these to /Applications/Firefoxes/
 
+To see which versions you have installed (via install-all-firefox) already, enter the following:
+
+> ./install-all-firefox.sh status
+
 ## INSTALLATION
 
 1. From a terminal prompt enter the following
@@ -58,10 +62,15 @@ To see what you have installed, enter the following
 ## NEW FEATURES
 - Detects previously installed (by install-all-firefox) Firefoxes and prompts to reinstall
 - you can now correctly specify the version to install
-for single:
-> ./install-all-firefox.sh 2.0.0.20
-for multiple:
-> ./install-all-firefox.sh "2.0.0.20 3.0.19"
+
+    for single:
+
+    > ./install-all-firefox.sh 2.0.0.20
+
+    for multiple:
+
+    > ./install-all-firefox.sh "2.0.0.20 3.0.19"
+
 - installer now provides more visual feedback of progress
 - installs each version after getting dmg, so you don't need to wait for all versions to install
 - streamlined the install-all-firefox.sh file!

@@ -133,23 +133,27 @@ get_associated_information(){
             nice_name="Firefox 10.0"
         ;;
         beta)
-            # This seems a bit flakey
+            # This seems a bit flaky
 
             release_type="beta"
             # future="true" # Even though it's technically future, the file structure is the same as non-future
             autoupdate="true"
             ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
-            candidates_folder=`curl -silent -L ${ftp_candidates} | sort -n | tail -n1`
-            build_folder=`curl -silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
 
-            ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
+            if [[ $versions != 'status' ]]
+                then
+                candidates_folder=`curl -silent -L ${ftp_candidates} | sort -n | tail -n1`
+                build_folder=`curl -silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
 
-            dmg_file=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
-            sum_file_tmp=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
-            sum_file_folder="mac/${locale}/"
-            sum_file="${sum_file_tmp}"
+                ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
 
-            sum_file_type="sha512"
+                dmg_file=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
+                sum_file_tmp=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
+                sum_file_folder="mac/${locale}/"
+                sum_file="${sum_file_tmp}"
+                sum_file_type="md5"
+            fi
+
             binary="firefox"
             short_name="fxb"
             nice_name="Firefox Beta"
@@ -159,9 +163,14 @@ get_associated_information(){
             future="true"
             autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
-            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
-            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
-            sum_file_type="sha512"
+
+            if [[ $versions != 'status' ]]
+                then
+                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                sum_file_type="sha512"
+            fi
+
             binary="firefox"
             short_name="fxa"
             nice_name="Firefox Aurora"
@@ -173,9 +182,14 @@ get_associated_information(){
             future="true"
             autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org//pub/mozilla.org/firefox/nightly/latest-trunk/"
-            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
-            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
-            sum_file_type="sha512"
+
+            if [[ $versions != 'status' ]]
+                then
+                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                sum_file_type="sha512"
+            fi
+
             binary="firefox"
             short_name="fxn"
             nice_name="Firefox Nightly"
@@ -187,9 +201,14 @@ get_associated_information(){
             future="true"
             autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
-            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
-            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
-            sum_file_type="sha512"
+
+            if [[ $versions != 'status' ]]
+                then
+                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                sum_file_type="sha512"
+            fi
+
             binary="firefox"
             short_name="fxux"
             nice_name="Firefox UX Nightly"
@@ -201,7 +220,6 @@ get_associated_information(){
             exit 1
         ;;
     esac
-    log "====================\nInstalling ${nice_name}"
 }
 setup_dirs(){
     if [[ ! -d "$tmp_directory" ]]
@@ -405,9 +423,27 @@ versions=${versions/all_past/${default_versions_past}}
 versions=${versions/all/${default_versions}}
 versions=${versions/current/${default_versions_current}}
 
+if [[ $versions == 'status' ]]
+    then
+    printf "The versions in \033[32mgreen\033[00m are installed:\n"
+    for VERSION in $default_versions
+    do
+        get_associated_information $VERSION
+        if [[ -d "${install_directory}${nice_name}.app" ]]
+            then
+            printf "\n\033[32m - ${nice_name} ($VERSION)\033[00m"
+        else
+            printf "\n\033[31m - ${nice_name} ($VERSION)\033[00m"
+        fi
+    done
+    printf "\n\nTo install, type \033[1m./install-all-firefox.sh [version]\033[22m, with [version] being the number or name in parentheses"
+    exit 1
+fi
+
 for VERSION in $versions
 do
     get_associated_information $VERSION
+    log "====================\nInstalling ${nice_name}"
     setup_dirs
     get_bits
     check_dmg

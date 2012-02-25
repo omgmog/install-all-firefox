@@ -51,6 +51,9 @@ The installation process for Aurora and the Nightlies don't take a locale; rathe
 
 4. It'll take a little while to grab the .dmg files, but it should only need to do this once. (until you reboot and the contents of /tmp are deleted)
 
+To see what you have installed, enter the following
+
+> ./install-all-firefox.sh status
 
 ## NEW FEATURES
 - Detects previously installed (by install-all-firefox) Firefoxes and prompts to reinstall
@@ -73,6 +76,7 @@ for multiple:
 - Added groups ("all", "all\_past", "all\_future")
 - Added "current" alias for the current version
 - Add check for local 'bits' folder (if whole branch mirrored locally)
+- You can run `./install-all-firefox.sh status` to see what you have installed
 
 ## TODO
 - Add ability to specify additional versions

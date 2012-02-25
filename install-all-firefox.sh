@@ -300,7 +300,8 @@ check_dmg(){
                 error "✖ Invalid sum type specified!"
             ;;
         esac
-        if [[ "${sum_of_dmg}" == "${sum_expected}" ]]
+
+        if [[ "${sum_expected}" == *"${sum_of_dmg}"* ]]
             then
             log "✔ ${sum_file_type} of ${dmg_file} matches"
         else

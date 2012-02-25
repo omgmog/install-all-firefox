@@ -130,7 +130,9 @@ get_associated_information(){
             ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
 
             dmg_file=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
-            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+            sum_file_tmp=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
+            sum_file_folder="mac/${locale}/"
+            sum_file="${sum_file_tmp}"
 
             sum_file_type="sha512"
             binary="firefox"
@@ -271,7 +273,7 @@ check_dmg(){
 }
 get_sum_file(){
     cd "${tmp_directory}"
-    curl -C -L "${ftp_root}${sum_file}" -o "${sum_file}-${short_name}"
+    curl -C -L "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
 }
 download_dmg(){
     cd "${tmp_directory}"

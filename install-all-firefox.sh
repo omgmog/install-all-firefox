@@ -20,8 +20,8 @@ sum_expected=""
 binary=""
 short_name=""
 nice_name=""
-vol_name="Firefox"
-release_name="Firefox"
+vol_name_default="Firefox"
+release_name_default="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
 
@@ -41,6 +41,12 @@ get_locale() {
 get_locale
 
 get_associated_information(){
+    # Reset everything
+    vol_name=$vol_name_default
+    release_name=$release_name_default
+    autoupdate=""
+    future=""
+
     case $1 in
         2.0.0.20)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"

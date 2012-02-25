@@ -223,6 +223,7 @@ get_associated_information(){
         ;;
         *)
             error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"
+            error "  To see which versions you have installed, type:\n  ./install-all-firefox.sh status"
             exit 1
         ;;
     esac

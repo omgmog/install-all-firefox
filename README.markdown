@@ -16,6 +16,7 @@ Currently it installs:
 - Firefox 8.0.1
 - Firefox 9.0.1
 - Firefox 10.0
+- Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
 - Firefox UX Nightly
@@ -68,7 +69,7 @@ for multiple:
 - Complete rewrite from scratch! (see NEW FEATURES above)
 
 ## Update: 24/02/2012
-- Added support for Nightly / Aurora / Nightly UX
+- Added support for Beta / Aurora / Nightly / Nightly UX
 - Added groups ("all", "all\_past", "all\_future")
 - Added "current" alias for the current version
 - Add check for local 'bits' folder (if whole branch mirrored locally)

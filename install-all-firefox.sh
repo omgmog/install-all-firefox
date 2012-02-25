@@ -1,5 +1,5 @@
 #!/bin/bash
-default_versions_future="aurora nightly ux"
+default_versions_future="beta aurora nightly ux"
 default_versions_current="10.0"
 default_versions_past="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
 
@@ -116,6 +116,25 @@ get_associated_information(){
             binary="firefox"
             short_name="fx10"
             nice_name="Firefox 10.0"
+        ;;
+        beta)
+            # This seems a bit flakey
+
+            release_type="beta"
+            # future="true" # Even though it's technically future, the file structure is the same as non-future
+            ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
+            candidates_folder=`curl -silent -L ${ftp_candidates} | sort -n | tail -n1`
+            build_folder=`curl -silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
+
+            ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
+
+            dmg_file=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
+            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+
+            sum_file_type="sha512"
+            binary="firefox"
+            short_name="fxb"
+            nice_name="Firefox Beta"
         ;;
         aurora)
             release_type="aurora"

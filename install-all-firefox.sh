@@ -1,12 +1,17 @@
 #!/bin/bash
-default_versions="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0 aurora"
+default_versions_future="beta aurora nightly ux"
+default_versions_current="10.0"
+default_versions_past="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
+
+default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
 bits_directory="${tmp_directory}bits/"
 install_directory="/Applications/Firefoxes/"
 
+locale_default="en-GB"
+
 # Don't edit below this line (unless you're adding new version cases in get_associated_information)
 
-locale=${2:-"en-GB"}
 versions="${1:-$default_versions}"
 ftp_root=""
 dmg_file=""
@@ -17,12 +22,21 @@ sum_expected=""
 binary=""
 short_name=""
 nice_name=""
-vol_name="Firefox"
-release_name="Firefox"
+vol_name_default="Firefox"
+release_name_default="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
+
+locale=$2
+
 get_associated_information(){
-    case $1 in 
+    # Reset everything
+    vol_name=$vol_name_default
+    release_name=$release_name_default
+    autoupdate=""
+    future=""
+
+    case $1 in
         2.0.0.20)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
             dmg_file="Firefox 2.0.0.20.dmg"
@@ -113,22 +127,95 @@ get_associated_information(){
             short_name="fx10"
             nice_name="Firefox 10.0"
         ;;
+        beta)
+            # This seems a bit flaky
+
+            release_type="beta"
+            # future="true" # Even though it's technically future, the file structure is the same as non-future
+            autoupdate="true"
+            ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
+
+            if [[ $versions != 'status' ]]
+                then
+                candidates_folder=`curl -silent -L ${ftp_candidates} | sort -n | tail -n1`
+                build_folder=`curl -silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
+
+                ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
+
+                dmg_file=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
+                sum_file_tmp=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
+                sum_file_folder="mac/${locale}/"
+                sum_file="${sum_file_tmp}"
+                sum_file_type="md5"
+            fi
+
+            binary="firefox"
+            short_name="fxb"
+            nice_name="Firefox Beta"
+        ;;
         aurora)
             release_type="aurora"
+            future="true"
+            autoupdate="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
-            dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
-            sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
-            sum_file_type="sha512"
+
+            if [[ $versions != 'status' ]]
+                then
+                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                sum_file_type="sha512"
+            fi
+
             binary="firefox"
             short_name="fxa"
             nice_name="Firefox Aurora"
+            vol_name="Aurora"
+            release_name="FirefoxAurora"
+        ;;
+        nightly)
+            release_type="nightly"
+            future="true"
+            autoupdate="true"
+            ftp_root="ftp://ftp.mozilla.org//pub/mozilla.org/firefox/nightly/latest-trunk/"
+
+            if [[ $versions != 'status' ]]
+                then
+                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                sum_file_type="sha512"
+            fi
+
+            binary="firefox"
+            short_name="fxn"
+            nice_name="Firefox Nightly"
+            vol_name="Nightly"
+            release_name="FirefoxNightly"
+        ;;
+        ux)
+            release_type="ux"
+            future="true"
+            autoupdate="true"
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
+
+            if [[ $versions != 'status' ]]
+                then
+                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                sum_file_type="sha512"
+            fi
+
+            binary="firefox"
+            short_name="fxux"
+            nice_name="Firefox UX Nightly"
+            vol_name="UX"
+            release_name="FirefoxUX"
         ;;
         *)
-            error "  Invalid version specified!\n\n  Please choose one of:\n  $default_versions\n\n"
+            error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"
+            error "  To see which versions you have installed, type:\n  ./install-all-firefox.sh status"
             exit 1
         ;;
     esac
-    log "====================\nInstalling ${nice_name}"
 }
 setup_dirs(){
     if [[ ! -d "$tmp_directory" ]]
@@ -146,6 +233,7 @@ setup_dirs(){
 }
 get_bits(){
     log "Downloading bits"
+    current_dir=`pwd`
     cd "$bits_directory"
     if [[ ! -f "setfileicon" ]]
         then
@@ -154,11 +242,20 @@ get_bits(){
     fi
     if [[ ! -f "${short_name}.png" ]]
         then
-        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+        new_icon="true"
+        icon_file="${current_dir}/bits/${short_name}.png"
+
+        # If file exists locally, use it
+        if [[ -f $icon_file ]]
+            then
+            cp -r $icon_file "${short_name}.png"
+        else
+            curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+        fi
     fi
-    if [[ ! -f "${short_name}.icns" ]]
+    if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]
         then
-        sips -s format icns "${short_name}.png" --out "${short_name}.icns"
+        sips -s format icns "${short_name}.png" --out "${short_name}.icns" > /dev/null
     fi
     if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]
         then
@@ -193,7 +290,8 @@ check_dmg(){
                 error "✖ Invalid sum type specified!"
             ;;
         esac
-        if [[ "${sum_of_dmg}" == "${sum_expected}" ]]
+
+        if [[ "${sum_expected}" == *"${sum_of_dmg}"* ]]
             then
             log "✔ ${sum_file_type} of ${dmg_file} matches"
         else
@@ -205,11 +303,11 @@ check_dmg(){
 }
 get_sum_file(){
     cd "${tmp_directory}"
-    curl -C -L "${ftp_root}${sum_file}" -o "${sum_file}-${short_name}"
+    curl -C -L "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
 }
 download_dmg(){
     cd "${tmp_directory}"
-    if [[ "${release_type}" == "aurora" ]]
+    if [[ "${future}" == "true" ]]
         then
         dmg_url="${ftp_root}${dmg_file}"
     else
@@ -222,11 +320,6 @@ download_dmg(){
 }
 mount_dmg(){
     hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
-    if [[ "${release_type}" == "aurora" ]]
-        then
-        vol_name="Aurora"
-        release_name="FirefoxAurora"
-    fi
 }
 install_app(){
     if [[ -d "${install_directory}${nice_name}.app" ]]
@@ -295,11 +388,16 @@ modify_launcher(){
     plist_new="${tmp_directory}Info.plist"
     sed -e "s/${binary}/${binary}-af/g" "${plist_old}" > "${plist_new}"
     mv "${plist_new}" "${plist_old}"
-   
+
     echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
     chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
-    echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
+    if [[ $autoupdate != "true" ]]
+        then
+        prefs_previous="\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);"
+    fi
+
+    echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);${prefs_previous}\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
 
     cd "${bits_directory}"
     ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"
@@ -315,9 +413,54 @@ log(){
     printf "\n\033[32m$*\033[00m\n"
     return $?
 }
+
+# Replace special keywords with actual versions (duplicates are okay; it'll work fine)
+versions=${versions/all_future/${default_versions_future}}
+versions=${versions/all_past/${default_versions_past}}
+versions=${versions/all/${default_versions}}
+versions=${versions/current/${default_versions_current}}
+
+if [[ $versions == 'status' ]]
+    then
+    printf "The versions in \033[32mgreen\033[00m are installed:\n"
+    for VERSION in $default_versions
+    do
+        get_associated_information $VERSION
+        if [[ -d "${install_directory}${nice_name}.app" ]]
+            then
+            printf "\n\033[32m - ${nice_name} ($VERSION)\033[00m"
+        else
+            printf "\n\033[31m - ${nice_name} ($VERSION)\033[00m"
+        fi
+    done
+    printf "\n\nTo install, type \033[1m./install-all-firefox.sh [version]\033[22m, with [version] being the number or name in parentheses"
+    exit 1
+fi
+
+get_locale() {
+    all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
+    lang=`echo ${LANG/_/-} | sed 's/\..*//'`
+
+    if [[ -z $locale ]]
+    then
+        if [[ $all_locales == *" $lang "* ]]
+            then
+            locale=$lang
+            echo "We detected your locale as ${lang}."
+        else
+            locale=$locale_default
+            echo "We couldn't guess your locale so we're falling back on ${locale_default}."
+        fi
+        echo "If this is wrong, use './install-all-firefox.sh [version] [locale]' to specify the locale."
+    fi
+}
+
+get_locale
+
 for VERSION in $versions
 do
     get_associated_information $VERSION
+    log "====================\nInstalling ${nice_name}"
     setup_dirs
     get_bits
     check_dmg

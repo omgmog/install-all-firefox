@@ -16,31 +16,38 @@ Currently it installs:
 - Firefox 8.0.1
 - Firefox 9.0.1
 - Firefox 10.0
-- Firefox Aurora (nightly)
+- Firefox Beta
+- Firefox Aurora
+- Firefox Nightly
+- Firefox UX Nightly
 
 The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
 
 The script installs these to /Applications/Firefoxes/
+
+To see which versions you have installed (via install-all-firefox) already, enter the following:
+
+> ./install-all-firefox.sh status
 
 ## INSTALLATION
 
 1. From a terminal prompt enter the following
 
     > curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
-    
+
     > chmod +x install-all-firefox.sh
-    
+
     > ./install-all-firefox.sh [version] [locale]
 
 [version] and [locale] are optional.
 
-By default the installer uses the en-GB locale, but you can specify any of the following:
+By default, the installer attempts to figure out your locale. If it can't, it uses the en-GB locale. You may also specify any of the following:
 
-    af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL, 
-    ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR, 
+    af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
+    ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,
     pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 
-The installation process for the Aurora nightly doesn't take any locale, but it installs en-US.
+The installation process for Aurora and the Nightlies don't take a locale; rather they install en-US.
 
 2. The script will download the 'bits' (icons, utils) for the rest of the installer.
 
@@ -48,14 +55,22 @@ The installation process for the Aurora nightly doesn't take any locale, but it 
 
 4. It'll take a little while to grab the .dmg files, but it should only need to do this once. (until you reboot and the contents of /tmp are deleted)
 
+To see what you have installed, enter the following
+
+> ./install-all-firefox.sh status
 
 ## NEW FEATURES
 - Detects previously installed (by install-all-firefox) Firefoxes and prompts to reinstall
 - you can now correctly specify the version to install
-for single:
-> ./install-all-firefox.sh 2.0.0.20
-for multiple:
-> ./install-all-firefox.sh "2.0.0.20 3.0.19"
+
+    for single:
+
+    > ./install-all-firefox.sh 2.0.0.20
+
+    for multiple:
+
+    > ./install-all-firefox.sh "2.0.0.20 3.0.19"
+
 - installer now provides more visual feedback of progress
 - installs each version after getting dmg, so you don't need to wait for all versions to install
 - streamlined the install-all-firefox.sh file!
@@ -65,10 +80,15 @@ for multiple:
 ## Update: 15/02/2012
 - Complete rewrite from scratch! (see NEW FEATURES above)
 
+## Update: 24/02/2012
+- Added support for Beta / Aurora / Nightly / Nightly UX
+- Added groups ("all", "all\_past", "all\_future")
+- Added "current" alias for the current version
+- Add check for local 'bits' folder (if whole branch mirrored locally)
+- You can run `./install-all-firefox.sh status` to see what you have installed
 
 ## TODO
 - Add ability to specify additional versions
-- Add check for local 'bits' folder (if whole branch mirrored locally)
 - Create launcher to preview a site in all install firefoxes (WIP!)
 
 ## CREDITS

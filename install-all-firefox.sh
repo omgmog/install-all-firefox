@@ -8,6 +8,8 @@ tmp_directory="/tmp/firefoxes/"
 bits_directory="${tmp_directory}bits/"
 install_directory="/Applications/Firefoxes/"
 
+locale_default="en-GB"
+
 # Don't edit below this line (unless you're adding new version cases in get_associated_information)
 
 versions="${1:-$default_versions}"
@@ -25,20 +27,7 @@ release_name_default="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
 
-get_locale() {
-    all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
-    lang=`echo ${LANG/_/-} | sed 's/\..*//'`
-
-    locale_default="en-GB"
-    if [[ $all_locales == *" $lang "* ]]
-        then
-        locale_default=$lang
-    fi
-
-    locale=${2:-$locale_default}
-}
-
-get_locale
+locale=$2
 
 get_associated_information(){
     # Reset everything
@@ -447,6 +436,26 @@ if [[ $versions == 'status' ]]
     printf "\n\nTo install, type \033[1m./install-all-firefox.sh [version]\033[22m, with [version] being the number or name in parentheses"
     exit 1
 fi
+
+get_locale() {
+    all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
+    lang=`echo ${LANG/_/-} | sed 's/\..*//'`
+
+    if [[ -z $locale ]]
+    then
+        if [[ $all_locales == *" $lang "* ]]
+            then
+            locale=$lang
+            echo "We detected your locale as ${lang}."
+        else
+            locale=$locale_default
+            echo "We couldn't guess your locale so we're falling back on ${locale_default}."
+        fi
+        echo "If this is wrong, use './install-all-firefox.sh [version] [locale]' to specify the locale."
+    fi
+}
+
+get_locale
 
 for VERSION in $versions
 do

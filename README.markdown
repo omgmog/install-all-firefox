@@ -10,14 +10,14 @@ Currently it installs:
 - Firefox 2.0.0.20
 - Firefox 3.0.19
 - Firefox 3.5.9
-- Firefox 3.6.26
+- Firefox 3.6.28
 - Firefox 4.0.1
 - Firefox 5.0.1
 - Firefox 6.0.1
 - Firefox 7.0.1
 - Firefox 8.0.1
 - Firefox 9.0.1
-- Firefox 10.0
+- Firefox 10.0.2
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -95,6 +95,7 @@ To see what you have installed, enter the following
 - Added system check to ensure being installed on OS X (Darwin)
 - Added prompt to clean-up (delete) temp directory
 - Improved message layout a bit
+- Updated Firefox 3.6.28, 10.0.2
 
 
 ## TODO

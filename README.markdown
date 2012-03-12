@@ -1,4 +1,5 @@
-![](https://github.com/omgmog/install-all-firefox/raw/master/bits/fxfirefox-folder.png)
+![](http://f.cl.ly/items/2z1X41220O2Q3F0L3Z0v/Screen%20shot%202012-03-12%20at%2013.45.24.png)
+![](http://f.cl.ly/items/1C2b0g1F0F0e3p0q0y0S/Screen%20shot%202012-03-12%20at%2013.45.47.png)
 
 ## ABOUT
 

@@ -8,6 +8,7 @@ Currently it installs:
 
 - Firefox 2.0.0.20
 - Firefox 3.0.19
+- Firefox 3.5.9
 - Firefox 3.6.26
 - Firefox 4.0.1
 - Firefox 5.0.1
@@ -86,6 +87,11 @@ To see what you have installed, enter the following
 - Added "current" alias for the current version
 - Add check for local 'bits' folder (if whole branch mirrored locally)
 - You can run `./install-all-firefox.sh status` to see what you have installed
+
+## Update: 12/03/2012
+- Added support for Firefox 3.5.9
+- Updated icons for Aurora / Nightly / Nightly UX to be more consistent
+
 
 ## TODO
 - Add ability to specify additional versions

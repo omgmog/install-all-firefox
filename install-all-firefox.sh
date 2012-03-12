@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
 default_versions_current="10.0"
-default_versions_past="2.0.0.20 3.0.19 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
+default_versions_past="2.0.0.20 3.0.19 3.5.9 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -54,6 +54,15 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx3"
             nice_name="Firefox 3.0"
+        ;;
+        3.5.9)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.9/"
+            dmg_file="Firefox 3.5.9.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox-bin"
+            short_name="fx35"
+            nice_name="Firefox 3.5"
         ;;
         3.6.26)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.26/"

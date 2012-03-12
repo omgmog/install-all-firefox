@@ -91,6 +91,9 @@ To see what you have installed, enter the following
 ## Update: 12/03/2012
 - Added support for Firefox 3.5.9
 - Updated icons for Aurora / Nightly / Nightly UX to be more consistent
+- Added system check to ensure being installed on OS X (Darwin)
+- Added prompt to clean-up (delete) temp directory
+- Improved message layout a bit
 
 
 ## TODO

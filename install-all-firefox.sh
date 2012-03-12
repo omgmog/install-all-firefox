@@ -442,7 +442,7 @@ if [[ $versions == 'status' ]]
             printf "\n\033[31m - ${nice_name} ($VERSION)\033[00m"
         fi
     done
-    printf "\n\nTo install, type \033[1m./install-all-firefox.sh [version]\033[22m, with [version] being the number or name in parentheses"
+    printf "\n\nTo install, type \033[1m./install-all-firefox.sh [version]\033[22m, \nwith [version] being the number or name in parentheses\n\n"
     exit 1
 fi
 
@@ -460,9 +460,39 @@ get_locale() {
             locale=$locale_default
             echo "We couldn't guess your locale so we're falling back on ${locale_default}."
         fi
-        echo "If this is wrong, use './install-all-firefox.sh [version] [locale]' to specify the locale."
+        echo "If this is wrong, use './install-all-firefox.sh [version] [locale]' to specify the locale.\n"
     fi
 }
+clean_up() {
+    log "Delete all files from temp directory (${tmp_directory})?"
+    read user_choice
+    choice_made="false"
+    while [[ "$choice_made" == "false" ]]
+    do
+        case "$user_choice" in
+            "y")
+                choice_made="true"
+                log "Deleting temp directory (${tmp_directory})!"
+                rm -rf ${tmp_directory}
+            ;;
+            "n")
+                choice_made="true"
+                log "Keeping temp directory (${tmp_directory}), though it will be deleted upon reboot!\n"
+            ;;
+            *)
+                error "Please enter 'y' or 'n'"
+                read user_choice
+            ;;
+        esac
+    done
+    return 0
+}
+
+if [ `uname -s` != "Darwin" ]
+    then
+    error "This script is designed to be run on OS X\nExiting...\n"
+    exit 0
+fi
 
 get_locale
 
@@ -476,3 +506,5 @@ do
     mount_dmg
     install_app
 done
+
+clean_up

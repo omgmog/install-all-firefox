@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="10.0"
-default_versions_past="2.0.0.20 3.0.19 3.5.9 3.6.26 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
+default_versions_current="10.0.2"
+default_versions_past="2.0.0.20 3.0.19 3.5.9 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -64,9 +64,9 @@ get_associated_information(){
             short_name="fx35"
             nice_name="Firefox 3.5"
         ;;
-        3.6.26)
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.26/"
-            dmg_file="Firefox 3.6.26.dmg"
+        3.6.28)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.28/"
+            dmg_file="Firefox 3.6.28.dmg"
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox-bin"
@@ -127,9 +127,9 @@ get_associated_information(){
             short_name="fx9"
             nice_name="Firefox 9.0"
         ;;
-        10.0)
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0/"
-            dmg_file="Firefox 10.0.dmg"
+        10.0.2)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
+            dmg_file="Firefox 10.0.2.dmg"
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox"
@@ -460,7 +460,7 @@ get_locale() {
             locale=$locale_default
             echo "We couldn't guess your locale so we're falling back on ${locale_default}."
         fi
-        echo "If this is wrong, use './install-all-firefox.sh [version] [locale]' to specify the locale.\n"
+        echo -e "If this is wrong, use './install-all-firefox.sh [version] [locale]' to specify the locale.\n"
     fi
 }
 clean_up() {

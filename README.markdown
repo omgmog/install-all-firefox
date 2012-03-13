@@ -36,15 +36,40 @@ To see which versions you have installed (via install-all-firefox) already, ente
 
 1. From a terminal prompt enter the following
 
-    > curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
+> curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
 
-    > chmod +x install-all-firefox.sh
+> chmod +x install-all-firefox.sh
 
-    > ./install-all-firefox.sh [version] [locale]
+> ./install-all-firefox.sh [version] [locale]
 
 [version] and [locale] are optional.
 
-By default, the installer attempts to figure out your locale. If it can't, it uses the en-GB locale. You may also specify any of the following:
+Available [version] keywords:
+
+> ./install-all-firefox.sh "all"
+
+> ./install-all-firefox.sh "all_future"
+
+> ./install-all-firefox.sh "all_past"
+
+> ./install-all-firefox.sh "current"
+
+> ./install-all-firefox.sh "a.b x.y"
+
+
+> ./install-all-firefox.sh "all" "x-Y"
+
+> ./install-all-firefox.sh "all_future" "x-Y"
+
+> ./install-all-firefox.sh "all_past" "x-Y"
+
+> ./install-all-firefox.sh "current" "x-Y"
+
+> ./install-all-firefox.sh "a.b x.y" "x-Y"
+
+(where 'a.b' and 'x.y' are versions, e.g. '2.0.20', '3.5.9', and 'x-Y' is a locale, e.g. 'en-GB' as defined below)
+
+By default, the installer attempts to figure out your [locale]. If it can't, it uses the en-GB locale. You may also specify any of the following:
 
     af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
     ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,

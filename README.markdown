@@ -18,6 +18,7 @@ Currently it installs:
 - Firefox 8.0.1
 - Firefox 9.0.1
 - Firefox 10.0.2
+- Firefox 11.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -97,6 +98,8 @@ To see what you have installed, enter the following
 - Improved message layout a bit
 - Updated Firefox 3.6.28, 10.0.2
 
+## Update: 13/03/2012
+- Added Firefox 11
 
 ## TODO
 - Add ability to specify additional versions

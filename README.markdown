@@ -30,42 +30,42 @@ The script installs these to /Applications/Firefoxes/
 
 To see which versions you have installed (via install-all-firefox) already, enter the following:
 
-> ./install-all-firefox.sh status
+> ./bootstrap.sh status
 
 ## INSTALLATION
 
 1. From a terminal prompt enter the following
 
-> curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/install-all-firefox.sh
+> curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
 
-> chmod +x install-all-firefox.sh
+> chmod +x bootstrap.sh
 
-> ./install-all-firefox.sh [version] [locale]
+> ./bootstrap.sh [version] [locale]
 
 [version] and [locale] are optional.
 
 Available [version] keywords:
 
-> ./install-all-firefox.sh "all"
+> ./bootstrap.sh "all"
 
-> ./install-all-firefox.sh "all_future"
+> ./bootstrap.sh "all_future"
 
-> ./install-all-firefox.sh "all_past"
+> ./bootstrap.sh "all_past"
 
-> ./install-all-firefox.sh "current"
+> ./bootstrap.sh "current"
 
-> ./install-all-firefox.sh "a.b x.y"
+> ./bootstrap.sh "a.b x.y"
 
 
-> ./install-all-firefox.sh "all" "x-Y"
+> ./bootstrap.sh "all" "x-Y"
 
-> ./install-all-firefox.sh "all_future" "x-Y"
+> ./bootstrap.sh "all_future" "x-Y"
 
-> ./install-all-firefox.sh "all_past" "x-Y"
+> ./bootstrap.sh "all_past" "x-Y"
 
-> ./install-all-firefox.sh "current" "x-Y"
+> ./bootstrap.sh "current" "x-Y"
 
-> ./install-all-firefox.sh "a.b x.y" "x-Y"
+> ./bootstrap.sh "a.b x.y" "x-Y"
 
 (where 'a.b' and 'x.y' are versions, e.g. '2.0.20', '3.5.9', and 'x-Y' is a locale, e.g. 'en-GB' as defined below)
 
@@ -85,7 +85,7 @@ The installation process for Aurora and the Nightlies don't take a locale; rathe
 
 To see what you have installed, enter the following
 
-> ./install-all-firefox.sh status
+> ./bootstrap.sh status
 
 ## NEW FEATURES
 - Detects previously installed (by install-all-firefox) Firefoxes and prompts to reinstall
@@ -93,11 +93,11 @@ To see what you have installed, enter the following
 
     for single:
 
-    > ./install-all-firefox.sh 2.0.0.20
+    > ./bootstrap.sh "2.0.0.20"
 
     for multiple:
 
-    > ./install-all-firefox.sh "2.0.0.20 3.0.19"
+    > ./bootstrap.sh "2.0.0.20 3.0.19"
 
 - installer now provides more visual feedback of progress
 - installs each version after getting dmg, so you don't need to wait for all versions to install
@@ -113,7 +113,7 @@ To see what you have installed, enter the following
 - Added groups ("all", "all\_past", "all\_future")
 - Added "current" alias for the current version
 - Add check for local 'bits' folder (if whole branch mirrored locally)
-- You can run `./install-all-firefox.sh status` to see what you have installed
+- You can run `./bootstrap.sh status` to see what you have installed
 
 ## Update: 12/03/2012
 - Added support for Firefox 3.5.9
@@ -125,6 +125,9 @@ To see what you have installed, enter the following
 
 ## Update: 13/03/2012
 - Added Firefox 11
+
+## Update: 14/03/2012
+- Added bootstrap.sh to check for script updates before running script
 
 ## TODO
 - Add ability to specify additional versions

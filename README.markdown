@@ -64,7 +64,7 @@ Available `[version]` keywords:
 
 (where `a.b` and `x.y` are versions, e.g. `2.0.20`, `3.5.9`, and `x-Y` is a locale, e.g. `en-GB` as defined below)
 
-By default, the installer attempts to figure out your ``[locale]`. If it can't, it uses the `en-GB` locale. You may also specify any of the following:
+By default, the installer attempts to figure out your `[locale]`. If it can't, it uses the `en-GB` locale. You may also specify any of the following:
 
 ```
 af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,

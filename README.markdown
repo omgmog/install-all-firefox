@@ -30,42 +30,31 @@ The script installs these to /Applications/Firefoxes/
 
 To see which versions you have installed (via install-all-firefox) already, enter the following:
 
-> ./bootstrap.sh status
+    ./bootstrap.sh status
 
 ## INSTALLATION
 
-1. From a terminal prompt enter the following
+From a terminal prompt enter the following
 
-> curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
-
-> chmod +x bootstrap.sh
-
-> ./bootstrap.sh [version] [locale]
+    curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
+    chmod +x bootstrap.sh
+    ./bootstrap.sh [version] [locale]
 
 [version] and [locale] are optional.
 
 Available [version] keywords:
 
-> ./bootstrap.sh "all"
+    ./bootstrap.sh "all"
+    ./bootstrap.sh "all_future"
+    ./bootstrap.sh "all_past"
+    ./bootstrap.sh "current"
+    ./bootstrap.sh "a.b x.y"
 
-> ./bootstrap.sh "all_future"
-
-> ./bootstrap.sh "all_past"
-
-> ./bootstrap.sh "current"
-
-> ./bootstrap.sh "a.b x.y"
-
-
-> ./bootstrap.sh "all" "x-Y"
-
-> ./bootstrap.sh "all_future" "x-Y"
-
-> ./bootstrap.sh "all_past" "x-Y"
-
-> ./bootstrap.sh "current" "x-Y"
-
-> ./bootstrap.sh "a.b x.y" "x-Y"
+    ./bootstrap.sh "all" "x-Y"
+    ./bootstrap.sh "all_future" "x-Y"
+    ./bootstrap.sh "all_past" "x-Y"
+    ./bootstrap.sh "current" "x-Y"
+    ./bootstrap.sh "a.b x.y" "x-Y"
 
 (where 'a.b' and 'x.y' are versions, e.g. '2.0.20', '3.5.9', and 'x-Y' is a locale, e.g. 'en-GB' as defined below)
 
@@ -77,27 +66,27 @@ By default, the installer attempts to figure out your [locale]. If it can't, it 
 
 The installation process for Aurora and the Nightlies don't take a locale; rather they install en-US.
 
-2. The script will download the 'bits' (icons, utils) for the rest of the installer.
+The script will download the 'bits' (icons, utils) for the rest of the installer.
 
-3. When the Mozilla license pops up, press Q and then Y to continue.
+When the Mozilla license pops up, press Q and then Y to continue.
 
-4. It'll take a little while to grab the .dmg files, but it should only need to do this once. (until you reboot and the contents of /tmp are deleted)
+It'll take a little while to grab the .dmg files, but it should only need to do this once. (until you reboot and the contents of /tmp are deleted)
 
 To see what you have installed, enter the following
 
-> ./bootstrap.sh status
+    ./bootstrap.sh status
 
 ## NEW FEATURES
 - Detects previously installed (by install-all-firefox) Firefoxes and prompts to reinstall
 - you can now correctly specify the version to install
 
-    for single:
+for single:
 
-    > ./bootstrap.sh "2.0.0.20"
+    ./bootstrap.sh "2.0.0.20"
+    
+for multiple:
 
-    for multiple:
-
-    > ./bootstrap.sh "2.0.0.20 3.0.19"
+    ./bootstrap.sh "2.0.0.20 3.0.19"
 
 - installer now provides more visual feedback of progress
 - installs each version after getting dmg, so you don't need to wait for all versions to install

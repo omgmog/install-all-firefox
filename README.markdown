@@ -24,74 +24,88 @@ Currently it installs:
 - Firefox Nightly
 - Firefox UX Nightly
 
-The script downloads the .dmg files from mozilla's FTP into /tmp/firefoxes.
+The script downloads the `.dmg` files from Mozilla's FTP server into `/tmp/firefoxes`.
 
-The script installs these to /Applications/Firefoxes/
+The script installs these to `/Applications/Firefoxes/`.
 
-To see which versions you have installed (via install-all-firefox) already, enter the following:
+To see which versions you have installed already, enter the following:
 
-    ./bootstrap.sh status
+```bash
+./bootstrap.sh status
+```
 
 ## INSTALLATION
 
-From a terminal prompt enter the following
+From a terminal prompt, enter the following:
 
-    curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
-    chmod +x bootstrap.sh
-    ./bootstrap.sh [version] [locale]
+```bash
+curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
+chmod +x bootstrap.sh
+./bootstrap.sh [version] [locale]
+```
 
-[version] and [locale] are optional.
+`[version]` and `[locale]` are optional.
 
-Available [version] keywords:
+Available `[version]` keywords:
 
-    ./bootstrap.sh "all"
-    ./bootstrap.sh "all_future"
-    ./bootstrap.sh "all_past"
-    ./bootstrap.sh "current"
-    ./bootstrap.sh "a.b x.y"
+```bash
+./bootstrap.sh "all"
+./bootstrap.sh "all_future"
+./bootstrap.sh "all_past"
+./bootstrap.sh "current"
+./bootstrap.sh "a.b x.y"
 
-    ./bootstrap.sh "all" "x-Y"
-    ./bootstrap.sh "all_future" "x-Y"
-    ./bootstrap.sh "all_past" "x-Y"
-    ./bootstrap.sh "current" "x-Y"
-    ./bootstrap.sh "a.b x.y" "x-Y"
+./bootstrap.sh "all" "x-Y"
+./bootstrap.sh "all_future" "x-Y"
+./bootstrap.sh "all_past" "x-Y"
+./bootstrap.sh "current" "x-Y"
+./bootstrap.sh "a.b x.y" "x-Y"
+```
 
-(where 'a.b' and 'x.y' are versions, e.g. '2.0.20', '3.5.9', and 'x-Y' is a locale, e.g. 'en-GB' as defined below)
+(where `a.b` and `x.y` are versions, e.g. `2.0.20`, `3.5.9`, and `x-Y` is a locale, e.g. `en-GB` as defined below)
 
-By default, the installer attempts to figure out your [locale]. If it can't, it uses the en-GB locale. You may also specify any of the following:
+By default, the installer attempts to figure out your `[locale]`. If it can't, it uses the `en-GB` locale. You may also specify any of the following:
 
-    af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
-    ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,
-    pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
+```
+af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
+ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,
+pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
+```
 
-The installation process for Aurora and the Nightlies don't take a locale; rather they install en-US.
+The installation process for Aurora and the Nightlies don't take a locale; rather they install `en-US`.
 
 The script will download the 'bits' (icons, utils) for the rest of the installer.
 
-When the Mozilla license pops up, press Q and then Y to continue.
+When the Mozilla license pops up, press `Q` and then `Y` to continue.
 
-It'll take a little while to grab the .dmg files, but it should only need to do this once. (until you reboot and the contents of /tmp are deleted)
+It'll take a little while to grab the `.dmg` files, but it should only need to do this once. (Until you reboot, and the contents of `/tmp` are deleted.)
 
-To see what you have installed, enter the following
+To see what you have installed, enter the following:
 
-    ./bootstrap.sh status
+```bash
+./bootstrap.sh status
+```
 
 ## NEW FEATURES
-- Detects previously installed (by install-all-firefox) Firefoxes and prompts to reinstall
+- Detects previously installed (by this script) Firefoxes and prompts to reinstall
 - you can now correctly specify the version to install
 
-for single:
+    for single:
 
+    ```bash
     ./bootstrap.sh "2.0.0.20"
-    
-for multiple:
+    ```
 
+    for multiple:
+
+    ```bash
     ./bootstrap.sh "2.0.0.20 3.0.19"
+    ```
 
 - installer now provides more visual feedback of progress
 - installs each version after getting dmg, so you don't need to wait for all versions to install
-- streamlined the install-all-firefox.sh file!
-- You can now customise the installation path and temp folder (by editing install-all-firefox.sh)
+- streamlined the `install-all-firefox.sh` file
+- You can now customise the installation path and temp folder (by editing `install-all-firefox.sh`)
 
 
 ## Update: 15/02/2012
@@ -99,8 +113,8 @@ for multiple:
 
 ## Update: 24/02/2012
 - Added support for Beta / Aurora / Nightly / Nightly UX
-- Added groups ("all", "all\_past", "all\_future")
-- Added "current" alias for the current version
+- Added groups (`all`, `all_past`, `all_future`)
+- Added `current` alias for the current version
 - Add check for local 'bits' folder (if whole branch mirrored locally)
 - You can run `./bootstrap.sh status` to see what you have installed
 
@@ -116,7 +130,7 @@ for multiple:
 - Added Firefox 11
 
 ## Update: 14/03/2012
-- Added bootstrap.sh to check for script updates before running script
+- Added `bootstrap.sh` to check for script updates before running script
 
 ## TODO
 - Add ability to specify additional versions
@@ -124,4 +138,4 @@ for multiple:
 
 ## CREDITS
 - Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms
-- setfileicon is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz
+- [setfileicon](http://maxao.free.fr/telechargements/setfileicon.m) is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz

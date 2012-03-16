@@ -41,10 +41,10 @@ From a terminal prompt, enter the following:
 ```bash
 curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
 chmod +x bootstrap.sh
-./bootstrap.sh [version] [locale]
+./bootstrap.sh [version] [locale] [prompt]
 ```
 
-`[version]` and `[locale]` are optional.
+`[version]` and `[locale]` are optional. If you would like confirmation before over-writing previously installed versions of Firefox, specify `prompt` as the third command line argument.
 
 Available `[version]` keywords:
 
@@ -60,6 +60,8 @@ Available `[version]` keywords:
 ./bootstrap.sh "all_past" "x-Y"
 ./bootstrap.sh "current" "x-Y"
 ./bootstrap.sh "a.b x.y" "x-Y"
+
+./bootstrap.sh "a.b" "x-Y" prompt
 ```
 
 (where `a.b` and `x.y` are versions, e.g. `2.0.20`, `3.5.9`, and `x-Y` is a locale, e.g. `en-GB` as defined below)
@@ -132,6 +134,11 @@ To see what you have installed, enter the following:
 ## Update: 14/03/2012
 - Added `bootstrap.sh` to check for script updates before running script
 
+## Update: 16/03/2012
+- Added the installation of Firebug for each version of Firefox.
+- Added more checks to ensure that the .dmg's unmount cleanly
+- Added `prompt` argument, by default the installer won't prompt
+
 ## TODO
 - Add ability to specify additional versions
 - Create launcher to preview a site in all install firefoxes (WIP!)
@@ -139,3 +146,4 @@ To see what you have installed, enter the following:
 ## CREDITS
 - Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms
 - [setfileicon](http://maxao.free.fr/telechargements/setfileicon.m) is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz
+- [Firebug](http://getfirebug.com/)

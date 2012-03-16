@@ -29,6 +29,13 @@ binary_folder="/Contents/MacOS/"
 
 locale=$2
 
+if [[ "${3}" == "prompt" ]]
+    then
+    no_prompt="false"
+else
+    no_prompt="true"
+fi
+
 get_associated_information(){
     # Reset everything
     vol_name=$vol_name_default
@@ -45,6 +52,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx2"
             nice_name="Firefox 2.0"
+
+            firebug_version="1.3.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.3/"
+            firebug_file="firebug-1.3.1.xpi"
         ;;
         3.0.19)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
@@ -54,6 +65,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx3"
             nice_name="Firefox 3.0"
+
+            firebug_version="1.3.4b2"
+            firebug_root="http://getfirebug.com/releases/firebug/1.3/"
+            firebug_file="firebug-1.3.4b2.xpi"
         ;;
         3.5.9)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.9/"
@@ -63,6 +78,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx35"
             nice_name="Firefox 3.5"
+
+            firebug_version="1.5.4"
+            firebug_root="http://getfirebug.com/releases/firebug/1.5/"
+            firebug_file="firebug-1.5.4.xpi"
         ;;
         3.6.28)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.28/"
@@ -72,6 +91,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx36"
             nice_name="Firefox 3.6"
+
+            firebug_version="1.7.3"
+            firebug_root="http://getfirebug.com/releases/firebug/1.7/"
+            firebug_file="firebug-1.7.3.xpi"
         ;;
         4.0.1)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
@@ -81,6 +104,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx4"
             nice_name="Firefox 4.0"
+
+            firebug_version="1.8.0b7"
+            firebug_root="http://getfirebug.com/releases/firebug/1.8/"
+            firebug_file="firebug-1.8.0b7.xpi"
         ;;
         5.0.1)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
@@ -90,6 +117,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx5"
             nice_name="Firefox 5.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         6.0.2)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
@@ -99,6 +130,10 @@ get_associated_information(){
             binary="firefox-bin"
             short_name="fx6"
             nice_name="Firefox 6.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         7.0.1)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
@@ -108,6 +143,10 @@ get_associated_information(){
             binary="firefox"
             short_name="fx7"
             nice_name="Firefox 7.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         8.0.1)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
@@ -117,6 +156,10 @@ get_associated_information(){
             binary="firefox"
             short_name="fx8"
             nice_name="Firefox 8.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         9.0.1)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
@@ -126,6 +169,10 @@ get_associated_information(){
             binary="firefox"
             short_name="fx9"
             nice_name="Firefox 9.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         10.0.2)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
@@ -135,6 +182,10 @@ get_associated_information(){
             binary="firefox"
             short_name="fx10"
             nice_name="Firefox 10.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         11.0)
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/11.0/"
@@ -144,6 +195,10 @@ get_associated_information(){
             binary="firefox"
             short_name="fx11"
             nice_name="Firefox 11.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;        
         beta)
             # This seems a bit flaky
@@ -155,13 +210,13 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                candidates_folder=`curl -silent -L ${ftp_candidates} | sort -n | tail -n1`
-                build_folder=`curl -silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
+                candidates_folder=`curl --silent -L ${ftp_candidates} | sort -n | tail -n1`
+                build_folder=`curl --silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
 
                 ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
 
-                dmg_file=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
-                sum_file_tmp=`curl -silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
+                sum_file_tmp=`curl --silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
                 sum_file_folder="mac/${locale}/"
                 sum_file="${sum_file_tmp}"
                 sum_file_type="md5"
@@ -170,6 +225,10 @@ get_associated_information(){
             binary="firefox"
             short_name="fxb"
             nice_name="Firefox Beta"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         aurora)
             release_type="aurora"
@@ -179,7 +238,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -189,6 +248,10 @@ get_associated_information(){
             nice_name="Firefox Aurora"
             vol_name="Aurora"
             release_name="FirefoxAurora"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         nightly)
             release_type="nightly"
@@ -198,7 +261,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -208,6 +271,10 @@ get_associated_information(){
             nice_name="Firefox Nightly"
             vol_name="Nightly"
             release_name="FirefoxNightly"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         ux)
             release_type="ux"
@@ -217,7 +284,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl -silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -227,6 +294,10 @@ get_associated_information(){
             nice_name="Firefox UX Nightly"
             vol_name="UX"
             release_name="FirefoxUX"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
         ;;
         *)
             error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"
@@ -255,7 +326,7 @@ get_bits(){
     cd "$bits_directory"
     if [[ ! -f "setfileicon" ]]
         then
-        curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+        curl -C -L --silent "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
         chmod +x setfileicon
     fi
     if [[ ! -f "${short_name}.png" ]]
@@ -268,7 +339,7 @@ get_bits(){
             then
             cp -r $icon_file "${short_name}.png"
         else
-            curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+            curl -C -L --silent "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
         fi
     fi
     if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]
@@ -279,7 +350,7 @@ get_bits(){
         then
         if [[ ! -f "fxfirefox-folder.png" ]]
             then
-            curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+            curl -C -L --silent "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
         fi
         if [[ ! -f "fxfirefox-folder.icns" ]]
             then
@@ -321,7 +392,7 @@ check_dmg(){
 }
 get_sum_file(){
     cd "${tmp_directory}"
-    curl -C -L "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
+    curl -C -L --silent "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
 }
 download_dmg(){
     cd "${tmp_directory}"
@@ -331,18 +402,27 @@ download_dmg(){
     else
         dmg_url="${ftp_root}mac/$locale/${dmg_file}"
     fi
-    if ! curl -C -L "${dmg_url}" -o "${dmg_file}"
+    if ! curl -C -L --silent "${dmg_url}" -o "${dmg_file}"
         then
         error "✖ Failed to download ${dmg_file}!"
     fi
 }
-mount_dmg(){
-    hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
-}
-install_app(){
-    if [[ -d "${install_directory}${nice_name}.app" ]]
+download_firebug(){
+    cd "${tmp_directory}"
+    if [[ ! -f "${tmp_directory}${firebug_file}" ]]
         then
-        log "Delete your existing ${nice_name}.app and install again? [y/n]"
+        if ! curl -C -L --silent "${firebug_root}${firebug_file}" -o "${firebug_file}"
+            then
+            error "✖ Failed to download ${firebug_file}"
+        else
+            log "✔ Downloaded ${firebug_file}"
+        fi
+    fi
+}
+prompt_firebug(){
+    if [ "${no_prompt}" == "false" ]
+        then
+        log "Install Firebug ${firebug_version} for ${nice_name}? [y/n]"
         read user_choice
         choice_made="false"
         while [[ "$choice_made" == "false" ]]
@@ -350,21 +430,80 @@ install_app(){
             case "$user_choice" in
                 "y")
                     choice_made="true"
-                    log "Reinstalling ${nice_name}.app"
-                    remove_app
-                    process_install
+                    download_firebug
+                    install_firebug
                 ;;
                 "n")
                     choice_made="true"
-                    log "Skipping installation of ${nice_name}.app"
-                ;;
-                *)
-                    error "Please enter 'y' or 'n'"
-                    read user_choice
                 ;;
             esac
         done
-        return 0
+    else
+        download_firebug
+        install_firebug
+    fi
+
+
+}
+install_firebug(){
+    if [[ -f "${install_directory}${nice_name}.app${binary_folder}${binary}" ]]
+        then
+        ext_dir=`cd $HOME/Library/Application\ Support/Firefox/Profiles/;cd \`ls -1 | grep ${short_name}\`; pwd`
+        cd "${ext_dir}"
+        if [[ ! -d "extensions" ]]
+            then
+            mkdir "extensions"
+        fi
+        cd "extensions"
+        ext_dir=`pwd`
+
+        cp -r "${tmp_directory}${firebug_file}" "${ext_dir}"
+        log "✔ Installed Firebug ${firebug_version}"
+    else
+        error "${nice_name} not installed so we can't install Firebug ${firebug_version}!"
+    fi
+}
+mount_dmg(){
+    hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
+}
+unmount_dmg(){
+    if [[ -d "/Volumes/${vol_name}" ]]
+        then
+        hdiutil detach "/Volumes/${vol_name}" -force > /dev/null
+    fi
+}
+install_app(){
+    if [[ -d "${install_directory}${nice_name}.app" ]]
+        then
+
+        if [ "${no_prompt}" == "false" ]
+            then
+            log "Delete your existing ${nice_name}.app and install again? [y/n]"
+            read user_choice
+            choice_made="false"
+            while [[ "$choice_made" == "false" ]]
+            do
+                case "$user_choice" in
+                    "y")
+                        choice_made="true"
+                        log "Reinstalling ${nice_name}.app"
+                        remove_app
+                        process_install
+                    ;;
+                    "n")
+                        choice_made="true"
+                        log "Skipping installation of ${nice_name}.app"
+                    ;;
+                    *)
+                        error "Please enter 'y' or 'n'"
+                        read user_choice
+                    ;;
+                esac
+            done
+        else
+            remove_app
+            process_install
+        fi
     else
         process_install
     fi
@@ -375,7 +514,6 @@ remove_app(){
         log "✔ Removed ${install_directory}${nice_name}.app"
     else
         error "✖ Could not remove ${install_directory}${nice_name}.app!"
-        return 0
     fi
 }
 process_install(){
@@ -384,10 +522,10 @@ process_install(){
         then
         log "✔ Installed ${nice_name}.app"
     else
+        unmount_dmg
         error "✖ Could not install ${nice_name}.app!"
-        return 0
     fi
-    hdiutil detach "/Volumes/${vol_name}" -force > /dev/null
+    unmount_dmg
     create_profile
     modify_launcher
     install_complete
@@ -398,7 +536,6 @@ create_profile(){
         log "✔ Created profile '${short_name}' for ${nice_name}"
     else
         error "✖ Could not create profile '${short_name}' for ${nice_name}"
-        return 0
     fi
 }
 modify_launcher(){
@@ -421,7 +558,7 @@ modify_launcher(){
     ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"
 }
 install_complete(){
-    log "✔ Install complete!\n"
+    log "✔ Install complete!"
 }
 error(){
     printf "\n\033[31m$*\033[00m"
@@ -473,7 +610,7 @@ get_locale() {
     fi
 }
 clean_up() {
-    log "Delete all files from temp directory (${tmp_directory})?"
+    log "Delete all files from temp directory (${tmp_directory})? [y/n]"
     read user_choice
     choice_made="false"
     while [[ "$choice_made" == "false" ]]
@@ -514,6 +651,8 @@ do
     check_dmg
     mount_dmg
     install_app
+    unmount_dmg
+    prompt_firebug
 done
 
 clean_up

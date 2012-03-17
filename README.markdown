@@ -29,7 +29,8 @@ Optionally, the script can install Firebug for each version of Firefox too.
 
 ### What does it do?
 
-1. The `bootstrap.sh` script downloads the latest version of `install-all-firefox.sh` before running to ensure that the script is up to date.
+1. The `bootstrap.sh` script downloads the latest version of `install-all-firefox.sh` before 
+running to ensure that the script is up to date.
 
 2. The script downloads all of the associated resources (icons) and utilities (seticon) to the `/tmp/firefoxes` directory.
 
@@ -50,7 +51,9 @@ You can see which versions of Firefox you've already installed using this script
 ```bash
 $ ./bootstrap.sh
 ```
+
 or
+
 ```bash
 $ ./bootstrap.sh status
 ```
@@ -78,11 +81,13 @@ $ ./bootstrap.sh "2.0.0.20 3.0.19"
 ```
 
 You can specify the `locale` to use, from the list of available `locale` options. By default `en-GB` is used.
+
 ```
 af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
 ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,
 pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 ```
+
 ```bash
 $ ./bootstrap.sh "all" "en-US"
 ```
@@ -90,6 +95,7 @@ $ ./bootstrap.sh "all" "en-US"
 
 
 If you want to just install all versions and leave the installation process unattended, there is a `no_prompt` option, this will default all of the `y/n` prompts to answering `y`.
+
 ```bash
 $ ./bootstrap.sh "all" "en-GB" "no_prompt"
 ```
@@ -108,7 +114,8 @@ chmod +x bootstrap.sh
 
 When the Mozilla license pops up, press `Q` and then `Y` to continue.
 
-It'll take a little while to grab the `.dmg` files, but it should only need to do this once. (Until you reboot, and the contents of `/tmp` are deleted.)
+It'll take a little while to grab the `.dmg` files, but it should only need to do this once. 
+(Until you reboot, and the contents of `/tmp` are deleted.)
 
 ---
 ## UPDATES 

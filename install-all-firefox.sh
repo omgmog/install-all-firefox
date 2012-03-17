@@ -29,11 +29,11 @@ binary_folder="/Contents/MacOS/"
 
 locale=$2
 
-if [[ "${3}" == "prompt" ]]
+if [[ "${3}" == "no_prompt" ]]
     then
-    no_prompt="false"
-else
     no_prompt="true"
+else
+    no_prompt="false"
 fi
 
 get_associated_information(){
@@ -210,13 +210,13 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                candidates_folder=`curl --silent -L ${ftp_candidates} | sort -n | tail -n1`
-                build_folder=`curl --silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
+                candidates_folder=`curl --progress-bar -L ${ftp_candidates} | sort -n | tail -n1`
+                build_folder=`curl --progress-bar -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
 
                 ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
 
-                dmg_file=`curl --silent -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
-                sum_file_tmp=`curl --silent -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
+                sum_file_tmp=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
                 sum_file_folder="mac/${locale}/"
                 sum_file="${sum_file_tmp}"
                 sum_file_type="md5"
@@ -238,7 +238,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -261,7 +261,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -284,7 +284,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --silent -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -326,7 +326,7 @@ get_bits(){
     cd "$bits_directory"
     if [[ ! -f "setfileicon" ]]
         then
-        curl -C -L --silent "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+        curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
         chmod +x setfileicon
     fi
     if [[ ! -f "${short_name}.png" ]]
@@ -339,7 +339,7 @@ get_bits(){
             then
             cp -r $icon_file "${short_name}.png"
         else
-            curl -C -L --silent "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+            curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
         fi
     fi
     if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]
@@ -350,7 +350,7 @@ get_bits(){
         then
         if [[ ! -f "fxfirefox-folder.png" ]]
             then
-            curl -C -L --silent "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+            curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
         fi
         if [[ ! -f "fxfirefox-folder.icns" ]]
             then
@@ -392,7 +392,7 @@ check_dmg(){
 }
 get_sum_file(){
     cd "${tmp_directory}"
-    curl -C -L --silent "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
+    curl -C -L --progress-bar "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
 }
 download_dmg(){
     cd "${tmp_directory}"
@@ -402,7 +402,7 @@ download_dmg(){
     else
         dmg_url="${ftp_root}mac/$locale/${dmg_file}"
     fi
-    if ! curl -C -L --silent "${dmg_url}" -o "${dmg_file}"
+    if ! curl -C -L --progress-bar "${dmg_url}" -o "${dmg_file}"
         then
         error "✖ Failed to download ${dmg_file}!"
     fi
@@ -411,7 +411,7 @@ download_firebug(){
     cd "${tmp_directory}"
     if [[ ! -f "${tmp_directory}${firebug_file}" ]]
         then
-        if ! curl -C -L --silent "${firebug_root}${firebug_file}" -o "${firebug_file}"
+        if ! curl -C -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
             then
             error "✖ Failed to download ${firebug_file}"
         else

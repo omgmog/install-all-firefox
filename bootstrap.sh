@@ -29,4 +29,9 @@ if [ ! "${local_script_md5}" == "${remote_script_md5}" ]
 	chmod +x ./install-all-firefox.sh
 fi
 
-./install-all-firefox.sh ${*}
+if [  "$1" == "" ]
+    then
+    ./install-all-firefox.sh "status"
+else
+    ./install-all-firefox.sh "${*}"
+fi

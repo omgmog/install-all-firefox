@@ -137,6 +137,8 @@ Previous updates removed from the README. Look at the file history to see them.
 - Rewrote the README
 - Updated `bootstrap.sh` so that it launches the installer with `status` argument if no arguments provided.
 
+### Update: 20/03/2012
+- Small fixes to beta/nightly file finding, see commit messages
 
 ---
 ## TODO

@@ -210,13 +210,13 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                candidates_folder=`curl --progress-bar -L ${ftp_candidates} | sort -n | tail -n1`
+                candidates_folder=`curl --progress-bar -L ${ftp_candidates} | sort -n | tail -1`
                 build_folder=`curl --progress-bar -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1`
 
                 ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
 
-                dmg_file=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | sed "s/^.\{56\}//"`
-                sum_file_tmp=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | tail -1 | sed "s/^.\{56\}//"`
+                sum_file_tmp=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file_folder="mac/${locale}/"
                 sum_file="${sum_file_tmp}"
                 sum_file_type="md5"
@@ -238,7 +238,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -261,7 +261,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -284,7 +284,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi

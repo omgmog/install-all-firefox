@@ -11,7 +11,7 @@ if [ `uname -s` != "Darwin" ]
     exit 0
 fi
 
-local_script_md5=`md5 -q install-all-firefox.sh`
+local_script_md5=`md5 -q /tmp/firefoxes/install-all-firefox.sh`
 remote_script_md5=''
 
 while [ "${remote_script_md5}" == "" ]
@@ -25,13 +25,14 @@ done
 
 if [ ! "${local_script_md5}" == "${remote_script_md5}" ]
 	then
-	cp /tmp/install-all-firefox.sh ./install-all-firefox.sh
-	chmod +x ./install-all-firefox.sh
+	cp /tmp/firefoxes/install-all-firefox.sh
+	mv /tmp/install-all-firefox.sh /tmp/firefoxes/install-all-firefox.sh
+	chmod +x /tmp/firefoxes/install-all-firefox.sh
 fi
 
 if [  "$1" == "" ]
     then
-    ./install-all-firefox.sh "status"
+    /tmp/firefoxes/install-all-firefox.sh "status"
 else
-    ./install-all-firefox.sh "${*}"
+    /tmp/firefoxes/install-all-firefox.sh "$1" "$2" "$3"
 fi

@@ -29,7 +29,7 @@ Optionally, the script can install Firebug for each version of Firefox too.
 
 ### What does it do?
 
-1. The `bootstrap.sh` script downloads the latest version of `install-all-firefox.sh` before 
+1. The `firefoxes.sh` script downloads the latest version of `install-all-firefox.sh` before 
 running to ensure that the script is up to date.
 
 2. The script downloads all of the associated resources (icons) and utilities (seticon) to the `/tmp/firefoxes` directory.
@@ -49,35 +49,35 @@ running to ensure that the script is up to date.
 You can see which versions of Firefox you've already installed using this script, using the following command:
 
 ```bash
-$ ./bootstrap.sh
+$ ./firefoxes.sh
 ```
 
 or
 
 ```bash
-$ ./bootstrap.sh status
+$ ./firefoxes.sh status
 ```
 
 You can specify the `version` to install, or use any of the pre-defined installation groups:
 
 ```bash
 // Default, installs all versions available
-$ ./bootstrap.sh
+$ ./firefoxes.sh
 
 // You can also use the 'all' keyword to install all versions available
-$ ./bootstrap.sh "all"
+$ ./firefoxes.sh "all"
 
 // 'all_future' installs Aurora, Beta, Nightly, Nightly UX
-$ ./bootstrap.sh "all_future"
+$ ./firefoxes.sh "all_future"
 
 // 'all_past' installs all versions excluding Aurora, Beta, Nightly and Nightly UX
-$ ./bootstrap.sh "all_past"
+$ ./firefoxes.sh "all_past"
 
 // 'current' installs the current version of Firefox only
-$ ./bootstrap.sh "current"
+$ ./firefoxes.sh "current"
 
 // Specify the versions you would like to install, from the list at the top of this README, separated by spaces
-$ ./bootstrap.sh "2.0.0.20 3.0.19"
+$ ./firefoxes.sh "2.0.0.20 3.0.19"
 ```
 
 You can specify the `locale` to use, from the list of available `locale` options. By default `en-GB` is used.
@@ -89,7 +89,7 @@ pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 ```
 
 ```bash
-$ ./bootstrap.sh "all" "en-US"
+$ ./firefoxes.sh "all" "en-US"
 ```
 (The installation process for the Aurora and Nightly/UX versions will install as `en-US` regardless of what you specify)
 
@@ -97,7 +97,7 @@ $ ./bootstrap.sh "all" "en-US"
 If you want to just install all versions and leave the installation process unattended, there is a `no_prompt` option, this will default all of the `y/n` prompts to answering `y`.
 
 ```bash
-$ ./bootstrap.sh "all" "en-GB" "no_prompt"
+$ ./firefoxes.sh "all" "en-GB" "no_prompt"
 ```
 (You will still need to manually accept the EULA if installing Firefox 2.0.0.20)
 
@@ -107,9 +107,9 @@ $ ./bootstrap.sh "all" "en-GB" "no_prompt"
 From a terminal prompt, enter the following:
 
 ```bash
-curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/bootstrap.sh
-chmod +x bootstrap.sh
-./bootstrap.sh [version] [locale] [no_prompt]
+curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/firefoxes.sh
+chmod +x firefoxes.sh
+./firefoxes.sh [version] [locale] [no_prompt]
 ```
 
 When the Mozilla license pops up, press `Q` and then `Y` to continue.
@@ -125,7 +125,7 @@ Previous updates removed from the README. Look at the file history to see them.
 - Added Firefox 11
 
 ### Update: 14/03/2012
-- Added `bootstrap.sh` to check for script updates before running script
+- Added `firefoxes.sh` to check for script updates before running script
 
 ### Update: 16/03/2012
 - Added the installation of Firebug for each version of Firefox.
@@ -135,7 +135,7 @@ Previous updates removed from the README. Look at the file history to see them.
 ### Update: 17/03/2012
 - Changed 'prompt' argument to 'no_prompt', so now by default it will prompt.
 - Rewrote the README
-- Updated `bootstrap.sh` so that it launches the installer with `status` argument if no arguments provided.
+- Updated `firefoxes.sh` so that it launches the installer with `status` argument if no arguments provided.
 
 ### Update: 20/03/2012
 - Small fixes to beta/nightly file finding, see commit messages

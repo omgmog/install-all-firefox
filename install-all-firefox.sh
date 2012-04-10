@@ -299,7 +299,7 @@ get_associated_information(){
         ;;
         *)
             error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"
-            error "  To see which versions you have installed, type:\n  ./bootstrap.sh status"
+            error "  To see which versions you have installed, type:\n  ./firefoxes.sh status"
             exit 1
         ;;
     esac
@@ -586,7 +586,7 @@ if [[ $versions == 'status' ]]
             printf "\n\033[31m - ${nice_name} ($VERSION)\033[00m"
         fi
     done
-    printf "\n\nTo install, type \033[1m./bootstrap.sh [version]\033[22m, \nwith [version] being the number or name in parentheses\n\n"
+    printf "\n\nTo install, type \033[1m./firefoxes.sh [version]\033[22m, \nwith [version] being the number or name in parentheses\n\n"
     exit 1
 fi
 
@@ -604,7 +604,7 @@ get_locale() {
             locale=$locale_default
             echo "We couldn't guess your locale so we're falling back on ${locale_default}."
         fi
-        echo -e "If this is wrong, use './bootstrap.sh [version] [locale]' to specify the locale.\n"
+        echo -e "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale.\n"
     fi
 }
 clean_up() {

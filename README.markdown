@@ -140,6 +140,10 @@ Previous updates removed from the README. Look at the file history to see them.
 ### Update: 20/03/2012
 - Small fixes to beta/nightly file finding, see commit messages
 
+### Update: 10/03/2012
+- Fixed bug with all parameters not being passed between scripts
+- Renamed `bootstrap.sh` to `firefoxes.sh`
+
 ---
 ## TODO
 - Add ability to specify additional versions

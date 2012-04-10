@@ -13,7 +13,10 @@ fi
 
 local_script_md5=`md5 -q /tmp/firefoxes/install-all-firefox.sh`
 remote_script_md5=''
-
+if [ ! -d "/tmp/firefoxes" ]
+	then
+	mkdir "/tmp/firefoxes"
+fi
 while [ "${remote_script_md5}" == "" ]
 do
 	if curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/install-all-firefox.sh" -o "/tmp/install-all-firefox.sh"

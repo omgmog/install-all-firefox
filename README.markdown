@@ -124,26 +124,7 @@ Previous updates removed from the README. Look at the file history to see them.
 
 ### Update: 24/04/2012
 - Added Firefox 12
-
-### Update: 13/03/2012
-- Added Firefox 11
-
-### Update: 14/03/2012
-- Added `firefoxes.sh` to check for script updates before running script
-
-### Update: 16/03/2012
-- Added the installation of Firebug for each version of Firefox.
-- Added more checks to ensure that the .dmg's unmount cleanly
-- Added `prompt` argument, by default the installer won't prompt
-
-### Update: 17/03/2012
-- Changed 'prompt' argument to 'no_prompt', so now by default it will prompt.
-- Rewrote the README
-- Updated `firefoxes.sh` so that it launches the installer with `status` argument if no arguments provided.
-
-### Update: 20/03/2012
-- Small fixes to beta/nightly file finding, see commit messages
-
+- 
 ### Update: 10/03/2012
 - Fixed bug with all parameters not being passed between scripts
 - Renamed `bootstrap.sh` to `firefoxes.sh`

@@ -200,6 +200,19 @@ get_associated_information(){
             firebug_root="http://getfirebug.com/releases/firebug/1.9/"
             firebug_file="firebug-1.9.1.xpi"
         ;;        
+        12.0)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/12.0/"
+            dmg_file="Firefox 12.0.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx12"
+            nice_name="Firefox 12.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
+        ;;        
         beta)
             # This seems a bit flaky
 

@@ -4,7 +4,7 @@
 ---
 ## ABOUT
 
-This is a bash script to install all major versions of Firefox on OS X
+This is a bash script to install all major versions of Firefox on OS X.
 
 Currently it installs:
 
@@ -20,6 +20,7 @@ Currently it installs:
 - Firefox 9.0.1
 - Firefox 10.0.2
 - Firefox 11.0
+- Firefox 12.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -120,6 +121,9 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ---
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
+
+### Update: 24/04/2012
+- Added Firefox 12
 
 ### Update: 13/03/2012
 - Added Firefox 11

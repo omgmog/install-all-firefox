@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="11.0"
-default_versions_past="2.0.0.20 3.0.19 3.5.9 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2"
+default_versions_current="12.0"
+default_versions_past="2.0.0.20 3.0.19 3.5.9 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -200,6 +200,19 @@ get_associated_information(){
             firebug_root="http://getfirebug.com/releases/firebug/1.9/"
             firebug_file="firebug-1.9.1.xpi"
         ;;        
+        12.0)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/12.0/"
+            dmg_file="Firefox 12.0.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx12"
+            nice_name="Firefox 12.0"
+
+            firebug_version="1.9.1"
+            firebug_root="http://getfirebug.com/releases/firebug/1.9/"
+            firebug_file="firebug-1.9.1.xpi"
+        ;;        
         beta)
             # This seems a bit flaky
 
@@ -236,7 +249,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | tail -1 | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -259,7 +272,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | tail -1 | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi
@@ -282,7 +295,7 @@ get_associated_information(){
 
             if [[ $versions != 'status' ]]
                 then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg" | tail -1 | sed "s/^.\{56\}//"`
+                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
                 sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
                 sum_file_type="sha512"
             fi

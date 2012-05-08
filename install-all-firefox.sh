@@ -29,8 +29,7 @@ binary_folder="/Contents/MacOS/"
 
 locale=$2
 
-if [[ "${3}" == "no_prompt" ]]
-then
+if [[ "${3}" == "no_prompt" ]]; then
   no_prompt="true"
 else
   no_prompt="false"
@@ -221,8 +220,7 @@ get_associated_information(){
       autoupdate="true"
       ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
 
-      if [[ $versions != 'status' ]]
-      then
+      if [[ $versions != 'status' ]]; then
         candidates_folder=`curl --silent -L ${ftp_candidates} | sort -n | tail -n1 | sed "s/^.\{56\}//"`
         build_folder=`curl --silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1 | sed "s/^.\{56\}//"`
         ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
@@ -247,8 +245,7 @@ get_associated_information(){
       autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
 
-      if [[ $versions != 'status' ]]
-      then
+      if [[ $versions != 'status' ]]; then
         dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
         sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
         sum_file_type="sha512"
@@ -270,8 +267,7 @@ get_associated_information(){
       autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org//pub/mozilla.org/firefox/nightly/latest-trunk/"
 
-      if [[ $versions != 'status' ]]
-      then
+      if [[ $versions != 'status' ]]; then
         dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
         sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
         sum_file_type="sha512"
@@ -293,8 +289,7 @@ get_associated_information(){
       autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
 
-      if [[ $versions != 'status' ]]
-      then
+      if [[ $versions != 'status' ]]; then
         dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
         sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
         sum_file_type="sha512"
@@ -318,16 +313,13 @@ get_associated_information(){
   esac
 }
 setup_dirs(){
-  if [[ ! -d "$tmp_directory" ]]
-  then
+  if [[ ! -d "$tmp_directory" ]]; then
     mkdir -p "$tmp_directory"
   fi
-  if [[ ! -d "$bits_directory" ]]
-  then
+  if [[ ! -d "$bits_directory" ]]; then
     mkdir -p "$bits_directory"
   fi
-  if [[ ! -d "$install_directory" ]]
-  then
+  if [[ ! -d "$install_directory" ]]; then
     mkdir -p "$install_directory"
   fi
 }
@@ -335,44 +327,36 @@ get_bits(){
   log "Downloading bits"
   current_dir=`pwd`
   cd "$bits_directory"
-  if [[ ! -f "setfileicon" ]]
-  then
+  if [[ ! -f "setfileicon" ]]; then
     curl -C -L --progress-bar "https://raw.github.com/metamorfos/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
     chmod +x setfileicon
   fi
-  if [[ ! -f "${short_name}.png" ]]
-  then
+  if [[ ! -f "${short_name}.png" ]]; then
     new_icon="true"
     icon_file="${current_dir}/bits/${short_name}.png"
 
     # If file exists locally, use it
-    if [[ -f $icon_file ]]
-    then
+    if [[ -f $icon_file ]]; then
       cp -r $icon_file "${short_name}.png"
     else
       curl -C -L --progress-bar "https://raw.github.com/metamorfos/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
     fi
   fi
-  if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]
-  then
+  if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]; then
     sips -s format icns "${short_name}.png" --out "${short_name}.icns" > /dev/null
   fi
-  if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]
-  then
-    if [[ ! -f "fxfirefox-folder.png" ]]
-    then
+  if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]; then
+    if [[ ! -f "fxfirefox-folder.png" ]]; then
       curl -C -L --progress-bar "https://raw.github.com/metamorfos/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
     fi
-    if [[ ! -f "fxfirefox-folder.icns" ]]
-    then
+    if [[ ! -f "fxfirefox-folder.icns" ]]; then
       sips -s format icns "fxfirefox-folder.png" --out "fxfirefox-folder.icns"
     fi
     ./setfileicon "fxfirefox-folder.icns" "${install_directory}"
   fi
 }
 check_dmg(){
-  if [[ ! -f "${tmp_directory}/${dmg_file}" ]]
-  then
+  if [[ ! -f "${tmp_directory}/${dmg_file}" ]]; then
     log "Downloading ${dmg_file}"
     download_dmg
   else
@@ -390,9 +374,7 @@ check_dmg(){
         error "✖ Invalid sum type specified!"
         ;;
     esac
-
-    if [[ "${sum_expected}" == *"${sum_of_dmg}"* ]]
-    then
+    if [[ "${sum_expected}" == *"${sum_of_dmg}"* ]]; then
       log "✔ ${sum_file_type} of ${dmg_file} matches"
     else
       error "✖ ${sum_file_type} of ${dmg_file} doesn't match!"
@@ -407,8 +389,7 @@ get_sum_file(){
 }
 download_dmg(){
   cd "${tmp_directory}"
-  if [[ "${future}" == "true" ]]
-  then
+  if [[ "${future}" == "true" ]]; then
     dmg_url="${ftp_root}${dmg_file}"
   else
     dmg_url="${ftp_root}mac/$locale/${dmg_file}"
@@ -420,8 +401,7 @@ download_dmg(){
 }
 download_firebug(){
   cd "${tmp_directory}"
-  if [[ ! -f "${tmp_directory}${firebug_file}" ]]
-  then
+  if [[ ! -f "${tmp_directory}${firebug_file}" ]]; then
     if ! curl -C -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
     then
       error "✖ Failed to download ${firebug_file}"
@@ -431,13 +411,11 @@ download_firebug(){
   fi
 }
 prompt_firebug(){
-  if [ "${no_prompt}" == "false" ]
-  then
+  if [ "${no_prompt}" == "false" ]; then
     log "Install Firebug ${firebug_version} for ${nice_name}? [y/n]"
     read user_choice
     choice_made="false"
-    while [[ "$choice_made" == "false" ]]
-    do
+    while [[ "$choice_made" == "false" ]]; do
       case "$user_choice" in
         "y")
           choice_made="true"
@@ -453,22 +431,60 @@ prompt_firebug(){
     download_firebug
     install_firebug
   fi
-
-
 }
 install_firebug(){
-  if [[ -f "${install_directory}${nice_name}.app${binary_folder}${binary}" ]]
-  then
-    ext_dir=`cd $HOME/Library/Application\ Support/Firefox/Profiles/;cd \`ls -1 | grep ${short_name}\`; pwd`
+  if [[ -f "${install_directory}${nice_name}.app${binary_folder}${binary}" ]]; then
+    is_legacy="false"
+    if [ "${short_name}" == "fx2" -o "${short_name}" == "fx3" -o "${short_name}" == "fx35" -o "${short_name}" == "fx36" ]; then
+      is_legacy="true"
+    fi
+
+    if [ "${is_legacy}" == "true" ]; then
+      ext_dir=`cd $HOME/Library/Application\ Support/Firefox/Profiles/;cd \`ls -1 | grep ${short_name}\`; pwd`
+    else
+      ext_dir="${install_directory}${nice_name}.app${binary_folder}"
+    fi
+
     cd "${ext_dir}"
-    if [[ ! -d "extensions" ]]
-    then
+
+    if [ "${is_legacy}" != "true" ]; then
+      if [[ ! -d "distribution" ]]; then
+        mkdir "distribution"
+      fi
+      cd "distribution"
+    fi
+
+    if [[ ! -d "extensions" ]]; then
       mkdir "extensions"
     fi
     cd "extensions"
+
     ext_dir=`pwd`
 
-    cp -r "${tmp_directory}${firebug_file}" "${ext_dir}"
+    if [[ "${is_legacy}" == "true" ]]; then
+      cp -r "${tmp_directory}${firebug_file}" "${ext_dir}"
+    else
+      unzip -qqo "${tmp_directory}${firebug_file}" -d "${tmp_directory}${firebug_version}"
+      cd "${tmp_directory}${firebug_version}"
+      FILE="`cat install.rdf`"
+      for i in $FILE;do
+        if echo "$i"|grep "urn:mozilla:install-manifest" &> /dev/null ; then
+          GET="true"
+        fi
+        if [ "$GET" = "true" ] ; then
+          if echo "$i"|grep "<em:id>" &> /dev/null; then
+            ID=`echo "$i" | sed 's#.*<em:id>\(.*\)</em:id>.*#\1#'`
+            GET="false"
+          elif echo "$i"|grep "em:id=\"" &> /dev/null; then
+            ID=`echo "$i" | sed 's/.*em:id="\(.*\)".*/\1/'`
+            GET="false"
+          fi
+        fi
+      done
+      cd ..
+      mv "${firebug_version}" "${ext_dir}/${ID}/"
+    fi
+
     log "✔ Installed Firebug ${firebug_version}"
   else
     error "${nice_name} not installed so we can't install Firebug ${firebug_version}!"
@@ -478,22 +494,18 @@ mount_dmg(){
   hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
 }
 unmount_dmg(){
-  if [[ -d "/Volumes/${vol_name}" ]]
-  then
+  if [[ -d "/Volumes/${vol_name}" ]]; then
     hdiutil detach "/Volumes/${vol_name}" -force > /dev/null
   fi
 }
 install_app(){
-  if [[ -d "${install_directory}${nice_name}.app" ]]
-  then
+  if [[ -d "${install_directory}${nice_name}.app" ]]; then
 
-    if [ "${no_prompt}" == "false" ]
-    then
+    if [ "${no_prompt}" == "false" ]; then
       log "Delete your existing ${nice_name}.app and install again? [y/n]"
       read user_choice
       choice_made="false"
-      while [[ "$choice_made" == "false" ]]
-      do
+      while [[ "$choice_made" == "false" ]]; do
         case "$user_choice" in
           "y")
             choice_made="true"
@@ -558,8 +570,7 @@ modify_launcher(){
   echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
   chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
-  if [[ $autoupdate != "true" ]]
-  then
+  if [[ $autoupdate != "true" ]]; then
     prefs_previous="\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);"
   fi
 
@@ -586,14 +597,11 @@ versions=${versions/all_past/${default_versions_past}}
 versions=${versions/all/${default_versions}}
 versions=${versions/current/${default_versions_current}}
 
-if [[ $versions == 'status' ]]
-then
+if [[ $versions == 'status' ]]; then
   printf "The versions in \033[32mgreen\033[00m are installed:\n"
-  for VERSION in $default_versions
-  do
+  for VERSION in $default_versions; do
     get_associated_information $VERSION
-    if [[ -d "${install_directory}${nice_name}.app" ]]
-    then
+    if [[ -d "${install_directory}${nice_name}.app" ]]; then
       printf "\n\033[32m - ${nice_name} ($VERSION)\033[00m"
     else
       printf "\n\033[31m - ${nice_name} ($VERSION)\033[00m"
@@ -607,10 +615,8 @@ get_locale() {
   all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
   lang=`echo ${LANG/_/-} | sed 's/\..*//'`
 
-  if [[ -z $locale ]]
-  then
-    if [[ $all_locales == *" $lang "* ]]
-    then
+  if [[ -z $locale ]]; then
+    if [[ $all_locales == *" $lang "* ]]; then
       locale=$lang
       echo "We detected your locale as ${lang}."
     else
@@ -624,8 +630,7 @@ clean_up() {
   log "Delete all files from temp directory (${tmp_directory})? [y/n]"
   read user_choice
   choice_made="false"
-  while [[ "$choice_made" == "false" ]]
-  do
+  while [[ "$choice_made" == "false" ]]; do
     case "$user_choice" in
       "y")
         choice_made="true"
@@ -645,16 +650,14 @@ clean_up() {
   return 0
 }
 
-if [ `uname -s` != "Darwin" ]
-then
+if [ `uname -s` != "Darwin" ]; then
   error "This script is designed to be run on OS X\nExiting...\n"
   exit 0
 fi
 
 get_locale
 
-for VERSION in $versions
-do
+for VERSION in $versions; do
   get_associated_information $VERSION
   log "====================\nInstalling ${nice_name}"
   setup_dirs

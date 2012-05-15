@@ -10,7 +10,7 @@ Currently it installs:
 
 - Firefox 2.0.0.20
 - Firefox 3.0.19
-- Firefox 3.5.9
+- Firefox 3.5.19
 - Firefox 3.6.28
 - Firefox 4.0.1
 - Firefox 5.0.1

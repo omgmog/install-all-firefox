@@ -69,9 +69,9 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/1.3/"
       firebug_file="firebug-1.3.4b2.xpi"
       ;;
-    3.5.9)
-      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.9/"
-      dmg_file="Firefox 3.5.9.dmg"
+    3.5.19)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.19/"
+      dmg_file="Firefox 3.5.19.dmg"
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox-bin"

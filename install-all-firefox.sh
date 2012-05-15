@@ -328,7 +328,7 @@ get_bits(){
   current_dir=`pwd`
   cd "$bits_directory"
   if [[ ! -f "setfileicon" ]]; then
-    curl -C -L --progress-bar "https://raw.github.com/metamorfos/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+    curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
     chmod +x setfileicon
   fi
   if [[ ! -f "${short_name}.png" ]]; then
@@ -339,7 +339,7 @@ get_bits(){
     if [[ -f $icon_file ]]; then
       cp -r $icon_file "${short_name}.png"
     else
-      curl -C -L --progress-bar "https://raw.github.com/metamorfos/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+      curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
     fi
   fi
   if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]; then
@@ -347,7 +347,7 @@ get_bits(){
   fi
   if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]; then
     if [[ ! -f "fxfirefox-folder.png" ]]; then
-      curl -C -L --progress-bar "https://raw.github.com/metamorfos/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+      curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
     fi
     if [[ ! -f "fxfirefox-folder.icns" ]]; then
       sips -s format icns "fxfirefox-folder.png" --out "fxfirefox-folder.icns"

@@ -122,16 +122,15 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 15/05/2012
+- Realised that 3.5.9 wasn't the latest point release for 3.5, updated it to 3.5.19
+
 ### Update: 08/05/2012
 - Formatting fixes in `install-all-firefox.sh`
 - Fixed the firebug installation process for Firefox 4+!
 
 ### Update: 24/04/2012
 - Added Firefox 12
-
-### Update: 10/03/2012
-- Fixed bug with all parameters not being passed between scripts
-- Renamed `bootstrap.sh` to `firefoxes.sh`
 
 ---
 ## TODO

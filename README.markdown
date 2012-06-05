@@ -21,6 +21,7 @@ Currently it installs:
 - Firefox 10.0.2
 - Firefox 11.0
 - Firefox 12.0
+- Firefox 13.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -122,15 +123,15 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 05/05/2012
+- Added Firefox 13
+
 ### Update: 15/05/2012
 - Realised that 3.5.9 wasn't the latest point release for 3.5, updated it to 3.5.19
 
 ### Update: 08/05/2012
 - Formatting fixes in `install-all-firefox.sh`
 - Fixed the firebug installation process for Firefox 4+!
-
-### Update: 24/04/2012
-- Added Firefox 12
 
 ---
 ## TODO

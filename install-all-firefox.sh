@@ -1,6 +1,6 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="13.0"
+default_versions_current="13.0.1"
 default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
@@ -212,9 +212,9 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
       firebug_file="firebug-1.9.1.xpi"
       ;;    
-    13.0)
-      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0/"
-      dmg_file="Firefox 13.0.dmg"
+    13.0.1)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
+      dmg_file="Firefox 13.0.1.dmg"
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox"

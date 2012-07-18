@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="13.0.1"
-default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0"
+default_versions_current="14.0.1"
+default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -117,9 +117,9 @@ get_associated_information(){
       short_name="fx5"
       nice_name="Firefox 5.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;
     6.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
@@ -130,9 +130,9 @@ get_associated_information(){
       short_name="fx6"
       nice_name="Firefox 6.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;
     7.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
@@ -143,9 +143,9 @@ get_associated_information(){
       short_name="fx7"
       nice_name="Firefox 7.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;
     8.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
@@ -156,9 +156,9 @@ get_associated_information(){
       short_name="fx8"
       nice_name="Firefox 8.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;
     9.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
@@ -169,9 +169,9 @@ get_associated_information(){
       short_name="fx9"
       nice_name="Firefox 9.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;
     10.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
@@ -182,9 +182,9 @@ get_associated_information(){
       short_name="fx10"
       nice_name="Firefox 10.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;
     11.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/11.0/"
@@ -195,9 +195,9 @@ get_associated_information(){
       short_name="fx11"
       nice_name="Firefox 11.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;        
     12.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/12.0/"
@@ -208,9 +208,9 @@ get_associated_information(){
       short_name="fx12"
       nice_name="Firefox 12.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.9.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.9.2.xpi"
       ;;    
     13.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
@@ -221,9 +221,22 @@ get_associated_information(){
       short_name="fx13"
       nice_name="Firefox 13.0"
 
-      firebug_version="1.9.1"
+      firebug_version="1.10.0"
       firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.1.xpi"
+      firebug_file="firebug-1.10.0.xpi"
+      ;;   
+    14.0.1)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/"
+      dmg_file="Firefox 14.0.1.dmg"
+      sum_file="MD5SUMS"
+      sum_file_type="md5"
+      binary="firefox"
+      short_name="fx14"
+      nice_name="Firefox 14.0"
+
+      firebug_version="1.10.0"
+      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
+      firebug_file="firebug-1.10.0.xpi"
       ;;        
     beta)
       # This seems a bit flaky
@@ -248,9 +261,9 @@ get_associated_information(){
       short_name="fxb"
       nice_name="Firefox Beta"
 
-      firebug_version="1.10.0a5"
+      firebug_version="1.10.0"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0a5.xpi"
+      firebug_file="firebug-1.10.0.xpi"
       ;;
     aurora)
       release_type="aurora"
@@ -270,9 +283,9 @@ get_associated_information(){
       vol_name="Aurora"
       release_name="FirefoxAurora"
 
-      firebug_version="1.10.0a5"
+      firebug_version="1.10.0"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0a5.xpi"
+      firebug_file="firebug-1.10.0.xpi"
       ;;
     nightly)
       release_type="nightly"
@@ -292,9 +305,9 @@ get_associated_information(){
       vol_name="Nightly"
       release_name="FirefoxNightly"
 
-      firebug_version="1.10.0a5"
+      firebug_version="1.10.0"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0a5.xpi"
+      firebug_file="firebug-1.10.0.xpi"
       ;;
     ux)
       release_type="ux"
@@ -314,9 +327,9 @@ get_associated_information(){
       vol_name="UX"
       release_name="FirefoxUX"
 
-      firebug_version="1.10.0a5"
+      firebug_version="1.10.0"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0a5.xpi"
+      firebug_file="firebug-1.10.0.xpi"
       ;;
     *)
       error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"

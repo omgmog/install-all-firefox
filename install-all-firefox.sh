@@ -414,7 +414,7 @@ download_dmg(){
 }
 download_firebug(){
   cd "${tmp_directory}"
-  if [[ ! -f "${tmp_directory}${firebug_file}" ]]; then
+  if [[ ! -f "${firebug_file}" ]]; then
     if ! curl -C -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
     then
       error "✖ Failed to download ${firebug_file}"

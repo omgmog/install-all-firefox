@@ -354,7 +354,7 @@ get_bits(){
   current_dir=`pwd`
   cd "$bits_directory"
   if [[ ! -f "setfileicon" ]]; then
-    curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+    curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
     chmod +x setfileicon
   fi
   if [[ ! -f "${short_name}.png" ]]; then
@@ -365,7 +365,7 @@ get_bits(){
     if [[ -f $icon_file ]]; then
       cp -r $icon_file "${short_name}.png"
     else
-      curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+      curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
     fi
   fi
   if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]; then
@@ -373,7 +373,7 @@ get_bits(){
   fi
   if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]; then
     if [[ ! -f "fxfirefox-folder.png" ]]; then
-      curl -C -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+      curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
     fi
     if [[ ! -f "fxfirefox-folder.icns" ]]; then
       sips -s format icns "fxfirefox-folder.png" --out "fxfirefox-folder.icns"
@@ -411,7 +411,7 @@ check_dmg(){
 }
 get_sum_file(){
   cd "${tmp_directory}"
-  curl -C -L --progress-bar "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
+  curl -C - -L --progress-bar "${ftp_root}${sum_file_folder}${sum_file}" -o "${sum_file}-${short_name}"
 }
 download_dmg(){
   cd "${tmp_directory}"
@@ -420,7 +420,7 @@ download_dmg(){
   else
     dmg_url="${ftp_root}mac/$locale/${dmg_file}"
   fi
-  if ! curl -C -L --progress-bar "${dmg_url}" -o "${dmg_file}"
+  if ! curl -C - -L --progress-bar "${dmg_url}" -o "${dmg_file}"
   then
     error "✖ Failed to download ${dmg_file}!"
   fi
@@ -428,7 +428,7 @@ download_dmg(){
 download_firebug(){
   cd "${tmp_directory}"
   if [[ ! -f "${firebug_file}" ]]; then
-    if ! curl -C -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
+    if ! curl -C - -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
     then
       error "✖ Failed to download ${firebug_file}"
     else

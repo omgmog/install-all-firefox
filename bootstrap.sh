@@ -8,7 +8,7 @@ log(){
 
 echo "The script now uses 'firefoxes.sh' not 'bootstrap.sh', I'll go ahead and download the updated script for you now..."
 
-if curl -C -L "https://raw.github.com/omgmog/install-all-firefox/master/firefoxes.sh" -o "/tmp/firefoxes.sh"
+if curl -C - -L "https://raw.github.com/omgmog/install-all-firefox/master/firefoxes.sh" -o "/tmp/firefoxes.sh"
 	then
 	chmod +x "/tmp/firefoxes.sh"
 	log "✔ Successfully downloaded the new 'firefoxes.sh'!"

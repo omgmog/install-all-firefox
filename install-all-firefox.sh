@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="14.0.1"
-default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1"
+default_versions_current="15.0"
+default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -233,6 +233,19 @@ get_associated_information(){
       binary="firefox"
       short_name="fx14"
       nice_name="Firefox 14.0"
+
+      firebug_version="1.10.0"
+      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
+      firebug_file="firebug-1.10.0.xpi"
+      ;;  
+    15.0)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0/"
+      dmg_file="Firefox 15.0.dmg"
+      sum_file="MD5SUMS"
+      sum_file_type="md5"
+      binary="firefox"
+      short_name="fx15"
+      nice_name="Firefox 15.0"
 
       firebug_version="1.10.0"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"

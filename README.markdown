@@ -23,6 +23,7 @@ Currently it installs:
 - Firefox 12.0
 - Firefox 13.0.1
 - Firefox 14.0.1
+- Firefox 15.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -124,16 +125,14 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 28/08/2012
+- Added Firefox 15.0
+- Fixed issue with using `curl -C` incorrectly causing a infinite loop
+
 ### Update: 18/07/2012
 - Added Firefox 14.0.1
 - Updated Firebug to 1.9.2 and 1.10.0
 - Fixed issue with Firebug xpi being redownloaded
-
-### Update: 22/06/2012
-- Added Firefox 13.0.1
-
-### Update: 05/05/2012
-- Added Firefox 13
 
 ---
 ## TODO

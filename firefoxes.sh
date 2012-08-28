@@ -20,7 +20,7 @@ then
 fi
 while [ "${remote_script_md5}" == "" ]
 do
-  if curl -C - -L "https://raw.github.com/omgmog/install-all-firefox/master/install-all-firefox.sh" -o "/tmp/install-all-firefox.sh"
+  if curl -L "https://raw.github.com/omgmog/install-all-firefox/master/install-all-firefox.sh" -o "/tmp/install-all-firefox.sh"
   then
     chmod +x "/tmp/install-all-firefox.sh"
     remote_script_md5=`md5 -q /tmp/install-all-firefox.sh`

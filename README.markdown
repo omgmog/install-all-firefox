@@ -125,6 +125,11 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 31/08/2012
+- Fixed Firefox Beta detection, "beta" is now correctly detected as 16.0
+- Improved automatic locale detection for $LANG like "de_DE.UTF-8", $LANG setting is shown during detection
+- Updated Firebug to 1.10.2 for all Firefoxes using 1.10.0
+
 ### Update: 28/08/2012
 - Added Firefox 15.0
 - Fixed issue with using `curl -C` incorrectly causing a infinite loop

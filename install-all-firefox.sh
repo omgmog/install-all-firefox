@@ -234,9 +234,9 @@ get_associated_information(){
       short_name="fx14"
       nice_name="Firefox 14.0"
 
-      firebug_version="1.10.0"
+      firebug_version="1.10.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_file="firebug-1.10.2.xpi"
       ;;  
     15.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0/"
@@ -247,9 +247,9 @@ get_associated_information(){
       short_name="fx15"
       nice_name="Firefox 15.0"
 
-      firebug_version="1.10.0"
+      firebug_version="1.10.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_file="firebug-1.10.2.xpi"
       ;;        
     beta)
       # This seems a bit flaky
@@ -260,8 +260,8 @@ get_associated_information(){
       ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
 
       if [[ $versions != 'status' ]]; then
-        candidates_folder=`curl --silent -L ${ftp_candidates} | sort -n | tail -n1 | sed "s/^.\{56\}//"`
-        build_folder=`curl --silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1 | sed "s/^.\{56\}//"`
+        candidates_folder=`curl --silent -L ${ftp_candidates} | sed "s/^.\{56\}//" | sort -n | tail -n1`
+        build_folder=`curl --silent -L ${ftp_candidates}/${candidates_folder}/ | sed "s/^.\{56\}//" | sort -n | tail -n1`
         ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
         dmg_file=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | tail -1 | sed "s/^.\{56\}//"`
         sum_file_tmp=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | tail -1 | sed "s/^.\{56\}//"`
@@ -274,9 +274,9 @@ get_associated_information(){
       short_name="fxb"
       nice_name="Firefox Beta"
 
-      firebug_version="1.10.0"
+      firebug_version="1.10.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_file="firebug-1.10.2.xpi"
       ;;
     aurora)
       release_type="aurora"
@@ -296,9 +296,9 @@ get_associated_information(){
       vol_name="Aurora"
       release_name="FirefoxAurora"
 
-      firebug_version="1.10.0"
+      firebug_version="1.10.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_file="firebug-1.10.2.xpi"
       ;;
     nightly)
       release_type="nightly"
@@ -318,9 +318,9 @@ get_associated_information(){
       vol_name="Nightly"
       release_name="FirefoxNightly"
 
-      firebug_version="1.10.0"
+      firebug_version="1.10.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_file="firebug-1.10.2.xpi"
       ;;
     ux)
       release_type="ux"
@@ -340,9 +340,9 @@ get_associated_information(){
       vol_name="UX"
       release_name="FirefoxUX"
 
-      firebug_version="1.10.0"
+      firebug_version="1.10.2"
       firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_file="firebug-1.10.2.xpi"
       ;;
     *)
       error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"
@@ -657,10 +657,16 @@ get_locale() {
   if [[ -z $locale ]]; then
     if [[ $all_locales == *" $lang "* ]]; then
       locale=$lang
-      echo "We detected your locale as ${lang}."
+      echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
     else
-      locale=$locale_default
-      echo "We couldn't guess your locale so we're falling back on ${locale_default}."
+      lang=`echo ${lang} | sed 's/-.*//'`
+      if [[ $all_locales == *" $lang "* ]]; then
+        locale=$lang
+        echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+      else
+        locale=$locale_default
+        echo "We couldn't guess your locale so we're falling back on ${locale_default}."
+      fi
     fi
     echo -e "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale.\n"
   fi

@@ -66,8 +66,9 @@ get_associated_information(){
       nice_name="Firefox 3.0"
 
       firebug_version="1.3.4b2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.3/"
-      firebug_file="firebug-1.3.4b2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     3.5.19)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.19/"
@@ -79,8 +80,9 @@ get_associated_information(){
       nice_name="Firefox 3.5"
 
       firebug_version="1.5.4"
-      firebug_root="http://getfirebug.com/releases/firebug/1.5/"
-      firebug_file="firebug-1.5.4.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     3.6.28)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.28/"
@@ -92,8 +94,9 @@ get_associated_information(){
       nice_name="Firefox 3.6"
 
       firebug_version="1.7.3"
-      firebug_root="http://getfirebug.com/releases/firebug/1.7/"
-      firebug_file="firebug-1.7.3.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     4.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
@@ -105,8 +108,9 @@ get_associated_information(){
       nice_name="Firefox 4.0"
 
       firebug_version="1.8.0b7"
-      firebug_root="http://getfirebug.com/releases/firebug/1.8/"
-      firebug_file="firebug-1.8.0b7.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     5.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
@@ -118,8 +122,9 @@ get_associated_information(){
       nice_name="Firefox 5.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     6.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
@@ -131,8 +136,9 @@ get_associated_information(){
       nice_name="Firefox 6.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     7.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
@@ -144,8 +150,9 @@ get_associated_information(){
       nice_name="Firefox 7.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     8.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
@@ -157,8 +164,9 @@ get_associated_information(){
       nice_name="Firefox 8.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     9.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
@@ -170,8 +178,9 @@ get_associated_information(){
       nice_name="Firefox 9.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     10.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
@@ -183,8 +192,9 @@ get_associated_information(){
       nice_name="Firefox 10.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     11.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/11.0/"
@@ -196,8 +206,9 @@ get_associated_information(){
       nice_name="Firefox 11.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;        
     12.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/12.0/"
@@ -209,8 +220,9 @@ get_associated_information(){
       nice_name="Firefox 12.0"
 
       firebug_version="1.9.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.9.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;    
     13.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
@@ -221,9 +233,10 @@ get_associated_information(){
       short_name="fx13"
       nice_name="Firefox 13.0"
 
-      firebug_version="1.10.0"
-      firebug_root="http://getfirebug.com/releases/firebug/1.9/"
-      firebug_file="firebug-1.10.0.xpi"
+      firebug_version="1.10.2"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;   
     14.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/"
@@ -235,8 +248,9 @@ get_associated_information(){
       nice_name="Firefox 14.0"
 
       firebug_version="1.10.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;  
     15.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0/"
@@ -248,8 +262,9 @@ get_associated_information(){
       nice_name="Firefox 15.0"
 
       firebug_version="1.10.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;        
     beta)
       # This seems a bit flaky
@@ -275,8 +290,9 @@ get_associated_information(){
       nice_name="Firefox Beta"
 
       firebug_version="1.10.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     aurora)
       release_type="aurora"
@@ -297,8 +313,9 @@ get_associated_information(){
       release_name="FirefoxAurora"
 
       firebug_version="1.10.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     nightly)
       release_type="nightly"
@@ -319,8 +336,9 @@ get_associated_information(){
       release_name="FirefoxNightly"
 
       firebug_version="1.10.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     ux)
       release_type="ux"
@@ -341,8 +359,9 @@ get_associated_information(){
       release_name="FirefoxUX"
 
       firebug_version="1.10.2"
-      firebug_root="http://getfirebug.com/releases/firebug/1.10/"
-      firebug_file="firebug-1.10.2.xpi"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
       ;;
     *)
       error "  Invalid version specified!\n\n  Please choose one of:\n  all all_past all_future current $default_versions\n\n"

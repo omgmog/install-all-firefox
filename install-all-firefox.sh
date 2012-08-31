@@ -260,8 +260,8 @@ get_associated_information(){
       ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
 
       if [[ $versions != 'status' ]]; then
-        candidates_folder=`curl --silent -L ${ftp_candidates} | sort -n | tail -n1 | sed "s/^.\{56\}//"`
-        build_folder=`curl --silent -L ${ftp_candidates}${candidates_folder}/ | sort -n | tail -n1 | sed "s/^.\{56\}//"`
+        candidates_folder=`curl --silent -L ${ftp_candidates} | sed "s/^.\{56\}//" | sort -n | tail -n1`
+        build_folder=`curl --silent -L ${ftp_candidates}/${candidates_folder}/ | sed "s/^.\{56\}//" | sort -n | tail -n1`
         ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
         dmg_file=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | tail -1 | sed "s/^.\{56\}//"`
         sum_file_tmp=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | tail -1 | sed "s/^.\{56\}//"`

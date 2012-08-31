@@ -125,6 +125,9 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 31/08/2012
+- Fixed Firefox Beta detection, "beta" is now correctly detected as 16.0
+
 ### Update: 28/08/2012
 - Added Firefox 15.0
 - Fixed issue with using `curl -C` incorrectly causing a infinite loop

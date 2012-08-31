@@ -657,10 +657,16 @@ get_locale() {
   if [[ -z $locale ]]; then
     if [[ $all_locales == *" $lang "* ]]; then
       locale=$lang
-      echo "We detected your locale as ${lang}."
+      echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
     else
-      locale=$locale_default
-      echo "We couldn't guess your locale so we're falling back on ${locale_default}."
+      lang=`echo ${lang} | sed 's/-.*//'`
+      if [[ $all_locales == *" $lang "* ]]; then
+        locale=$lang
+        echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+      else
+        locale=$locale_default
+        echo "We couldn't guess your locale so we're falling back on ${locale_default}."
+      fi
     fi
     echo -e "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale.\n"
   fi

@@ -127,6 +127,7 @@ Previous updates removed from the README. Look at the file history to see them.
 
 ### Update: 31/08/2012
 - Fixed Firefox Beta detection, "beta" is now correctly detected as 16.0
+- Improved automatic locale detection for $LANG like "de_DE.UTF-8", $LANG setting is shown during detection
 
 ### Update: 28/08/2012
 - Added Firefox 15.0

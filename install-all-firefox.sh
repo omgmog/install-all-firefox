@@ -549,7 +549,7 @@ install_firebug(){
   fi
 }
 mount_dmg(){
-  hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
+  echo Y | PAGER=true hdiutil attach -plist -nobrowse -readonly -quiet "${dmg_file}" > /dev/null
 }
 unmount_dmg(){
   if [[ -d "/Volumes/${vol_name}" ]]; then

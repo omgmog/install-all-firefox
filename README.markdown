@@ -124,6 +124,10 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ---
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
+
+### Update: 20/09/2012
+- Updated Firefox 15 > 15.0.1
+
 ### Update: 06/09/2012
 - Added work-around for the EULA prompt on Firefox 2.0.0.20
 
@@ -132,10 +136,6 @@ Previous updates removed from the README. Look at the file history to see them.
 - Improved automatic locale detection for $LANG like "de_DE.UTF-8", $LANG setting is shown during detection
 - Updated Firebug to 1.10.2 for all Firefoxes using 1.10.0
 - Improved Firebug installation process
-
-### Update: 28/08/2012
-- Added Firefox 15.0
-- Fixed issue with using `curl -C` incorrectly causing a infinite loop
 
 ---
 ## TODO

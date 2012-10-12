@@ -23,7 +23,8 @@ Currently it installs:
 - Firefox 12.0
 - Firefox 13.0.1
 - Firefox 14.0.1
-- Firefox 15.0
+- Firefox 15.0.1
+- Firefox 16.0.1
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -126,16 +127,13 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 Previous updates removed from the README. Look at the file history to see them.
 
 ### Update: 20/09/2012
+- Added Firefox 16.0.1
+
+### Update: 20/09/2012
 - Updated Firefox 15 > 15.0.1
 
 ### Update: 06/09/2012
 - Added work-around for the EULA prompt on Firefox 2.0.0.20
-
-### Update: 31/08/2012
-- Fixed Firefox Beta detection, "beta" is now correctly detected as 16.0
-- Improved automatic locale detection for $LANG like "de_DE.UTF-8", $LANG setting is shown during detection
-- Updated Firebug to 1.10.2 for all Firefoxes using 1.10.0
-- Improved Firebug installation process
 
 ---
 ## TODO

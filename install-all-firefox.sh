@@ -272,7 +272,7 @@ get_associated_information(){
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox"
-      short_name="fx15"
+      short_name="fx16"
       nice_name="Firefox 16.0"
 
       firebug_version="1.10.2"

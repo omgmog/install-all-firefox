@@ -25,6 +25,7 @@ Currently it installs:
 - Firefox 14.0.1
 - Firefox 15.0.1
 - Firefox 16.0.1
+- Firefox 17.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -126,14 +127,14 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 22/11/2012
+- Added Firefox 17.0
+
 ### Update: 20/09/2012
 - Added Firefox 16.0.1
 
 ### Update: 20/09/2012
 - Updated Firefox 15 > 15.0.1
-
-### Update: 06/09/2012
-- Added work-around for the EULA prompt on Firefox 2.0.0.20
 
 ---
 ## TODO

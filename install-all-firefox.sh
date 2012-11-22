@@ -233,7 +233,7 @@ get_associated_information(){
       short_name="fx13"
       nice_name="Firefox 13.0"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -247,7 +247,7 @@ get_associated_information(){
       short_name="fx14"
       nice_name="Firefox 14.0"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -261,7 +261,7 @@ get_associated_information(){
       short_name="fx15"
       nice_name="Firefox 15.0"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -275,7 +275,7 @@ get_associated_information(){
       short_name="fx16"
       nice_name="Firefox 16.0"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -289,7 +289,7 @@ get_associated_information(){
       short_name="fx17"
       nice_name="Firefox 17.0"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -317,7 +317,7 @@ get_associated_information(){
       short_name="fxb"
       nice_name="Firefox Beta"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -340,7 +340,7 @@ get_associated_information(){
       vol_name="Aurora"
       release_name="FirefoxAurora"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -363,7 +363,7 @@ get_associated_information(){
       vol_name="Nightly"
       release_name="FirefoxNightly"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -386,7 +386,7 @@ get_associated_information(){
       vol_name="UX"
       release_name="FirefoxUX"
 
-      firebug_version="1.10.2"
+      firebug_version="1.10.6"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"

@@ -129,6 +129,7 @@ Previous updates removed from the README. Look at the file history to see them.
 
 ### Update: 22/11/2012
 - Added Firefox 17.0
+- Updated Firebug 1.10.2 > 1.10.6
 
 ### Update: 20/09/2012
 - Added Firefox 16.0.1

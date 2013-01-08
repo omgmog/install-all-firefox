@@ -26,6 +26,7 @@ Currently it installs:
 - Firefox 15.0.1
 - Firefox 16.0.1
 - Firefox 17.0.1
+- Firefox 18.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -127,15 +128,15 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 08/01/2013
+- Added Firefox 18.0
+
 ### Update: 05/12/2012
 - Updated Firefox 17 > 17.0.1
 
 ### Update: 22/11/2012
 - Added Firefox 17.0
 - Updated Firebug 1.10.2 > 1.10.6
-
-### Update: 20/09/2012
-- Added Firefox 16.0.1
 
 ---
 ## TODO

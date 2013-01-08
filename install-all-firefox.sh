@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="17.0.1"
-default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1"
+default_versions_current="18.0"
+default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -39,7 +39,7 @@ get_associated_information(){
   # Reset everything
   vol_name=$vol_name_default
   release_name=$release_name_default
-  autoupdate=""
+  autoupdate="false"
   future=""
 
   case $1 in
@@ -279,7 +279,7 @@ get_associated_information(){
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
-      ;;        
+      ;;
     17.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/17.0.1/"
       dmg_file="Firefox 17.0.1.dmg"
@@ -289,7 +289,21 @@ get_associated_information(){
       short_name="fx17"
       nice_name="Firefox 17.0"
 
-      firebug_version="1.10.6"
+      firebug_version="1.11.1"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
+      ;;
+    18.0)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/18.0/"
+      dmg_file="Firefox 18.0.dmg"
+      sum_file="MD5SUMS"
+      sum_file_type="md5"
+      binary="firefox"
+      short_name="fx18"
+      nice_name="Firefox 18.0"
+
+      firebug_version="1.11.1"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -657,10 +671,10 @@ modify_launcher(){
   chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
   if [[ $autoupdate != "true" ]]; then
-    prefs_previous="\n pref(\"app.update.auto\",false);\n pref(\"app.update.enabled\",false);"
+    prefs_previous="\nuser_pref(\"app.update.auto\",false);\nuser_pref(\"app.update.enabled\",false);"
   fi
 
-  echo -e "pref(\"browser.shell.checkDefaultBrowser\", false);${prefs_previous}\n pref(\"browser.startup.homepage\",\"about:blank\");\n pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
+  echo -e "${prefs_previous}\npref(\"browser.startup.homepage\",\"about:blank\");\nuser_pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
 
   cd "${bits_directory}"
   ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"

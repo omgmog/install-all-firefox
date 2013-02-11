@@ -363,7 +363,7 @@ get_associated_information(){
       release_type="nightly"
       future="true"
       autoupdate="true"
-      ftp_root="ftp://ftp.mozilla.org//pub/mozilla.org/firefox/nightly/latest-trunk/"
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-trunk/"
 
       if [[ $versions != 'status' ]]; then
         dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`

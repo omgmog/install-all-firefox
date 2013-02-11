@@ -29,7 +29,6 @@ done
 
 if [ ! "${local_script_md5}" == "${remote_script_md5}" ]
 then
-  cp /tmp/firefoxes/install-all-firefox.sh
   mv /tmp/install-all-firefox.sh /tmp/firefoxes/install-all-firefox.sh
   chmod +x /tmp/firefoxes/install-all-firefox.sh
 fi

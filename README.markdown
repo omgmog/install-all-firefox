@@ -111,7 +111,7 @@ $ ./firefoxes.sh "all" "en-GB" "no_prompt"
 If you want to install to a different directory, pass that as the last option. Include a trailing slash.
 
 ```bash
-$ ./firefoxes.sh "all" "en-GB" "no_prompt" "/Users/myhomedir/Applications"
+$ ./firefoxes.sh "all" "en-GB" "no_prompt" "/Users/myhomedir/Applications/"
 ```
 
 ---

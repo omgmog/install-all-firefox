@@ -28,8 +28,6 @@ binary_folder="/Contents/MacOS/"
 
 locale=$2
 
-appFolder=$4
-
 if [[ "${3}" == "no_prompt" ]]; then
   no_prompt="true"
 else
@@ -41,7 +39,6 @@ if [[ "${4}" == "" ]]; then
 else
   install_directory=$4
 fi
-
 
 get_associated_information(){
   # Reset everything

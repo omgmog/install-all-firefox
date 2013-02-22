@@ -37,5 +37,5 @@ if [  "$1" == "" ]
 then
   /tmp/firefoxes/install-all-firefox.sh "status"
 else
-  /tmp/firefoxes/install-all-firefox.sh "$1" "$2" "$3"
+  /tmp/firefoxes/install-all-firefox.sh "$1" "$2" "$3" "$4"
 fi

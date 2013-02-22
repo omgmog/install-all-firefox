@@ -6,7 +6,6 @@ default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
 bits_directory="${tmp_directory}bits/"
-install_directory="/Applications/Firefoxes/"
 
 locale_default="en-GB"
 
@@ -29,11 +28,20 @@ binary_folder="/Contents/MacOS/"
 
 locale=$2
 
+appFolder=$4
+
 if [[ "${3}" == "no_prompt" ]]; then
   no_prompt="true"
 else
   no_prompt="false"
 fi
+
+if [[ "${4}" == "" ]]; then
+	install_directory="/Applications/Firefoxes/"
+else
+  install_directory=$4
+fi
+
 
 get_associated_information(){
   # Reset everything

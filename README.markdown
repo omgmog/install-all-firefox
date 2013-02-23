@@ -122,7 +122,7 @@ From a terminal prompt, enter the following:
 ```bash
 curl -L -O https://github.com/omgmog/install-all-firefox/raw/master/firefoxes.sh
 chmod +x firefoxes.sh
-./firefoxes.sh [version] [locale] [no_prompt]
+./firefoxes.sh [version] [locale] [no_prompt] [install_directory]
 ```
 
 When the Mozilla license pops up, press `Q` and then `Y` to continue.
@@ -134,14 +134,14 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 23/02/2013
+- Merged @plumlee's addition of specifying install directory
+
 ### Update: 07/02/2013
 - Updated Firefox 18.0 > 18.0.2
 
 ### Update: 08/01/2013
 - Added Firefox 18.0
-
-### Update: 05/12/2012
-- Updated Firefox 17 > 17.0.1
 
 ---
 ## TODO

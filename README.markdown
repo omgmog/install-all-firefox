@@ -108,6 +108,12 @@ $ ./firefoxes.sh "all" "en-GB" "no_prompt"
 ```
 (You will still need to manually accept the EULA if installing Firefox 2.0.0.20)
 
+If you want to install to a different directory, pass that as the last option. Include a trailing slash.
+
+```bash
+$ ./firefoxes.sh "all" "en-GB" "no_prompt" "/Users/myhomedir/Applications/"
+```
+
 ---
 ## INSTALLATION
 

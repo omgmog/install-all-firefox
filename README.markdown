@@ -27,7 +27,7 @@ Currently it installs:
 - Firefox 16.0.1
 - Firefox 17.0.1
 - Firefox 18.0.2
-- Firefox 19.0
+- Firefox 19.0.2
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -135,14 +135,14 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 ## UPDATES 
 Previous updates removed from the README. Look at the file history to see them.
 
+### Update: 14/03/2013
+- Updated Firefox 19.0 > 19.0.2
+
 ### Update: 25/02/2013
 - Added Firefox 19.0
 
 ### Update: 23/02/2013
 - Merged @plumlee's addition of specifying install directory
-
-### Update: 07/02/2013
-- Updated Firefox 18.0 > 18.0.2
 
 ---
 ## TODO

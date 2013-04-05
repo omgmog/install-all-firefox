@@ -28,6 +28,7 @@ Currently it installs:
 - Firefox 17.0.1
 - Firefox 18.0.2
 - Firefox 19.0.2
+- Firefox 20.0
 - Firefox Beta
 - Firefox Aurora
 - Firefox Nightly
@@ -133,7 +134,10 @@ It'll take a little while to grab the `.dmg` files, but it should only need to d
 
 ---
 ## UPDATES 
-Previous updates removed from the README. Look at the file history to see them.
+Previous updates removed from the README. Look at the file history or the commit history to see them.
+
+### Update: 14/03/2013
+- Added Firefox 20.0
 
 ### Update: 14/03/2013
 - Updated Firefox 19.0 > 19.0.2
@@ -141,16 +145,12 @@ Previous updates removed from the README. Look at the file history to see them.
 ### Update: 25/02/2013
 - Added Firefox 19.0
 
-### Update: 23/02/2013
-- Merged @plumlee's addition of specifying install directory
-
 ---
 ## TODO
 - Add ability to specify additional versions
 - Create launcher to preview a site in all install firefoxes (WIP!)
 
 ## CREDITS
-- Portions of the bash script are based on ievms by xdissent - https://github.com/xdissent/ievms
 - [setfileicon](http://maxao.free.fr/telechargements/setfileicon.m) is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz
 - [Firebug](http://getfirebug.com/)
 - Thanks to the community for using/reporting issues/making suggestions for features!

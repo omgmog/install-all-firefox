@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="20.0"
-default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1 18.0.2 19.0.2"
+default_versions_current="21.0"
+default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1 18.0.2 19.0.2 20.0"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -214,7 +214,7 @@ get_associated_information(){
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
-      ;;        
+      ;;
     12.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/12.0/"
       dmg_file="Firefox 12.0.dmg"
@@ -228,7 +228,7 @@ get_associated_information(){
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
-      ;;    
+      ;;
     13.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
       dmg_file="Firefox 13.0.1.dmg"
@@ -242,7 +242,7 @@ get_associated_information(){
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
-      ;;   
+      ;;
     14.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/"
       dmg_file="Firefox 14.0.1.dmg"
@@ -256,7 +256,7 @@ get_associated_information(){
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
-      ;;  
+      ;;
     15.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0.1/"
       dmg_file="Firefox 15.0.1.dmg"
@@ -270,7 +270,7 @@ get_associated_information(){
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
-      ;;  
+      ;;
     16.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/16.0.1/"
       dmg_file="Firefox 16.0.1.dmg"
@@ -335,6 +335,20 @@ get_associated_information(){
       binary="firefox"
       short_name="fx20"
       nice_name="Firefox 20.0"
+
+      firebug_version="1.11.3"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
+      ;;
+    21.0)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/21.0/"
+      dmg_file="Firefox 21.0.dmg"
+      sum_file="MD5SUMS"
+      sum_file_type="md5"
+      binary="firefox"
+      short_name="fx21"
+      nice_name="Firefox 21.0"
 
       firebug_version="1.11.3"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`

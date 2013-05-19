@@ -294,7 +294,7 @@ get_associated_information(){
       short_name="fx17"
       nice_name="Firefox 17.0"
 
-      firebug_version="1.11.1"
+      firebug_version="1.11.3"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -308,7 +308,7 @@ get_associated_information(){
       short_name="fx18"
       nice_name="Firefox 18.0"
 
-      firebug_version="1.11.1"
+      firebug_version="1.11.3"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -322,7 +322,7 @@ get_associated_information(){
       short_name="fx19"
       nice_name="Firefox 19.0"
 
-      firebug_version="1.11.1"
+      firebug_version="1.11.3"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -336,7 +336,7 @@ get_associated_information(){
       short_name="fx20"
       nice_name="Firefox 20.0"
 
-      firebug_version="1.11.1"
+      firebug_version="1.11.3"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"

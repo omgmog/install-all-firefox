@@ -38,7 +38,7 @@ Optionally, the script can install Firebug for each version of Firefox too.
 
 ### What does it do?
 
-1. The `firefoxes.sh` script downloads the latest version of `install-all-firefox.sh` before 
+1. The `firefoxes.sh` script downloads the latest version of `install-all-firefox.sh` before
 running to ensure that the script is up to date.
 
 2. The script downloads all of the associated resources (icons) and utilities (seticon) to the `/tmp/firefoxes` directory.
@@ -129,27 +129,10 @@ chmod +x firefoxes.sh
 
 When the Mozilla license pops up, press `Q` and then `Y` to continue.
 
-It'll take a little while to grab the `.dmg` files, but it should only need to do this once. 
+It'll take a little while to grab the `.dmg` files, but it should only need to do this once.
 (Until you reboot, and the contents of `/tmp` are deleted.)
 
 ---
-## UPDATES 
-Previous updates removed from the README. Look at the file history or the commit history to see them.
-
-### Update: 14/03/2013
-- Added Firefox 20.0
-
-### Update: 14/03/2013
-- Updated Firefox 19.0 > 19.0.2
-
-### Update: 25/02/2013
-- Added Firefox 19.0
-
----
-## TODO
-- Add ability to specify additional versions
-- Create launcher to preview a site in all install firefoxes (WIP!)
-
 ## CREDITS
 - [setfileicon](http://maxao.free.fr/telechargements/setfileicon.m) is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz
 - [Firebug](http://getfirebug.com/)

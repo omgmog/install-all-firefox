@@ -580,6 +580,7 @@ prompt_firebug(){
       case "$user_choice" in
         "y")
           choice_made="true"
+          log "Downloading Firebug ${firebug_version}"
           download_firebug
           install_firebug
           ;;
@@ -589,6 +590,7 @@ prompt_firebug(){
       esac
     done
   else
+    log "Downloading Firebug ${firebug_version}"
     download_firebug
     install_firebug
   fi

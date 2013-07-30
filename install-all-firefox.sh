@@ -3,6 +3,11 @@ default_versions_future="beta aurora nightly ux"
 default_versions_current="22.0"
 default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1 18.0.2 19.0.2 20.0 21.0"
 
+versions_usage_point_one="10.0.2 11.0 13.0 14.0"
+versions_usage_point_two="12.0 15.0.1 17.0.1 18.0.2 19.0.2"
+versions_usage_point_three="3.6.28"
+versions_usage_point_four_up="16.0.1 20.0 21.0 22.0"
+
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
 bits_directory="${tmp_directory}bits/"
@@ -757,6 +762,10 @@ versions=${versions/all_future/${default_versions_future}}
 versions=${versions/all_past/${default_versions_past}}
 versions=${versions/all/${default_versions}}
 versions=${versions/current/${default_versions_current}}
+versions=${versions/min_point_one/${versions_usage_point_one} ${versions_usage_point_two} ${versions_usage_point_three} ${versions_usage_point_four_up}}
+versions=${versions/min_point_two/${versions_usage_point_two} ${versions_usage_point_three} ${versions_usage_point_four_up}}
+versions=${versions/min_point_three/${versions_usage_point_three} ${versions_usage_point_four_up}}
+versions=${versions/min_point_four/${versions_usage_point_four_up}}
 
 if [[ $versions == 'status' ]]; then
   printf "The versions in \033[32mgreen\033[00m are installed:\n"

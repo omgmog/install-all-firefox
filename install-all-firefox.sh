@@ -48,6 +48,7 @@ get_associated_information(){
   future=""
 
   case $1 in
+    2.0)
     2.0.0.20)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
       dmg_file="Firefox 2.0.0.20.dmg"
@@ -61,6 +62,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/1.3/"
       firebug_file="firebug-1.3.1.xpi"
       ;;
+    3.0)
     3.0.19)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
       dmg_file="Firefox 3.0.19.dmg"
@@ -75,6 +77,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    3.5)
     3.5.19)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.19/"
       dmg_file="Firefox 3.5.19.dmg"
@@ -89,6 +92,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    3.6)
     3.6.28)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.28/"
       dmg_file="Firefox 3.6.28.dmg"
@@ -103,6 +107,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    4.0)
     4.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
       dmg_file="Firefox 4.0.1.dmg"
@@ -117,6 +122,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    5.0)
     5.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
       dmg_file="Firefox 5.0.1.dmg"
@@ -131,6 +137,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    6.0)
     6.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
       dmg_file="Firefox 6.0.2.dmg"
@@ -145,6 +152,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    7.0)
     7.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
       dmg_file="Firefox 7.0.1.dmg"
@@ -159,6 +167,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    8.0)
     8.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
       dmg_file="Firefox 8.0.1.dmg"
@@ -173,6 +182,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    9.0)
     9.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
       dmg_file="Firefox 9.0.1.dmg"
@@ -187,6 +197,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    10.0)
     10.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
       dmg_file="Firefox 10.0.2.dmg"
@@ -229,6 +240,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    13.0)
     13.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
       dmg_file="Firefox 13.0.1.dmg"
@@ -243,6 +255,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    14.0)
     14.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/"
       dmg_file="Firefox 14.0.1.dmg"
@@ -257,6 +270,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    15.0)
     15.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0.1/"
       dmg_file="Firefox 15.0.1.dmg"
@@ -271,6 +285,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    16.0)
     16.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/16.0.1/"
       dmg_file="Firefox 16.0.1.dmg"
@@ -285,6 +300,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    17.0)
     17.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/17.0.1/"
       dmg_file="Firefox 17.0.1.dmg"
@@ -299,6 +315,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    18.0)
     18.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/18.0.2/"
       dmg_file="Firefox 18.0.2.dmg"
@@ -313,6 +330,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    19.0)
     19.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/19.0.2/"
       dmg_file="Firefox 19.0.2.dmg"

@@ -563,6 +563,7 @@ download_dmg(){
 download_firebug(){
   cd "${tmp_directory}"
   if [[ ! -f "${firebug_file}" ]]; then
+    log "Downloading Firebug ${firebug_version}"
     if ! curl -C - -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
     then
       error "✖ Failed to download ${firebug_file}"
@@ -580,7 +581,6 @@ prompt_firebug(){
       case "$user_choice" in
         "y")
           choice_made="true"
-          log "Downloading Firebug ${firebug_version}"
           download_firebug
           install_firebug
           ;;
@@ -590,7 +590,6 @@ prompt_firebug(){
       esac
     done
   else
-    log "Downloading Firebug ${firebug_version}"
     download_firebug
     install_firebug
   fi

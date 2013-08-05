@@ -45,7 +45,6 @@ get_associated_information(){
   # Reset everything
   vol_name=$vol_name_default
   release_name=$release_name_default
-  autoupdate="false"
   future=""
 
   case $1 in
@@ -374,8 +373,6 @@ get_associated_information(){
       # This seems a bit flaky
 
       release_type="beta"
-      # future="true" # Even though it's technically future, the file structure is the same as non-future
-      autoupdate="true"
       ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
 
       if [[ $versions != 'status' ]]; then
@@ -401,7 +398,6 @@ get_associated_information(){
     aurora)
       release_type="aurora"
       future="true"
-      autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
 
       if [[ $versions != 'status' ]]; then
@@ -424,7 +420,6 @@ get_associated_information(){
     nightly)
       release_type="nightly"
       future="true"
-      autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-trunk/"
 
       if [[ $versions != 'status' ]]; then
@@ -447,7 +442,6 @@ get_associated_information(){
     ux)
       release_type="ux"
       future="true"
-      autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
 
       if [[ $versions != 'status' ]]; then
@@ -730,14 +724,30 @@ modify_launcher(){
   sed -e "s/${binary}/${binary}-af/g" "${plist_old}" > "${plist_new}"
   mv "${plist_new}" "${plist_old}"
 
-  echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
+cat > "${install_directory}${nice_name}.app${binary_folder}${binary}-af" <<EOL
+#!/bin/sh
+"${install_directory}${nice_name}.app${binary_folder}${binary}" -no-remote -P ${short_name} &
+EOL
+
   chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
-  if [[ $autoupdate != "true" ]]; then
-    prefs_previous="\nuser_pref(\"app.update.auto\",false);\nuser_pref(\"app.update.enabled\",false);"
-  fi
+  # tell all.js where to find config
+cat > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/all.js" <<EOL
+pref("general.config.obscure_value", 0);
+pref("general.config.filename","mozilla.cfg");
+EOL
 
-  echo -e "${prefs_previous}\npref(\"browser.startup.homepage\",\"about:blank\");\nuser_pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
+  # make config
+cat > "${install_directory}${nice_name}.app${binary_folder}mozilla.cfg" <<EOL
+lockPref("browser.startup.homepage", "about:blank");
+lockPref("browser.shell.checkDefaultBrowser", false);
+lockPref("browser.startup.homepage_override.mstone", "ignore");
+lockPref("app.update.enabled", false);
+lockPref("browser.rights.3.shown", false);
+lockPref("toolkit.telemetry.prompted", 2);
+lockPref("toolkit.telemetry.rejected", true);
+EOL
+
 
   cd "${bits_directory}"
   ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"

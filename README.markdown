@@ -111,8 +111,6 @@ chmod +x firefoxes.sh
 ./firefoxes.sh [version] [locale] [no_prompt] [install_directory]
 ```
 
-When the Mozilla license pops up, press `Q` and then `Y` to continue.
-
 It'll take a little while to grab the `.dmg` files, but it should only need to do this once.
 (Until you reboot, and the contents of `/tmp` are deleted.)
 

@@ -791,12 +791,12 @@ get_locale() {
   if [[ -z $locale ]]; then
     if [[ $all_locales == *" $lang "* ]]; then
       locale=$lang
-      echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+      echo "We're using \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
     else
       lang=`echo ${lang} | sed 's/-.*//'`
       if [[ $all_locales == *" $lang "* ]]; then
         locale=$lang
-        echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+        echo "We're using \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
       else
         locale=$locale_default
         echo "We couldn't guess your locale so we're falling back on ${locale_default}."

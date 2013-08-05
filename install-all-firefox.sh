@@ -5,6 +5,7 @@ default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
+bits_host="https://raw.github.com/omgmog/install-all-firefox/master/bits/"
 bits_directory="${tmp_directory}bits/"
 
 locale_default="en-GB"
@@ -489,7 +490,7 @@ get_bits(){
   current_dir=`pwd`
   cd "$bits_directory"
   if [[ ! -f "setfileicon" ]]; then
-    curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+    curl -C - -L --progress-bar "${bits_host}setfileicon" -o "setfileicon"
     chmod +x setfileicon
   fi
   if [[ ! -f "${short_name}.png" ]]; then
@@ -500,7 +501,7 @@ get_bits(){
     if [[ -f $icon_file ]]; then
       cp -r $icon_file "${short_name}.png"
     else
-      curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+      curl -C - -L --progress-bar "${bits_host}${short_name}.png" -o "${short_name}.png"
     fi
   fi
   if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]; then
@@ -508,7 +509,7 @@ get_bits(){
   fi
   if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]; then
     if [[ ! -f "fxfirefox-folder.png" ]]; then
-      curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+      curl -C - -L --progress-bar "${bits_host}fxfirefox-folder.png" -o "fxfirefox-folder.png"
     fi
     if [[ ! -f "fxfirefox-folder.icns" ]]; then
       sips -s format icns "fxfirefox-folder.png" --out "fxfirefox-folder.icns" &> /dev/null

@@ -69,9 +69,15 @@ $ ./firefoxes.sh "all_past"
 // 'current' installs the current version of Firefox only
 $ ./firefoxes.sh "current"
 
+// 'min_point_one', 'min_point_two', 'min_point_three', 'min_point_four' install versions with at least 0.1%, 0.2%, 0.3% or 0.4% global usage share, respectively
+$ ./firefoxes.sh "min_point_one"
+$ ./firefoxes.sh "min_point_two"
+
 // Specify the versions you would like to install, from the list at the top of this README, separated by spaces
 $ ./firefoxes.sh "2.0.0.20 3.0.19"
 ```
+
+Usage share options are based on data from [StatCounter's global statistics](http://gs.statcounter.com) for August 2013.
 
 You can specify the `locale` to use, from the list of available `locale` options. By default `en-GB` is used.
 

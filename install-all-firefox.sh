@@ -1,7 +1,7 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="22.0"
-default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1 18.0.2 19.0.2 20.0 21.0"
+default_versions_current="23.0"
+default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1 18.0.2 19.0.2 20.0 21.0 22.0"
 
 versions_usage_point_one="10.0.2 11.0 13.0 14.0"
 versions_usage_point_two="12.0 15.0.1 17.0.1 18.0.2 19.0.2"
@@ -10,6 +10,7 @@ versions_usage_point_four_up="16.0.1 20.0 21.0 22.0"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
+bits_host="https://raw.github.com/omgmog/install-all-firefox/master/bits/"
 bits_directory="${tmp_directory}bits/"
 
 locale_default="en-GB"
@@ -49,11 +50,10 @@ get_associated_information(){
   # Reset everything
   vol_name=$vol_name_default
   release_name=$release_name_default
-  autoupdate="false"
   future=""
 
   case $1 in
-    2.0.0.20)
+    2.0 | 2.0.0.20)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
       dmg_file="Firefox 2.0.0.20.dmg"
       sum_file="MD5SUMS"
@@ -66,7 +66,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/1.3/"
       firebug_file="firebug-1.3.1.xpi"
       ;;
-    3.0.19)
+    3.0 | 3.0.19)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
       dmg_file="Firefox 3.0.19.dmg"
       sum_file="MD5SUMS"
@@ -80,7 +80,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    3.5.19)
+    3.5 | 3.5.19)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.5.19/"
       dmg_file="Firefox 3.5.19.dmg"
       sum_file="MD5SUMS"
@@ -94,7 +94,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    3.6.28)
+    3.6 | 3.6.28)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.6.28/"
       dmg_file="Firefox 3.6.28.dmg"
       sum_file="MD5SUMS"
@@ -108,7 +108,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    4.0.1)
+    4.0 | 4.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
       dmg_file="Firefox 4.0.1.dmg"
       sum_file="MD5SUMS"
@@ -122,7 +122,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    5.0.1)
+    5.0 | 5.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
       dmg_file="Firefox 5.0.1.dmg"
       sum_file="MD5SUMS"
@@ -136,7 +136,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    6.0.2)
+    6.0 | 6.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
       dmg_file="Firefox 6.0.2.dmg"
       sum_file="MD5SUMS"
@@ -150,7 +150,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    7.0.1)
+    7.0 | 7.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
       dmg_file="Firefox 7.0.1.dmg"
       sum_file="MD5SUMS"
@@ -164,7 +164,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    8.0.1)
+    8.0 | 8.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
       dmg_file="Firefox 8.0.1.dmg"
       sum_file="MD5SUMS"
@@ -178,7 +178,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    9.0.1)
+    9.0 | 9.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
       dmg_file="Firefox 9.0.1.dmg"
       sum_file="MD5SUMS"
@@ -192,7 +192,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    10.0.2)
+    10.0 | 10.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
       dmg_file="Firefox 10.0.2.dmg"
       sum_file="MD5SUMS"
@@ -234,7 +234,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    13.0.1)
+    13.0 | 13.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
       dmg_file="Firefox 13.0.1.dmg"
       sum_file="MD5SUMS"
@@ -248,7 +248,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    14.0.1)
+    14.0 | 14.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/"
       dmg_file="Firefox 14.0.1.dmg"
       sum_file="MD5SUMS"
@@ -262,7 +262,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    15.0.1)
+    15.0 | 15.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0.1/"
       dmg_file="Firefox 15.0.1.dmg"
       sum_file="MD5SUMS"
@@ -276,7 +276,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    16.0.1)
+    16.0 | 16.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/16.0.1/"
       dmg_file="Firefox 16.0.1.dmg"
       sum_file="MD5SUMS"
@@ -290,7 +290,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    17.0.1)
+    17.0 | 17.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/17.0.1/"
       dmg_file="Firefox 17.0.1.dmg"
       sum_file="MD5SUMS"
@@ -304,7 +304,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    18.0.2)
+    18.0 | 18.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/18.0.2/"
       dmg_file="Firefox 18.0.2.dmg"
       sum_file="MD5SUMS"
@@ -318,7 +318,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    19.0.2)
+    19.0 | 19.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/19.0.2/"
       dmg_file="Firefox 19.0.2.dmg"
       sum_file="MD5SUMS"
@@ -374,12 +374,24 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
+    23.0)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/23.0/"
+      dmg_file="Firefox 23.0.dmg"
+      sum_file="MD5SUMS"
+      sum_file_type="md5"
+      binary="firefox"
+      short_name="fx23"
+      nice_name="Firefox 23.0"
+
+      firebug_version="1.12.0"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
+      ;;
     beta)
       # This seems a bit flaky
 
       release_type="beta"
-      # future="true" # Even though it's technically future, the file structure is the same as non-future
-      autoupdate="true"
       ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
 
       if [[ $versions != 'status' ]]; then
@@ -397,7 +409,7 @@ get_associated_information(){
       short_name="fxb"
       nice_name="Firefox Beta"
 
-      firebug_version="1.10.6"
+      firebug_version="1.12.0"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -405,7 +417,6 @@ get_associated_information(){
     aurora)
       release_type="aurora"
       future="true"
-      autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
 
       if [[ $versions != 'status' ]]; then
@@ -420,7 +431,7 @@ get_associated_information(){
       vol_name="Aurora"
       release_name="FirefoxAurora"
 
-      firebug_version="1.10.6"
+      firebug_version="1.12.0"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -428,7 +439,6 @@ get_associated_information(){
     nightly)
       release_type="nightly"
       future="true"
-      autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-trunk/"
 
       if [[ $versions != 'status' ]]; then
@@ -443,7 +453,7 @@ get_associated_information(){
       vol_name="Nightly"
       release_name="FirefoxNightly"
 
-      firebug_version="1.10.6"
+      firebug_version="1.12.0"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -451,7 +461,6 @@ get_associated_information(){
     ux)
       release_type="ux"
       future="true"
-      autoupdate="true"
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
 
       if [[ $versions != 'status' ]]; then
@@ -466,7 +475,7 @@ get_associated_information(){
       vol_name="UX"
       release_name="FirefoxUX"
 
-      firebug_version="1.10.6"
+      firebug_version="1.12.0"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
@@ -494,7 +503,7 @@ get_bits(){
   current_dir=`pwd`
   cd "$bits_directory"
   if [[ ! -f "setfileicon" ]]; then
-    curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/setfileicon" -o "setfileicon"
+    curl -C - -L --progress-bar "${bits_host}setfileicon" -o "setfileicon"
     chmod +x setfileicon
   fi
   if [[ ! -f "${short_name}.png" ]]; then
@@ -505,7 +514,7 @@ get_bits(){
     if [[ -f $icon_file ]]; then
       cp -r $icon_file "${short_name}.png"
     else
-      curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/${short_name}.png" -o "${short_name}.png"
+      curl -C - -L --progress-bar "${bits_host}${short_name}.png" -o "${short_name}.png"
     fi
   fi
   if [[ ! -f "${short_name}.icns" || $new_icon == "true" ]]; then
@@ -513,7 +522,7 @@ get_bits(){
   fi
   if [[ ! -f "${install_directory}{$nice_name}.app/Icon" ]]; then
     if [[ ! -f "fxfirefox-folder.png" ]]; then
-      curl -C - -L --progress-bar "https://raw.github.com/omgmog/install-all-firefox/master/bits/fxfirefox-folder.png" -o "fxfirefox-folder.png"
+      curl -C - -L --progress-bar "${bits_host}fxfirefox-folder.png" -o "fxfirefox-folder.png"
     fi
     if [[ ! -f "fxfirefox-folder.icns" ]]; then
       sips -s format icns "fxfirefox-folder.png" --out "fxfirefox-folder.icns" &> /dev/null
@@ -568,6 +577,7 @@ download_dmg(){
 download_firebug(){
   cd "${tmp_directory}"
   if [[ ! -f "${firebug_file}" ]]; then
+    log "Downloading Firebug ${firebug_version}"
     if ! curl -C - -L --progress-bar "${firebug_root}${firebug_file}" -o "${firebug_file}"
     then
       error "✖ Failed to download ${firebug_file}"
@@ -733,14 +743,30 @@ modify_launcher(){
   sed -e "s/${binary}/${binary}-af/g" "${plist_old}" > "${plist_new}"
   mv "${plist_new}" "${plist_old}"
 
-  echo -e "#!/bin/sh\n\"${install_directory}${nice_name}.app${binary_folder}${binary}\" -no-remote -P \"${short_name}\" &" > "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
+cat > "${install_directory}${nice_name}.app${binary_folder}${binary}-af" <<EOL
+#!/bin/sh
+"${install_directory}${nice_name}.app${binary_folder}${binary}" -no-remote -P ${short_name} &
+EOL
+
   chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
-  if [[ $autoupdate != "true" ]]; then
-    prefs_previous="\nuser_pref(\"app.update.auto\",false);\nuser_pref(\"app.update.enabled\",false);"
-  fi
+  # tell all.js where to find config
+cat > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/all.js" <<EOL
+pref("general.config.obscure_value", 0);
+pref("general.config.filename","mozilla.cfg");
+EOL
 
-  echo -e "${prefs_previous}\npref(\"browser.startup.homepage\",\"about:blank\");\nuser_pref(\"browser.shell.checkDefaultBrowser\", false)" > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/macprefs.js"
+  # make config
+cat > "${install_directory}${nice_name}.app${binary_folder}mozilla.cfg" <<EOL
+lockPref("browser.startup.homepage", "about:blank");
+lockPref("browser.shell.checkDefaultBrowser", false);
+lockPref("browser.startup.homepage_override.mstone", "ignore");
+lockPref("app.update.enabled", false);
+lockPref("browser.rights.3.shown", false);
+lockPref("toolkit.telemetry.prompted", 2);
+lockPref("toolkit.telemetry.rejected", true);
+EOL
+
 
   cd "${bits_directory}"
   ./setfileicon "${short_name}.icns" "${install_directory}/${nice_name}.app/"
@@ -788,12 +814,12 @@ get_locale() {
   if [[ -z $locale ]]; then
     if [[ $all_locales == *" $lang "* ]]; then
       locale=$lang
-      echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+      echo "We're using \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
     else
       lang=`echo ${lang} | sed 's/-.*//'`
       if [[ $all_locales == *" $lang "* ]]; then
         locale=$lang
-        echo "We use \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+        echo "We're using \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
       else
         locale=$locale_default
         echo "We couldn't guess your locale so we're falling back on ${locale_default}."

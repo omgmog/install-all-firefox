@@ -389,13 +389,13 @@ get_associated_information(){
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
     24 | 24.0)
-      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/23.0/"
-      dmg_file="Firefox 23.0.dmg"
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/24.0/"
+      dmg_file="Firefox 24.0.dmg"
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox"
-      short_name="fx23"
-      nice_name="Firefox 23.0"
+      short_name="fx24"
+      nice_name="Firefox 24.0"
 
       firebug_version="1.12.0"
       firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`

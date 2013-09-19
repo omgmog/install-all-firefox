@@ -74,7 +74,8 @@ $ ./firefoxes.sh "min_point_one"
 $ ./firefoxes.sh "min_point_two"
 
 // Specify the versions you would like to install, from the list at the top of this README, separated by spaces
-$ ./firefoxes.sh "2.0.0.20 3.0.19"
+// New: You can now use shorthand for versions, such as: 2, 3, 3.5, 10, 24, etc.
+$ ./firefoxes.sh "2 3"
 ```
 
 Usage share options are based on data from [StatCounter's global statistics](http://gs.statcounter.com) for August 2013.

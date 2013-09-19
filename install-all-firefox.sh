@@ -1,12 +1,12 @@
 #!/bin/bash
 default_versions_future="beta aurora nightly ux"
-default_versions_current="23.0"
-default_versions_past="2.0.0.20 3.0.19 3.5.19 3.6.28 4.0.1 5.0.1 6.0.2 7.0.1 8.0.1 9.0.1 10.0.2 11.0 12.0 13.0.1 14.0.1 15.0.1 16.0.1 17.0.1 18.0.2 19.0.2 20.0 21.0 22.0"
+default_versions_current="24"
+default_versions_past="2 3 3.5 3.6 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23"
 
-versions_usage_point_one="10.0.2 11.0 13.0 14.0 18.0.2"
-versions_usage_point_two="12.0 15.0.1 17.0.1 19.0.2"
-versions_usage_point_three="3.6.28 20.0"
-versions_usage_point_four_up="16.0.1 21.0 22.0 23.0"
+versions_usage_point_one="10 11 13 14 18"
+versions_usage_point_two="12 15 17 19"
+versions_usage_point_three="3.6 20"
+versions_usage_point_four_up="16 21 22 23"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
@@ -53,7 +53,7 @@ get_associated_information(){
   future=""
 
   case $1 in
-    2.0 | 2.0.0.20)
+    2 | 2.0 | 2.0.0.20)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/2.0.0.20/"
       dmg_file="Firefox 2.0.0.20.dmg"
       sum_file="MD5SUMS"
@@ -66,7 +66,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/1.3/"
       firebug_file="firebug-1.3.1.xpi"
       ;;
-    3.0 | 3.0.19)
+    3 | 3.0 | 3.0.19)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/3.0.19-real-real/"
       dmg_file="Firefox 3.0.19.dmg"
       sum_file="MD5SUMS"
@@ -108,7 +108,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    4.0 | 4.0.1)
+    4 | 4.0 | 4.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/4.0.1/"
       dmg_file="Firefox 4.0.1.dmg"
       sum_file="MD5SUMS"
@@ -122,7 +122,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    5.0 | 5.0.1)
+    5 | 5.0 | 5.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/5.0.1/"
       dmg_file="Firefox 5.0.1.dmg"
       sum_file="MD5SUMS"
@@ -136,7 +136,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    6.0 | 6.0.2)
+    6 | 6.0 | 6.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/6.0.2/"
       dmg_file="Firefox 6.0.2.dmg"
       sum_file="MD5SUMS"
@@ -150,7 +150,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    7.0 | 7.0.1)
+    7 | 7.0 | 7.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/7.0.1/"
       dmg_file="Firefox 7.0.1.dmg"
       sum_file="MD5SUMS"
@@ -164,7 +164,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    8.0 | 8.0.1)
+    8 | 8.0 | 8.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/8.0.1/"
       dmg_file="Firefox 8.0.1.dmg"
       sum_file="MD5SUMS"
@@ -178,7 +178,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    9.0 | 9.0.1)
+    9 | 9.0 | 9.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/9.0.1/"
       dmg_file="Firefox 9.0.1.dmg"
       sum_file="MD5SUMS"
@@ -192,7 +192,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    10.0 | 10.0.2)
+    10 | 10.0 | 10.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/10.0.2/"
       dmg_file="Firefox 10.0.2.dmg"
       sum_file="MD5SUMS"
@@ -206,7 +206,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    11.0)
+    11 | 11.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/11.0/"
       dmg_file="Firefox 11.0.dmg"
       sum_file="MD5SUMS"
@@ -220,7 +220,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    12.0)
+    12 | 12.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/12.0/"
       dmg_file="Firefox 12.0.dmg"
       sum_file="MD5SUMS"
@@ -234,7 +234,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    13.0 | 13.0.1)
+    13 | 13.0 | 13.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/13.0.1/"
       dmg_file="Firefox 13.0.1.dmg"
       sum_file="MD5SUMS"
@@ -248,7 +248,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    14.0 | 14.0.1)
+    14 | 14.0 | 14.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/"
       dmg_file="Firefox 14.0.1.dmg"
       sum_file="MD5SUMS"
@@ -262,7 +262,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    15.0 | 15.0.1)
+    15 | 15.0 | 15.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/15.0.1/"
       dmg_file="Firefox 15.0.1.dmg"
       sum_file="MD5SUMS"
@@ -276,7 +276,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    16.0 | 16.0.1)
+    16 | 16.0 | 16.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/16.0.1/"
       dmg_file="Firefox 16.0.1.dmg"
       sum_file="MD5SUMS"
@@ -290,7 +290,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    17.0 | 17.0.1)
+    17 | 17.0 | 17.0.1)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/17.0.1/"
       dmg_file="Firefox 17.0.1.dmg"
       sum_file="MD5SUMS"
@@ -304,7 +304,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    18.0 | 18.0.2)
+    18 | 18.0 | 18.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/18.0.2/"
       dmg_file="Firefox 18.0.2.dmg"
       sum_file="MD5SUMS"
@@ -318,7 +318,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    19.0 | 19.0.2)
+    19 | 19.0 | 19.0.2)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/19.0.2/"
       dmg_file="Firefox 19.0.2.dmg"
       sum_file="MD5SUMS"
@@ -332,7 +332,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    20.0)
+    20 | 20.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/20.0/"
       dmg_file="Firefox 20.0.dmg"
       sum_file="MD5SUMS"
@@ -346,7 +346,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    21.0)
+    21 | 21.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/21.0/"
       dmg_file="Firefox 21.0.dmg"
       sum_file="MD5SUMS"
@@ -360,7 +360,7 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    22.0)
+    22 | 22.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/22.0/"
       dmg_file="Firefox 22.0.dmg"
       sum_file="MD5SUMS"
@@ -374,7 +374,21 @@ get_associated_information(){
       firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
-    23.0)
+    23 | 23.0 | 23.0.1)
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/23.0/"
+      dmg_file="Firefox 23.0.dmg"
+      sum_file="MD5SUMS"
+      sum_file_type="md5"
+      binary="firefox"
+      short_name="fx23"
+      nice_name="Firefox 23.0"
+
+      firebug_version="1.12.0"
+      firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+      firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+      firebug_file="firebug-${firebug_version}.xpi"
+      ;;
+    24 | 24.0)
       ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/23.0/"
       dmg_file="Firefox 23.0.dmg"
       sum_file="MD5SUMS"

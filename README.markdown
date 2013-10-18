@@ -66,8 +66,10 @@ $ ./firefoxes.sh "all_future"
 // 'all_past' installs all versions excluding Aurora, Beta, Nightly and Nightly UX
 $ ./firefoxes.sh "all_past"
 
-// 'current' installs the current version of Firefox only
+// 'current' installs the current version of Firefox only (other allowed keywords: 'newest', 'latest')
 $ ./firefoxes.sh "current"
+$ ./firefoxes.sh "newest"
+$ ./firefoxes.sh "latest"
 
 // 'min_point_one', 'min_point_two', 'min_point_three', 'min_point_four' install versions with at least 0.1%, 0.2%, 0.3% or 0.4% global usage share, respectively
 $ ./firefoxes.sh "min_point_one"

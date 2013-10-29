@@ -86,7 +86,7 @@ get_associated_information(){
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox-bin"
-      short_name="fx35"
+      short_name="fx3-5"
       nice_name="Firefox 3.5"
 
       firebug_version="1.5.4"
@@ -100,7 +100,7 @@ get_associated_information(){
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox-bin"
-      short_name="fx36"
+      short_name="fx3-6"
       nice_name="Firefox 3.6"
 
       firebug_version="1.7.3"

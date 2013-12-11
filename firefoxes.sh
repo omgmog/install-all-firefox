@@ -8,7 +8,7 @@ error(){
 if [ `uname -s` != "Darwin" ]
 then
   error "This script is designed to be run on OS X\nExiting...\n"
-  exit 0
+  exit 1
 fi
 
 local_script_md5=`md5 -q /tmp/firefoxes/install-all-firefox.sh`

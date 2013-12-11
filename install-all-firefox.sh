@@ -375,8 +375,8 @@ get_associated_information(){
       firebug_file="firebug-${firebug_version}.xpi"
       ;;
     23 | 23.0 | 23.0.1)
-      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/23.0/"
-      dmg_file="Firefox 23.0.dmg"
+      ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/23.0.1/"
+      dmg_file="Firefox 23.0.1.dmg"
       sum_file="MD5SUMS"
       sum_file_type="md5"
       binary="firefox"

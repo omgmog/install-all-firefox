@@ -13,7 +13,7 @@ tmp_directory="/tmp/firefoxes/"
 bits_host="https://raw.github.com/omgmog/install-all-firefox/master/bits/"
 bits_directory="${tmp_directory}bits/"
 
-locale_default="en-GB"
+locale_default="en-US"
 
 # Don't edit below this line (unless you're adding new version cases in get_associated_information)
 

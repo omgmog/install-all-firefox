@@ -32,7 +32,7 @@ release_name_default="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
 
-locale=$2
+specified_locale=$2
 
 if [[ "${3}" == "no_prompt" ]]; then
   no_prompt="true"
@@ -867,25 +867,28 @@ fi
 
 get_locale() {
   all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
-  lang=`echo ${LANG/_/-} | sed 's/\..*//'`
 
-  if [[ -z $locale ]]; then
-    if [[ $all_locales == *" $lang "* ]]; then
-      locale=$lang
-      echo "We're using \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
+  cleaned_system_locale=`echo ${LANG/_/-} | sed 's/\..*//'`
+  cleaned_specified_locale=`echo ${specified_locale/_/-} | sed 's/\..*//'`
+
+  if [ -n $specified_locale ]; then
+    if [[ $all_locales != *" $cleaned_specified_locale "* ]]; then
+        echo -e "\"${cleaned_specified_locale}\" was not found in our list of valid locales."
+        locale=$cleaned_system_locale
+
     else
-      lang=`echo ${lang} | sed 's/-.*//'`
-      if [[ $all_locales == *" $lang "* ]]; then
-        locale=$lang
-        echo "We're using \"${lang}\" as locale for installation (based on \$LANG = \"${LANG}\")."
-      else
-        locale=$locale_default
-        echo "We couldn't guess your locale so we're falling back on ${locale_default}."
-      fi
+      locale=$cleaned_specified_locale
     fi
-    echo -e "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale.\n"
+  else
+    locale=$cleaned_system_locale
   fi
+
+  echo "We're using ${locale} as your locale."
+
+  echo -e "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale.\n"
+  echo -e "The valid locales are: \n ${all_locales}"
 }
+
 clean_up() {
   log "Delete all files from temp directory (${tmp_directory})? [y/n]"
   read user_choice

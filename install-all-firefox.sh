@@ -695,7 +695,7 @@ prompt_firebug(){
 install_firebug(){
   if [[ -f "${install_directory}${nice_name}.app${binary_folder}${binary}" ]]; then
     is_legacy="false"
-    if [ "${short_name}" == "fx2" -o "${short_name}" == "fx3" -o "${short_name}" == "fx35" -o "${short_name}" == "fx36" ]; then
+    if [ "${short_name}" == "fx2" -o "${short_name}" == "fx3" -o "${short_name}" == "fx3-5" -o "${short_name}" == "fx3-6" ]; then
       is_legacy="true"
     fi
 

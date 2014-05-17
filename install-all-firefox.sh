@@ -44,6 +44,10 @@ if [[ "${4}" == "" ]]; then
     install_directory="/Applications/Firefoxes/"
 else
   install_directory=$4
+  install_directory_length=${#install_directory}-1
+  if [ "${install_directory:install_directory_length}" != "/" ]; then
+    install_directory="${install_directory}/"
+  fi
 fi
 
 get_associated_information(){

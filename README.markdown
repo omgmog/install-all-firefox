@@ -80,7 +80,7 @@ $ ./firefoxes.sh "min_point_two"
 $ ./firefoxes.sh "2 3"
 ```
 
-Usage share options are based on data from [StatCounter's global statistics](http://gs.statcounter.com) for August 2013.
+Usage share options are based on data from [StatCounter's global statistics](http://gs.statcounter.com) for April 2014.
 
 You can specify the `locale` to use, from the list of available `locale` options. By default `en-GB` is used.
 

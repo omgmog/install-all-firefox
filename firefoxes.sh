@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function main {
+main () {
     local remote_dir="https://raw.github.com/omgmog/install-all-firefox/master/"
     local temp_dir="/tmp/"
     local output_dir="${temp_dir}firefoxes/"

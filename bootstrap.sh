@@ -2,7 +2,7 @@
 
 readonly PROGNAME=$(basename $0)
 
-function main {
+main () {
     local remote_dir="https://raw.github.com/omgmog/install-all-firefox/master/"
     local script_name="firefoxes.sh"
     local temp_dir="/tmp/"

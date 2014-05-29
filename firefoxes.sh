@@ -1,41 +1,41 @@
 #!/bin/bash
-# Bootstrap to check for script updates before running ./install-all-firefox.sh
 
-error(){
-  printf "\n\033[31m$*\033[00m"
-  return 0
+function main {
+    local remote_dir="https://raw.github.com/omgmog/install-all-firefox/master/"
+    local temp_dir="/tmp/"
+    local output_dir="${temp_dir}firefoxes/"
+    local script_name="install-all-firefox.sh"
+    local remote_script="${remote_dir}${script_name}"
+    local local_script="${temp_dir}${script_name}"
+    local script_output="${output_dir}${script_name}"
+    local existing_script_md5=""
+    local remote_script_md5=""
+
+    if [[ "$(uname -s)" != "Darwin" ]]; then
+        echo -e "This script is designed to be used on OS X only.\nExiting..."
+        exit 1
+    fi
+
+    mkdir -p "${output_dir}"
+
+    if [[ -e "${script_output}" ]]; then
+        existing_script_md5="$(md5 -q "${script_output}")"
+    fi
+
+    if curl -L "${remote_script}" -o "${local_script}"; then
+        remote_script_md5="$(md5 -q "${local_script}")"
+    fi
+
+    if [[ "${existing_script_md5}" != "${remote_script_md5}" ]]; then
+        mv "${local_script}" "${script_output}"
+        chmod +x "${script_output}"
+    fi
+
+    if [[ "$@" == "" ]]; then
+        sh "${script_output}" "status"
+    else
+        sh "${script_output}" "$@"
+    fi
 }
-if [ `uname -s` != "Darwin" ]
-then
-  error "This script is designed to be run on OS X\nExiting...\n"
-  exit 1
-fi
 
-local_script_md5=`md5 -q /tmp/firefoxes/install-all-firefox.sh`
-remote_script_md5=''
-
-if [ ! -d "/tmp/firefoxes" ]
-then
-  mkdir "/tmp/firefoxes"
-fi
-while [ "${remote_script_md5}" == "" ]
-do
-  if curl -L "https://raw.github.com/omgmog/install-all-firefox/master/install-all-firefox.sh" -o "/tmp/install-all-firefox.sh"
-  then
-    chmod +x "/tmp/install-all-firefox.sh"
-    remote_script_md5=`md5 -q /tmp/install-all-firefox.sh`
-  fi
-done
-
-if [ ! "${local_script_md5}" == "${remote_script_md5}" ]
-then
-  mv /tmp/install-all-firefox.sh /tmp/firefoxes/install-all-firefox.sh
-  chmod +x /tmp/firefoxes/install-all-firefox.sh
-fi
-
-if [  "$1" == "" ]
-then
-  /tmp/firefoxes/install-all-firefox.sh "status"
-else
-  /tmp/firefoxes/install-all-firefox.sh "$1" "$2" "$3" "$4"
-fi
+main

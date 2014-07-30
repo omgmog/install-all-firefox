@@ -12,7 +12,8 @@ main () {
     local remote_script_md5=""
 
     if [[ "$(uname -s)" != "Darwin" ]]; then
-        echo -e "This script is designed to be used on OS X only.\nExiting..."
+        echo "This script is designed to be used on OS X only."
+        echo "Exiting..."
         exit 1
     fi
 

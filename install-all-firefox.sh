@@ -933,7 +933,7 @@ get_locale() {
 
   if [ -n $specified_locale ]; then
     if [[ $all_locales != *" $cleaned_specified_locale "* ]]; then
-        echo -e "\"${cleaned_specified_locale}\" was not found in our list of valid locales."
+        echo "\"${cleaned_specified_locale}\" was not found in our list of valid locales."
         locale=$cleaned_system_locale
 
     else
@@ -945,8 +945,10 @@ get_locale() {
 
   echo "We're using ${locale} as your locale."
 
-  echo -e "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale.\n"
-  echo -e "The valid locales are: \n ${all_locales}"
+  echo "If this is wrong, use './firefoxes.sh [version] [locale]' to specify the locale."
+  echo ""
+  echo "The valid locales are:"
+  echo " ${all_locales}"
 }
 
 clean_up() {

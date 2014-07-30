@@ -928,8 +928,18 @@ fi
 get_locale() {
   all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
 
-  cleaned_system_locale=`echo ${LANG/_/-} | sed 's/\..*//'`
+  # ex: "fr-FR.UTF-8" => "fr-FR"
   cleaned_specified_locale=`echo ${specified_locale/_/-} | sed 's/\..*//'`
+  cleaned_system_locale=`echo ${LANG/_/-} | sed 's/\..*//'`
+
+  # ex: "fr-FR" => "fr"
+  cleaned_system_locale_short=`echo $cleaned_system_locale | sed 's/-.*//'`
+
+  if [[ $all_locales != *" $cleaned_system_locale "* && $all_locales == *" $cleaned_system_locale_short "* ]]; then
+    echo "Your system locale \"$cleaned_system_locale\" is not available, but \"$cleaned_system_locale_short\" is!"
+    echo "We'll use \"$cleaned_system_locale_short\" as the default locale if you've not specified a valid locale."
+    cleaned_system_locale=$cleaned_system_locale_short
+  fi
 
   if [ -n $specified_locale ]; then
     if [[ $all_locales != *" $cleaned_specified_locale "* ]]; then

@@ -935,6 +935,11 @@ get_locale() {
   # ex: "fr-FR" => "fr"
   cleaned_system_locale_short=`echo $cleaned_system_locale | sed 's/-.*//'`
 
+  if [[ $cleaned_system_locale == 'en-AU' ]]; then
+    echo "Your system locale is set to en-AU. As there is no en-AU localization available for Firefox, en-US has been used instead."
+    cleaned_system_locale='en-US'
+  fi
+
   if [[ $all_locales != *" $cleaned_system_locale "* && $all_locales == *" $cleaned_system_locale_short "* ]]; then
     echo "Your system locale \"$cleaned_system_locale\" is not available, but \"$cleaned_system_locale_short\" is!"
     echo "We'll use \"$cleaned_system_locale_short\" as the default locale if you've not specified a valid locale."

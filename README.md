@@ -54,29 +54,30 @@ $ ./firefoxes.sh status
 You can specify the `version` to install, or use any of the pre-defined installation groups:
 
 ```bash
-// Default, installs all versions available
+# Default, installs all versions available
 $ ./firefoxes.sh
 
-// You can also use the 'all' keyword to install all versions available
+# You can also use the 'all' keyword to install all versions available
 $ ./firefoxes.sh "all"
 
-// 'all_future' installs Aurora, Beta, Nightly, Nightly UX
+# 'all_future' installs Aurora, Beta, Nightly, Nightly UX
 $ ./firefoxes.sh "all_future"
 
-// 'all_past' installs all versions excluding Aurora, Beta, Nightly and Nightly UX
+# 'all_past' installs all versions excluding Aurora, Beta, Nightly and Nightly UX
 $ ./firefoxes.sh "all_past"
 
-// 'current' installs the current version of Firefox only (other allowed keywords: 'newest', 'latest')
+# 'current' installs the current version of Firefox only (other allowed keywords: 'newest', 'latest')
 $ ./firefoxes.sh "current"
 $ ./firefoxes.sh "newest"
 $ ./firefoxes.sh "latest"
 
-// 'min_point_one', 'min_point_two', 'min_point_three', 'min_point_four' install versions with at least 0.1%, 0.2%, 0.3% or 0.4% global usage share, respectively
+# 'min_point_one', 'min_point_two', 'min_point_three', 'min_point_four' 
+# install versions with at least 0.1%, 0.2%, 0.3% or 0.4% global usage share, respectively
 $ ./firefoxes.sh "min_point_one"
 $ ./firefoxes.sh "min_point_two"
 
-// Specify the versions you would like to install, from the list at the top of this README, separated by spaces
-// New: You can now use shorthand for versions, such as: 2, 3, 3.5, 10, 24, etc.
+# Specify the versions you would like to install, from the list at the top of this README, separated by spaces
+# New: You can now use shorthand for versions, such as: 2, 3, 3.5, 10, 24, etc.
 $ ./firefoxes.sh "2 3"
 ```
 

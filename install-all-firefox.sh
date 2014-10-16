@@ -973,7 +973,7 @@ get_locale() {
 }
 
 clean_up() {
-    if ask "Delete all files from temp directory (${tmp_directory})?"; then
+    if ask "Delete all files from temp directory (${tmp_directory})?" Y; then
         log "Deleting temp directory (${tmp_directory})!"
         rm -rf ${tmp_directory}
     else

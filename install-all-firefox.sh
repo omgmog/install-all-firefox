@@ -50,6 +50,29 @@ else
   fi
 fi
 
+ask(){
+    while true; do
+        if [ "${2:-}" = "Y" ]; then
+            prompt="Y/n"
+            default=Y
+        elif [ "${2:-}" = "N" ]; then
+            prompt="y/N"
+            default=N
+        else
+            prompt="y/n"
+            default=
+        fi
+        read -p "$1 [$prompt] " REPLY
+        if [ -z "$REPLY" ]; then
+            REPLY=$default
+        fi
+        case "$REPLY" in
+            Y*|y*) return 0 ;;
+            N*|n*) return 1 ;;
+        esac
+    done
+}
+
 get_associated_information(){
   # Reset everything
   vol_name=$vol_name_default
@@ -732,21 +755,10 @@ download_firebug(){
 }
 prompt_firebug(){
   if [ "${no_prompt}" == "false" ]; then
-    log "Install Firebug ${firebug_version} for ${nice_name}? [y/n]"
-    read user_choice
-    choice_made="false"
-    while [[ "$choice_made" == "false" ]]; do
-      case "$user_choice" in
-        "y")
-          choice_made="true"
-          download_firebug
-          install_firebug
-          ;;
-        "n")
-          choice_made="true"
-          ;;
-      esac
-    done
+    if ask "Install Firebug ${firebug_version} for ${nice_name}?" Y; then
+        download_firebug
+        install_firebug
+    fi
   else
     download_firebug
     install_firebug
@@ -822,27 +834,13 @@ install_app(){
   if [[ -d "${install_directory}${nice_name}.app" ]]; then
 
     if [ "${no_prompt}" == "false" ]; then
-      log "Delete your existing ${nice_name}.app and install again? [y/n]"
-      read user_choice
-      choice_made="false"
-      while [[ "$choice_made" == "false" ]]; do
-        case "$user_choice" in
-          "y")
-            choice_made="true"
-            log "Reinstalling ${nice_name}.app"
-            remove_app
-            process_install
-            ;;
-          "n")
-            choice_made="true"
-            log "Skipping installation of ${nice_name}.app"
-            ;;
-          *)
-            error "Please enter 'y' or 'n'"
-            read user_choice
-            ;;
-        esac
-      done
+      if ask "Delete your existing ${nice_name}.app and reinstall?" Y; then
+        log "Reinstalling ${nice_name}.app"
+        remove_app
+        process_install
+      else
+        log "Skipping reinstallation of ${nice_name}.app"
+      fi
     else
       remove_app
       process_install
@@ -997,27 +995,13 @@ get_locale() {
 }
 
 clean_up() {
-  log "Delete all files from temp directory (${tmp_directory})? [y/n]"
-  read user_choice
-  choice_made="false"
-  while [[ "$choice_made" == "false" ]]; do
-    case "$user_choice" in
-      "y")
-        choice_made="true"
+    if ask "Delete all files from temp directory (${tmp_directory})?"; then
         log "Deleting temp directory (${tmp_directory})!"
         rm -rf ${tmp_directory}
-        ;;
-      "n")
-        choice_made="true"
+    else
         log "Keeping temp directory (${tmp_directory}), though it will be deleted upon reboot!\n"
-        ;;
-      *)
-        error "Please enter 'y' or 'n'"
-        read user_choice
-        ;;
-    esac
-  done
-  return 0
+    fi
+    return 0
 }
 
 if [ `uname -s` != "Darwin" ]; then

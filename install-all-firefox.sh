@@ -103,7 +103,7 @@ get_associated_information(){
             nice_name="Firefox 3.0"
 
             firebug_version="1.3.4b2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -117,7 +117,7 @@ get_associated_information(){
             nice_name="Firefox 3.5"
 
             firebug_version="1.5.4"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -131,7 +131,7 @@ get_associated_information(){
             nice_name="Firefox 3.6"
 
             firebug_version="1.7.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -145,7 +145,7 @@ get_associated_information(){
             nice_name="Firefox 4.0"
 
             firebug_version="1.8.0b7"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -159,7 +159,7 @@ get_associated_information(){
             nice_name="Firefox 5.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -173,7 +173,7 @@ get_associated_information(){
             nice_name="Firefox 6.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -187,7 +187,7 @@ get_associated_information(){
             nice_name="Firefox 7.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -201,7 +201,7 @@ get_associated_information(){
             nice_name="Firefox 8.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -215,7 +215,7 @@ get_associated_information(){
             nice_name="Firefox 9.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -229,7 +229,7 @@ get_associated_information(){
             nice_name="Firefox 10.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -243,7 +243,7 @@ get_associated_information(){
             nice_name="Firefox 11.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -257,7 +257,7 @@ get_associated_information(){
             nice_name="Firefox 12.0"
 
             firebug_version="1.9.2"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -271,7 +271,7 @@ get_associated_information(){
             nice_name="Firefox 13.0"
 
             firebug_version="1.10.6"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -285,7 +285,7 @@ get_associated_information(){
             nice_name="Firefox 14.0"
 
             firebug_version="1.10.6"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -299,7 +299,7 @@ get_associated_information(){
             nice_name="Firefox 15.0"
 
             firebug_version="1.10.6"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -313,7 +313,7 @@ get_associated_information(){
             nice_name="Firefox 16.0"
 
             firebug_version="1.10.6"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -327,7 +327,7 @@ get_associated_information(){
             nice_name="Firefox 17.0"
 
             firebug_version="1.11.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -341,7 +341,7 @@ get_associated_information(){
             nice_name="Firefox 18.0"
 
             firebug_version="1.11.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -355,7 +355,7 @@ get_associated_information(){
             nice_name="Firefox 19.0"
 
             firebug_version="1.11.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -369,7 +369,7 @@ get_associated_information(){
             nice_name="Firefox 20.0"
 
             firebug_version="1.11.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -383,7 +383,7 @@ get_associated_information(){
             nice_name="Firefox 21.0"
 
             firebug_version="1.11.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -397,7 +397,7 @@ get_associated_information(){
             nice_name="Firefox 22.0"
 
             firebug_version="1.11.3"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -411,7 +411,7 @@ get_associated_information(){
             nice_name="Firefox 23.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -425,7 +425,7 @@ get_associated_information(){
             nice_name="Firefox 24.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -439,7 +439,7 @@ get_associated_information(){
             nice_name="Firefox 25.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -453,7 +453,7 @@ get_associated_information(){
             nice_name="Firefox 26.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -467,7 +467,7 @@ get_associated_information(){
             nice_name="Firefox 27.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -481,7 +481,7 @@ get_associated_information(){
             nice_name="Firefox 28.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -495,7 +495,7 @@ get_associated_information(){
             nice_name="Firefox 29.0"
 
             firebug_version="1.12.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -560,11 +560,11 @@ get_associated_information(){
             release_type="beta"
             ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
             if [[ $versions != 'status' ]]; then
-                candidates_folder=`curl --silent -L ${ftp_candidates} | sed "s/^.\{56\}//" | sort -n | tail -n1`
-                build_folder=`curl --silent -L ${ftp_candidates}/${candidates_folder}/ | sed "s/^.\{56\}//" | sort -n | tail -n1`
+                candidates_folder=$(curl --silent -L ${ftp_candidates} | sed "s/^.\{56\}//" | sort -n | tail -n1)
+                build_folder=$(curl --silent -L ${ftp_candidates}/${candidates_folder}/ | sed "s/^.\{56\}//" | sort -n | tail -n1)
                 ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
-                dmg_file=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | tail -1 | sed "s/^.\{56\}//"`
-                sum_file_tmp=`curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | tail -1 | sed "s/^.\{56\}//"`
+                dmg_file=$(curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | tail -1 | sed "s/^.\{56\}//")
+                sum_file_tmp=$(curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | tail -1 | sed "s/^.\{56\}//")
                 sum_file_folder="mac/${locale}/"
                 sum_file="${sum_file_tmp}"
                 sum_file_type="md5"
@@ -573,7 +573,7 @@ get_associated_information(){
             short_name="fxb"
             nice_name="Firefox Beta"
             firebug_version="2.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -582,8 +582,8 @@ get_associated_information(){
             future="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
             if [[ $versions != 'status' ]]; then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
-                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//")
+                sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
                 sum_file_type="sha512"
             fi
             binary="firefox"
@@ -592,7 +592,7 @@ get_associated_information(){
             vol_name="Aurora"
             release_name="FirefoxAurora"
             firebug_version="2.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -601,8 +601,8 @@ get_associated_information(){
             future="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-trunk/"
             if [[ $versions != 'status' ]]; then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
-                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//")
+                sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
                 sum_file_type="sha512"
             fi
             binary="firefox"
@@ -611,7 +611,7 @@ get_associated_information(){
             vol_name="Nightly"
             release_name="FirefoxNightly"
             firebug_version="2.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -620,8 +620,8 @@ get_associated_information(){
             future="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
             if [[ $versions != 'status' ]]; then
-                dmg_file=`curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//"`
-                sum_file=`echo ${dmg_file} | sed "s/\.dmg/\.checksums/"`
+                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//")
+                sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
                 sum_file_type="sha512"
             fi
             binary="firefox"
@@ -630,7 +630,7 @@ get_associated_information(){
             vol_name="UX"
             release_name="FirefoxUX"
             firebug_version="2.0"
-            firebug_version_short=`echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//'`
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -654,7 +654,7 @@ setup_dirs(){
 }
 get_bits(){
     log "Downloading bits"
-    current_dir=`pwd`
+    current_dir=$(pwd)
     cd "$bits_directory"
     if [[ ! -f "setfileicon" ]]; then
         curl -C - -L --progress-bar "${bits_host}setfileicon" -o "setfileicon"
@@ -690,12 +690,12 @@ check_dmg(){
         get_sum_file
         case $sum_file_type in
             md5)
-                sum_of_dmg=`md5 -q "${tmp_directory}${dmg_file}"`
-                sum_expected=`cat "${sum_file}-${short_name}" | grep "${locale}/${dmg_file}" | cut -c 1-32`
+                sum_of_dmg=$(md5 -q "${tmp_directory}${dmg_file}")
+                sum_expected=$(cat "${sum_file}-${short_name}" | grep "${locale}/${dmg_file}" | cut -c 1-32)
             ;;
             sha512)
-                sum_of_dmg=`openssl dgst -sha512 "${tmp_directory}${dmg_file}" | sed "s/^.*\(.\{128\}\)$/\1/"`
-                sum_expected=`cat "${sum_file}-${short_name}" | grep "${sum_of_dmg}" | cut -c 1-128`
+                sum_of_dmg=$(openssl dgst -sha512 "${tmp_directory}${dmg_file}" | sed "s/^.*\(.\{128\}\)$/\1/")
+                sum_expected=$(cat "${sum_file}-${short_name}" | grep "${sum_of_dmg}" | cut -c 1-128)
             ;;
             *)
                 error "✖ Invalid sum type specified!"
@@ -756,7 +756,7 @@ install_firebug(){
             is_legacy="true"
         fi
         if [ "${is_legacy}" == "true" ]; then
-            ext_dir=`cd $HOME/Library/Application\ Support/Firefox/Profiles/;cd \`ls -1 | grep ${short_name}\`; pwd`
+            ext_dir=$(cd $HOME/Library/Application\ Support/Firefox/Profiles/;cd $(ls -1 | grep ${short_name}); pwd)
         else
             ext_dir="${install_directory}${nice_name}.app${binary_folder}"
         fi
@@ -771,23 +771,23 @@ install_firebug(){
             mkdir "extensions"
         fi
         cd "extensions"
-        ext_dir=`pwd`
+        ext_dir=$(pwd)
         if [[ "${is_legacy}" == "true" ]]; then
             cp -r "${tmp_directory}${firebug_file}" "${ext_dir}"
         else
             unzip -qqo "${tmp_directory}${firebug_file}" -d "${tmp_directory}${firebug_version}"
             cd "${tmp_directory}${firebug_version}"
-            FILE="`cat install.rdf`"
+            FILE="$(cat install.rdf)"
             for i in $FILE;do
                 if echo "$i"|grep "urn:mozilla:install-manifest" &> /dev/null ; then
                     GET="true"
                 fi
                 if [ "$GET" = "true" ] ; then
                     if echo "$i"|grep "<em:id>" &> /dev/null; then
-                        ID=`echo "$i" | sed 's#.*<em:id>\(.*\)</em:id>.*#\1#'`
+                        ID=$(echo "$i" | sed 's#.*<em:id>\(.*\)</em:id>.*#\1#')
                         GET="false"
                     elif echo "$i"|grep "em:id=\"" &> /dev/null; then
-                        ID=`echo "$i" | sed 's/.*em:id="\(.*\)".*/\1/'`
+                        ID=$(echo "$i" | sed 's/.*em:id="\(.*\)".*/\1/')
                         GET="false"
                     fi
                 fi
@@ -933,11 +933,11 @@ get_locale() {
     all_locales=" af ar be bg ca cs da de el en-GB en-US es-AR es-ES eu fi fr fy-NL ga-IE he hu it ja-JP-mac ko ku lt mk mn nb-NO nl nn-NO pa-IN pl pt-BR pt-PT ro ru sk sl sv-SE tr uk zh-CN zh-TW "
 
     # ex: "fr-FR.UTF-8" => "fr-FR"
-    cleaned_specified_locale=`echo ${specified_locale/_/-} | sed 's/\..*//'`
-    cleaned_system_locale=`echo ${LANG/_/-} | sed 's/\..*//'`
+    cleaned_specified_locale=$(echo ${specified_locale/_/-} | sed 's/\..*//')
+    cleaned_system_locale=$(echo ${LANG/_/-} | sed 's/\..*//')
 
     # ex: "fr-FR" => "fr"
-    cleaned_system_locale_short=`echo $cleaned_system_locale | sed 's/-.*//'`
+    cleaned_system_locale_short=$(echo $cleaned_system_locale | sed 's/-.*//')
 
     # Will make something more scalable if needed later
     # But for now, we make these locales use en-US
@@ -981,7 +981,7 @@ clean_up() {
     return 0
 }
 
-if [ `uname -s` != "Darwin" ]; then
+if [ "$(uname -s)" != "Darwin" ]; then
     error "This script is designed to be run on OS X\nExiting...\n"
     exit 0
 fi

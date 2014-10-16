@@ -62,6 +62,7 @@ ask(){
             prompt="y/n"
             default=
         fi
+        echo
         read -p "$1 [$prompt] " REPLY
         if [ -z "$REPLY" ]; then
             REPLY=$default

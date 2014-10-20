@@ -942,7 +942,7 @@ get_locale() {
 
     # Will make something more scalable if needed later
     # But for now, we make these locales use en-US
-    if [[ $cleaned_system_locale == 'en-AU' || $cleaned_sysem_locale == 'en-CA' ]]; then
+    if [[ $cleaned_system_locale == 'en-AU' || $cleaned_system_locale == 'en-CA' ]]; then
         echo "Your system locale is set to ${cleaned_system_locale}. As there is no ${cleaned_system_locale} localization available for Firefox, en-US has been used instead."
         cleaned_system_locale='en-US'
     fi
@@ -953,7 +953,7 @@ get_locale() {
         cleaned_system_locale=$cleaned_system_locale_short
     fi
 
-    if [ -n $specified_locale ]; then
+    if [[ -n $specified_locale ]]; then
         if [[ $all_locales != *" $cleaned_specified_locale "* ]]; then
             echo "\"${cleaned_specified_locale}\" was not found in our list of valid locales."
             locale=$cleaned_system_locale

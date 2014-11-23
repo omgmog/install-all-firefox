@@ -1,7 +1,7 @@
 #!/bin/bash
 
 main () {
-    local remote_dir="https://raw.github.com/omgmog/install-all-firefox/master/"
+    local remote_dir="https://raw.githubusercontent.com/omgmog/install-all-firefox/master/"
     local temp_dir="/tmp/"
     local output_dir="${temp_dir}firefoxes/"
     local script_name="install-all-firefox.sh"

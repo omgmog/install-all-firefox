@@ -10,7 +10,7 @@ versions_usage_point_four_up="27 28 29"
 
 default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
 tmp_directory="/tmp/firefoxes/"
-bits_host="https://raw.github.com/omgmog/install-all-firefox/master/bits/"
+bits_host="https://raw.githubusercontent.com/omgmog/install-all-firefox/master/bits/"
 bits_directory="${tmp_directory}bits/"
 
 locale_default="en-US"

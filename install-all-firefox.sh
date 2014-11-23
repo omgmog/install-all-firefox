@@ -542,9 +542,9 @@ get_associated_information(){
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
-        33 | 33.0)
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/33.0/"
-            dmg_file="Firefox 33.0.dmg"
+        33 | 33.0 | 33.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/33.1/"
+            dmg_file="Firefox 33.1.dmg"
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox"
@@ -942,7 +942,7 @@ get_locale() {
 
     # Will make something more scalable if needed later
     # But for now, we make these locales use en-US
-    if [[ $cleaned_system_locale == 'en-AU' || $cleaned_sysem_locale == 'en-CA' ]]; then
+    if [[ $cleaned_system_locale == 'en-AU' || $cleaned_system_locale == 'en-CA' ]]; then
         echo "Your system locale is set to ${cleaned_system_locale}. As there is no ${cleaned_system_locale} localization available for Firefox, en-US has been used instead."
         cleaned_system_locale='en-US'
     fi
@@ -953,7 +953,7 @@ get_locale() {
         cleaned_system_locale=$cleaned_system_locale_short
     fi
 
-    if [ -n $specified_locale ]; then
+    if [[ -n $specified_locale ]]; then
         if [[ $all_locales != *" $cleaned_specified_locale "* ]]; then
             echo "\"${cleaned_specified_locale}\" was not found in our list of valid locales."
             locale=$cleaned_system_locale

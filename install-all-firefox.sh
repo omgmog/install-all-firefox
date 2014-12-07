@@ -542,9 +542,9 @@ get_associated_information(){
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
-        33 | 33.0 | 33.1)
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/33.1/"
-            dmg_file="Firefox 33.1.dmg"
+        33 | 33.0 | 33.1 | 33.1.1)
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/33.1.1/"
+            dmg_file="Firefox 33.1.1.dmg"
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox"

@@ -509,8 +509,8 @@ get_associated_information(){
             short_name="fx30"
             nice_name="Firefox 30.0"
 
-            firebug_version="2.0"
-            firebug_version_short=$firebug_version
+            firebug_version="2.0.6"
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -523,8 +523,8 @@ get_associated_information(){
             short_name="fx31"
             nice_name="Firefox 31.0"
 
-            firebug_version="2.0"
-            firebug_version_short=$firebug_version
+            firebug_version="2.0.6"
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -537,8 +537,8 @@ get_associated_information(){
             short_name="fx32"
             nice_name="Firefox 32.0"
 
-            firebug_version="2.0"
-            firebug_version_short=$firebug_version
+            firebug_version="2.0.6"
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
@@ -551,8 +551,8 @@ get_associated_information(){
             short_name="fx33"
             nice_name="Firefox 33.0"
 
-            firebug_version="2.0"
-            firebug_version_short=$firebug_version
+            firebug_version="2.0.6"
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;

@@ -31,6 +31,7 @@ vol_name_default="Firefox"
 release_name_default="Firefox"
 release_type=""
 binary_folder="/Contents/MacOS/"
+uses_v2_signing=false
 
 specified_locale=$2
 
@@ -579,6 +580,8 @@ get_associated_information(){
             short_name="fx35"
             nice_name="Firefox 35.0"
 
+            uses_v2_signing=true
+
             firebug_version="2.0.6"
             firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
@@ -901,13 +904,21 @@ EOL
     chmod +x "${install_directory}${nice_name}.app${binary_folder}${binary}-af"
 
 # tell all.js where to find config
-cat > "${install_directory}${nice_name}.app${binary_folder}defaults/pref/all.js" <<EOL
+
+if [[ "${uses_v2_signing}" == "true" ]]; then
+    config_dir="${install_directory}${nice_name}.app/Contents/Resources/"
+else
+    config_dir="${install_directory}${nice_name}.app${binary_folder}"
+fi
+prefs_dir="${config_dir}defaults/pref/"
+mkdir -p "${prefs_dir}"
+cat > "${prefs_dir}all.js" <<EOL
 pref("general.config.obscure_value", 0);
 pref("general.config.filename","mozilla.cfg");
 EOL
 
 # make config
-cat > "${install_directory}${nice_name}.app${binary_folder}mozilla.cfg" <<EOL
+cat > "${config_dir}mozilla.cfg" <<EOL
 lockPref("browser.startup.homepage", "about:blank");
 lockPref("browser.shell.checkDefaultBrowser", false);
 lockPref("browser.startup.homepage_override.mstone", "ignore");

@@ -566,6 +566,8 @@ get_associated_information(){
             short_name="fx34"
             nice_name="Firefox 34.0"
 
+            uses_v2_signing=true
+
             firebug_version="2.0.6"
             firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
@@ -790,7 +792,11 @@ install_firebug(){
         if [ "${is_legacy}" == "true" ]; then
             ext_dir=$(cd $HOME/Library/Application\ Support/Firefox/Profiles/;cd $(ls -1 | grep ${short_name}); pwd)
         else
-            ext_dir="${install_directory}${nice_name}.app${binary_folder}"
+            if [ "${uses_v2_signing}" == "true" ];then
+                ext_dir="${install_directory}${nice_name}.app/Contents/Resources/"
+            else
+                ext_dir="${install_directory}${nice_name}.app${binary_folder}"
+            fi
         fi
         cd "${ext_dir}"
         if [ "${is_legacy}" != "true" ]; then
@@ -911,15 +917,22 @@ else
     config_dir="${install_directory}${nice_name}.app${binary_folder}"
 fi
 prefs_dir="${config_dir}defaults/pref/"
+# fx34 doesn't move the mozilla.cfg yet...
+if [[ "${short_name}" == "fx34" ]]; then
+    config_dir="${install_directory}${nice_name}.app${binary_folder}"
+fi
+
 mkdir -p "${prefs_dir}"
-cat > "${prefs_dir}all.js" <<EOL
+prefs_file="${prefs_dir}all.js"
+
+cat > "${prefs_file}" <<EOL
 pref("general.config.obscure_value", 0);
-pref("general.config.filename","mozilla.cfg");
+pref("general.config.filename", "mozilla.cfg");
 EOL
 
 # make config
-cat > "${config_dir}mozilla.cfg" <<EOL
-lockPref("browser.startup.homepage", "about:blank");
+config_file="${config_dir}mozilla.cfg"
+cat > "${config_file}" <<EOL
 lockPref("browser.shell.checkDefaultBrowser", false);
 lockPref("browser.startup.homepage_override.mstone", "ignore");
 lockPref("app.update.enabled", false);

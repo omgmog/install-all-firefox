@@ -71,7 +71,7 @@ $ ./firefoxes.sh "current"
 $ ./firefoxes.sh "newest"
 $ ./firefoxes.sh "latest"
 
-# 'min_point_one', 'min_point_two', 'min_point_three', 'min_point_four' 
+# 'min_point_one', 'min_point_two', 'min_point_three', 'min_point_four'
 # install versions with at least 0.1%, 0.2%, 0.3% or 0.4% global usage share, respectively
 $ ./firefoxes.sh "min_point_one"
 $ ./firefoxes.sh "min_point_two"
@@ -124,8 +124,30 @@ chmod +x firefoxes.sh
 It'll take a little while to grab the `.dmg` files, but it should only need to do this once.
 (Until you reboot, and the contents of `/tmp` are deleted.)
 
+
+---
+## CONTRIBUTING
+If a new version of Firefox has been released but it's not yet here, feel free to add it and submit a pull request. You can even generate a new application icon using the `create_firefox_image_with_version` tool found in the [`bits`](https://github.com/omgmog/install-all-firefox/tree/master/bits) directory.
+
+### Checklist when adding a new version
+You should only need to make changes in `install-all-firefox.sh` when adding a new version, and also generating a new `fx[version].png` in the `bits` directory.
+
+1. Update `default_versions_current`
+2. Update `default_versions_past`
+3. Add a new version to the massive case statement in `get_associated_information()`
+4. Ensure that we're using the correct/latest version of Firebug. The [Firebug blog](http://getfirebug.com/) is pretty good at mentioning which versions of Firefox are supported with each release.
+5. Generate a new version icon:
+
+```bash
+cd bits
+./create_firefox_image_with_version "36.0" fx36.png
+```
+
+`create_firefox_image_with_version` uses ImageMagick's `convert` utility to composite the two base images together with text, so make sure you've got that installed first.
+
 ---
 ## CREDITS
 - [setfileicon](http://maxao.free.fr/telechargements/setfileicon.m) is a utility created by Damien Bobillot (damien.bobillot.2002_setfileicon@m4x.org) http://maxao.free.fr/telechargements/setfileicon.gz
 - [Firebug](http://getfirebug.com/)
 - Thanks to the community for using/reporting issues/making suggestions for features!
+- Thanks to Lurst for his [`create_firefox_image_with_version`](https://github.com/LuRsT/create_firefox_image_with_version) tool.

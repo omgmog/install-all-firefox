@@ -1,0 +1,88 @@
+#!/bin/bash
+
+in_text=$1
+out_image=$2
+
+# Position of text inside box
+TEXT_X_OFFSET="275"
+TEXT_Y_OFFSET="285"
+
+FONT_POINT_SIZE=120
+
+IN_ICON_BASE="base.png"
+IN_TEXT_CONTAINER="box.png"
+
+TMP_DIR="/tmp/"
+TMP_TEXT="${TMP_DIR}text.png"
+TMP_TEXT_SHADOW="${TMP_DIR}shadow.png"
+TMP_TEXT_CONTAINER="${TMP_DIR}text_box.png"
+
+
+# Check Arguments
+if [ -z $in_text ] || [ -z $out_image ]; then
+    echo "Need more arguments. Expecting at least two arguments."
+    echo "$ create_firefox_image_with_version <text> <output_filename>"
+    exit;
+fi
+
+
+# White text
+convert \
+    -background transparent \
+    -fill white \
+    -pointsize $FONT_POINT_SIZE \
+    label:$in_text \
+    $TMP_TEXT
+
+
+# Create text shadow
+convert \
+    -background transparent \
+    -fill black \
+    -pointsize $FONT_POINT_SIZE \
+    label:$in_text \
+    $TMP_TEXT_SHADOW
+
+convert $TMP_TEXT_SHADOW \
+    -gaussian-blur 5x5 \
+    $TMP_TEXT_SHADOW
+
+
+# Merge text shadow with white text
+convert $TMP_TEXT \
+    -colorize 0% \
+    miff:- | \
+        composite \
+            -dissolve 100 \
+            - $TMP_TEXT_SHADOW \
+            $TMP_TEXT
+
+
+# Insert text into box
+convert $TMP_TEXT \
+    -fill white \
+    -colorize 0% \
+    miff:- | \
+        composite \
+            -dissolve 100 \
+            -geometry +$TEXT_X_OFFSET+$TEXT_Y_OFFSET \
+            - $IN_TEXT_CONTAINER \
+            $TMP_TEXT_CONTAINER
+
+
+# Insert box into base image
+convert $TMP_TEXT_CONTAINER \
+    -fill white \
+    -colorize 0% \
+    miff:- | \
+        composite \
+            -dissolve 100 \
+            -gravity southeast \
+            - $IN_ICON_BASE \
+            $out_image
+
+
+# Clean up
+rm $TMP_TEXT
+rm $TMP_TEXT_SHADOW
+rm $TMP_TEXT_CONTAINER

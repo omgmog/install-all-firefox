@@ -667,7 +667,7 @@ get_associated_information(){
             future="true"
             ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-trunk/"
             if [[ $versions != 'status' ]]; then
-                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//")
+                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.* \(".*"$\)/\1/")
                 sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
                 sum_file_type="sha512"
             fi

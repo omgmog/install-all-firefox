@@ -143,7 +143,11 @@ cd bits
 ./create_firefox_image_with_version "36.0" fx36.png
 ```
 
-`create_firefox_image_with_version` uses ImageMagick's `convert` utility to composite the two base images together with text, so make sure you've got that installed first.
+`create_firefox_image_with_version` uses ImageMagick's `convert` utility to composite the two base images together with text, so make sure you've got that installed first:
+
+```bash
+$ brew install imagemagick gs
+```
 
 ---
 ## CREDITS

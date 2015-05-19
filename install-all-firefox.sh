@@ -627,7 +627,7 @@ get_associated_information(){
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox"
-            short_name="fx37"
+            short_name="fx38"
             nice_name="Firefox 38.0"
 
             uses_v2_signing=true

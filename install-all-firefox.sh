@@ -638,8 +638,8 @@ get_associated_information(){
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
         39 | 39.0)
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/39.0/"
-            dmg_file="Firefox 39.0.dmg"
+            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/39.0.3/"
+            dmg_file="Firefox 39.0.3.dmg"
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox"

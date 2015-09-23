@@ -685,7 +685,7 @@ get_associated_information(){
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
         *)
-            error "    Invalid version specified!\n\n    Please choose one of:\n    all all_past current $default_versions\n\n"
+            error "    Invalid version specified!\n\n    Please choose one of:\n    all current $default_versions\n\n"
             error "    To see which versions you have installed, type:\n    ./firefoxes.sh status"
             exit 1
         ;;
@@ -971,7 +971,6 @@ log(){
 }
 
 # Replace special keywords with actual versions (duplicates are okay; it'll work fine)
-versions=${versions/all_past/${default_versions_past}}
 versions=${versions/all/${default_versions}}
 versions=${versions/current/${default_versions_current}}
 versions=${versions/latest/${default_versions_current}}

@@ -1,5 +1,4 @@
 #!/bin/bash
-default_versions_future="beta aurora nightly ux"
 default_versions_current="41"
 default_versions_past="2 3 3.5 3.6 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40"
 
@@ -8,7 +7,7 @@ versions_usage_point_two="21 24 26"
 versions_usage_point_three=""
 versions_usage_point_four_up="27 28 29"
 
-default_versions="${default_versions_past} ${default_versions_current} ${default_versions_future}"
+default_versions="${default_versions_past} ${default_versions_current}"
 tmp_directory="/tmp/firefoxes/"
 bits_host="https://raw.githubusercontent.com/omgmog/install-all-firefox/master/bits/"
 bits_directory="${tmp_directory}bits/"
@@ -80,7 +79,6 @@ get_associated_information(){
     # Reset everything
     vol_name=$vol_name_default
     release_name=$release_name_default
-    future=""
 
     case $1 in
         2 | 2.0 | 2.0.0.20)
@@ -686,87 +684,8 @@ get_associated_information(){
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
         ;;
-        # This process is a bit flaky
-        beta)
-            release_type="beta"
-            ftp_candidates="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/candidates/"
-            if [[ $versions != 'status' ]]; then
-                candidates_folder=$(curl --silent -L ${ftp_candidates} | sed "s/^.\{56\}//" | sort -n | tail -n1)
-                build_folder=$(curl --silent -L ${ftp_candidates}/${candidates_folder}/ | sed "s/^.\{56\}//" | sort -n | tail -n1)
-                ftp_root="${ftp_candidates}${candidates_folder}/${build_folder}/"
-                dmg_file=$(curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".dmg" | tail -1 | sed "s/^.\{56\}//")
-                sum_file_tmp=$(curl --progress-bar -L ${ftp_root}mac/${locale}/ | grep ".checksums$" | tail -1 | sed "s/^.\{56\}//")
-                sum_file_folder="mac/${locale}/"
-                sum_file="${sum_file_tmp}"
-                sum_file_type="md5"
-            fi
-            binary="firefox"
-            short_name="fxb"
-            nice_name="Firefox Beta"
-            firebug_version="2.0"
-            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
-            firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
-            firebug_file="firebug-${firebug_version}.xpi"
-        ;;
-        aurora)
-            release_type="aurora"
-            future="true"
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-mozilla-aurora/"
-            if [[ $versions != 'status' ]]; then
-                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//")
-                sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
-                sum_file_type="sha512"
-            fi
-            binary="firefox"
-            short_name="fxa"
-            nice_name="Aurora"
-            vol_name="Aurora"
-            release_name="FirefoxAurora"
-            firebug_version="2.0"
-            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
-            firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
-            firebug_file="firebug-${firebug_version}.xpi"
-        ;;
-        nightly)
-            release_type="nightly"
-            future="true"
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-trunk/"
-            if [[ $versions != 'status' ]]; then
-                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.* \(".*"$\)/\1/")
-                sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
-                sum_file_type="sha512"
-            fi
-            binary="firefox"
-            short_name="fxn"
-            nice_name="Nightly"
-            vol_name="Nightly"
-            release_name="FirefoxNightly"
-            firebug_version="2.0"
-            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
-            firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
-            firebug_file="firebug-${firebug_version}.xpi"
-        ;;
-        ux)
-            release_type="ux"
-            future="true"
-            ftp_root="ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/"
-            if [[ $versions != 'status' ]]; then
-                dmg_file=$(curl --progress-bar -L ${ftp_root} | grep ".mac.dmg$" | tail -1 | sed "s/^.\{56\}//")
-                sum_file=$(echo ${dmg_file} | sed "s/\.dmg/\.checksums/")
-                sum_file_type="sha512"
-            fi
-            binary="firefox"
-            short_name="fxux"
-            nice_name="Nightly UX"
-            vol_name="UX"
-            release_name="FirefoxUX"
-            firebug_version="2.0"
-            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
-            firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
-            firebug_file="firebug-${firebug_version}.xpi"
-        ;;
         *)
-            error "    Invalid version specified!\n\n    Please choose one of:\n    all all_past all_future current $default_versions\n\n"
+            error "    Invalid version specified!\n\n    Please choose one of:\n    all all_past current $default_versions\n\n"
             error "    To see which versions you have installed, type:\n    ./firefoxes.sh status"
             exit 1
         ;;
@@ -847,12 +766,9 @@ get_sum_file(){
 }
 download_dmg(){
     cd "${tmp_directory}"
-    dmg_file_safe=$(echo ${dmg_file} | sed 's/ /\%20/g')
-    if [[ "${future}" == "true" ]]; then
-        dmg_url="${dmg_host}${release_directory}${dmg_file_safe}"
-    else
-        dmg_url="${dmg_host}releases/${release_directory}/mac/$locale/${dmg_file_safe}"
-    fi
+    dmg_file_safe=$(echo "${dmg_file}" | sed 's/ /\%20/g')
+    dmg_url="${dmg_host}releases/${release_directory}/mac/$locale/${dmg_file_safe}"
+    log "Downloading from ${dmg_url}"
     if ! curl -C - -L --progress-bar "${dmg_url}" -o "${dmg_file}"
     then
         error "✖ Failed to download ${dmg_file}!"
@@ -1055,7 +971,6 @@ log(){
 }
 
 # Replace special keywords with actual versions (duplicates are okay; it'll work fine)
-versions=${versions/all_future/${default_versions_future}}
 versions=${versions/all_past/${default_versions_past}}
 versions=${versions/all/${default_versions}}
 versions=${versions/current/${default_versions_current}}

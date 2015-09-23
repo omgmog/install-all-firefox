@@ -13,21 +13,16 @@ Currently it installs:
 - Firefox 3.5.19
 - Firefox 3.6.28
 - All version from 4.0.1 to latest version on rolling release
-- Firefox Beta
-- Firefox Aurora
-- Firefox Nightly
-- Firefox UX Nightly
 
 Optionally, the script can install Firebug for each version of Firefox too.
 
 ### What does it do?
 
-1. The `firefoxes.sh` script downloads the latest version of `install-all-firefox.sh` before
-running to ensure that the script is up to date.
+1. The `firefoxes.sh` script downloads the latest version of `install-all-firefox.sh` beforerunning to ensure that the script is up to date.
 
 2. The script downloads all of the associated resources (icons) and utilities (seticon) to the `/tmp/firefoxes` directory.
 
-3. The script downloads the `.dmg` files from Mozilla's FTP server into `/tmp/firefoxes`.
+3. The script downloads the `.dmg` files from Mozilla's server into `/tmp/firefoxes`.
 
 4. The script installs the Firefoxes to `/Applications/Firefoxes/`.
 
@@ -60,12 +55,6 @@ $ ./firefoxes.sh
 # You can also use the 'all' keyword to install all versions available
 $ ./firefoxes.sh "all"
 
-# 'all_future' installs Aurora, Beta, Nightly, Nightly UX
-$ ./firefoxes.sh "all_future"
-
-# 'all_past' installs all versions excluding Aurora, Beta, Nightly and Nightly UX
-$ ./firefoxes.sh "all_past"
-
 # 'current' installs the current version of Firefox only (other allowed keywords: 'newest', 'latest')
 $ ./firefoxes.sh "current"
 $ ./firefoxes.sh "newest"
@@ -86,18 +75,16 @@ Usage share options are based on data from [StatCounter's global statistics](htt
 You can specify the `locale` to use, from the list of available `locale` options. By default `en-GB` is used.
 
 ```
-af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr, fy-NL,
-ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO, pa-IN, pl, pt-BR,
-pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
+af, ar, be , bg, ca, cs, da, de, el, en-GB, en-US, es-AR, es-ES, eu, fi, fr,
+fy-NL, ga-IE, he, hu, it, ja-JP-mac, ko, ku, lt, mk, mn, nb-NO, nl, nn-NO,
+pa-IN, pl, pt-BR, pt-PT, ro, ru, sk, sl, sv-SE, tr, uk, zh-CN, zh-TW
 ```
 
 ```bash
 $ ./firefoxes.sh "all" "en-US"
 ```
-(The installation process for the Aurora and Nightly/UX versions will install as `en-US` regardless of what you specify)
 
-
-If you want to just install all versions and leave the installation process unattended, there is a `no_prompt` option, this will default all of the `y/n` prompts to answering `y`.
+If you want to just install all versions and leave the installation process unattended, there is a `no_prompt` option, this will default all of the `Y/n` prompts to answering `y`.
 
 ```bash
 $ ./firefoxes.sh "all" "en-GB" "no_prompt"

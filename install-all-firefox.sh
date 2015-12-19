@@ -994,11 +994,13 @@ install_complete(){
     log "✔ Install complete!"
 }
 error(){
-    printf "\n\033[31m$*\033[00m"
+    printf "\033[31m%b\033[00m " $*
+    printf "\n"
     return 0
 }
 log(){
-    printf "\n\033[32m$*\033[00m\n"
+    printf "\033[32m%b\033[00m " $*
+    printf "\n"
     return $?
 }
 
@@ -1079,7 +1081,7 @@ clean_up() {
 }
 
 if [ "$(uname -s)" != "Darwin" ]; then
-    error "This script is designed to be run on OS X\nExiting...\n"
+    error "This script is designed to be run on OS X\nExiting..."
     exit 0
 fi
 

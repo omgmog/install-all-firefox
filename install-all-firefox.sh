@@ -802,7 +802,7 @@ get_associated_information(){
             sum_file="MD5SUMS"
             sum_file_type="md5"
             binary="firefox"
-            short_name="fx48"
+            short_name="fx49"
             nice_name="Firefox 49.0"
 
             uses_v2_signing=true

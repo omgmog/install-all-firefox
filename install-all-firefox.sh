@@ -1,11 +1,11 @@
 #!/bin/bash
-default_versions_current="49"
+default_versions_current="50"
 
 past_00s="2 3 3.5 3.6 4 5 6 7 8 9"
 past_10s="10 11 12 13 14 15 16 17 18 19"
 past_20s="20 21 22 23 24 25 26 27 28 29"
 past_30s="30 31 32 33 34 35 36 37 38 39"
-past_40s="40 41 42 43 44 45 46 47 48"
+past_40s="40 41 42 43 44 45 46 47 48 49"
 
 default_versions_past="${past_00s} ${past_10s} ${past_20s} ${past_30s} ${past_40s}"
 
@@ -811,6 +811,22 @@ get_associated_information(){
             binary="firefox"
             short_name="fx49"
             nice_name="Firefox 49.0"
+
+            uses_v2_signing=true
+
+            firebug_version="2.0.17"
+            firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
+            firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
+            firebug_file="firebug-${firebug_version}.xpi"
+        ;;
+        50 | 50.0)
+            release_directory="50.0"
+            dmg_file="Firefox 50.0.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx50"
+            nice_name="Firefox 50.0"
 
             uses_v2_signing=true
 

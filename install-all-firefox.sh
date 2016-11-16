@@ -9,10 +9,11 @@ past_40s="40 41 42 43 44 45 46 47 48 49"
 
 default_versions_past="${past_00s} ${past_10s} ${past_20s} ${past_30s} ${past_40s}"
 
-versions_usage_point_one="3.6 12 16 17 22 23 25"
-versions_usage_point_two="21 24 26"
+# Using data from http://gs.statcounter.com/
+versions_usage_point_one="43 44 45 46 50"
+versions_usage_point_two=""
 versions_usage_point_three=""
-versions_usage_point_four_up="27 28 29"
+versions_usage_point_four_up="47 48"
 
 default_versions="${default_versions_past} ${default_versions_current}"
 tmp_directory="/tmp/firefoxes/"

@@ -1,13 +1,14 @@
 #!/bin/bash
-default_versions_current="50"
+default_versions_current="51"
 
 past_00s="2 3 3.5 3.6 4 5 6 7 8 9"
 past_10s="10 11 12 13 14 15 16 17 18 19"
 past_20s="20 21 22 23 24 25 26 27 28 29"
 past_30s="30 31 32 33 34 35 36 37 38 39"
 past_40s="40 41 42 43 44 45 46 47 48 49"
+past_50s="50"
 
-default_versions_past="${past_00s} ${past_10s} ${past_20s} ${past_30s} ${past_40s}"
+default_versions_past="${past_00s} ${past_10s} ${past_20s} ${past_30s} ${past_40s} ${past_50s}"
 
 # Using data from http://gs.statcounter.com/
 versions_usage_point_one="43 44 45 46 50"
@@ -836,6 +837,17 @@ get_associated_information(){
             firebug_version_short=$(echo "${firebug_version}" | sed 's/\.[0-9a-zA-Z]*$//')
             firebug_root="http://getfirebug.com/releases/firebug/${firebug_version_short}/"
             firebug_file="firebug-${firebug_version}.xpi"
+        ;;
+        51 | 51.0)
+            release_directory="51.0"
+            dmg_file="Firefox 51.0.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx51"
+            nice_name="Firefox 51.0"
+
+            uses_v2_signing=true
         ;;
         *)
             error "    Invalid version specified!\n\n    Please choose one of:\n    all current $default_versions\n\n"

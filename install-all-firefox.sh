@@ -87,6 +87,7 @@ get_associated_information(){
     # Reset everything
     vol_name=$vol_name_default
     release_name=$release_name_default
+    firebug_version=""
 
     case $1 in
         2 | 2.0 | 2.0.0.20)
@@ -939,14 +940,17 @@ download_firebug(){
     fi
 }
 prompt_firebug(){
-    if [ ${no_prompt} == false ]; then
-        if ask "Install Firebug ${firebug_version} for ${nice_name}?" Y; then
+    # Only do anything if we've got a firebug version
+    if [[ "${firebug_version}" != "" ]]; then
+        if [ ${no_prompt} == false ]; then
+            if ask "Install Firebug ${firebug_version} for ${nice_name}?" Y; then
+                download_firebug
+                install_firebug
+            fi
+        else
             download_firebug
             install_firebug
         fi
-    else
-        download_firebug
-        install_firebug
     fi
 }
 install_firebug(){

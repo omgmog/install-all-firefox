@@ -4,8 +4,8 @@ in_text=$1
 out_image=$2
 
 # Position of text inside box
-TEXT_X_OFFSET="275"
-TEXT_Y_OFFSET="285"
+TEXT_X_OFFSET="270"
+TEXT_Y_OFFSET="265"
 
 FONT_POINT_SIZE=120
 

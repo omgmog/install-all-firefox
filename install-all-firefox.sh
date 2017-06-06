@@ -1,12 +1,12 @@
 #!/bin/bash
-default_versions_current="52"
+default_versions_current="53"
 
 past_00s="2 3 3.5 3.6 4 5 6 7 8 9"
 past_10s="10 11 12 13 14 15 16 17 18 19"
 past_20s="20 21 22 23 24 25 26 27 28 29"
 past_30s="30 31 32 33 34 35 36 37 38 39"
 past_40s="40 41 42 43 44 45 46 47 48 49"
-past_50s="50 51"
+past_50s="50 51 52"
 
 default_versions_past="${past_00s} ${past_10s} ${past_20s} ${past_30s} ${past_40s} ${past_50s}"
 
@@ -857,6 +857,17 @@ get_associated_information(){
             binary="firefox"
             short_name="fx52"
             nice_name="Firefox 52.0"
+
+            uses_v2_signing=true
+        ;;
+        53 | 53.0 | 53.0.3)
+            release_directory="53.0.3"
+            dmg_file="Firefox 53.0.3.dmg"
+            sum_file="MD5SUMS"
+            sum_file_type="md5"
+            binary="firefox"
+            short_name="fx53"
+            nice_name="Firefox 53.0"
 
             uses_v2_signing=true
         ;;
